@@ -1,0 +1,28 @@
+/*********************************************** CSS ******************************************/
+
+/* S L I D E R */
+.carousel{
+  position: absolute;
+}
+
+.glyphicon{
+	top:30%;
+}
+
+/* H E A D E R */
+.navbar-header img{
+	padding-top: .5em;
+}
+
+/* 	B U S C A D O R */
+
+.single-welcome-hero-form{
+	padding: 0 0 0 30px;
+}
+.single-welcome-hero-form form{
+	width:100%;
+}
+
+.welcome-hero-btn{
+	background:#131212;
+}
