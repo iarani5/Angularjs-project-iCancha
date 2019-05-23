@@ -5,8 +5,8 @@
   position: absolute;
 }
 
-.glyphicon{
-	top:30%;
+.carousel-inner .item img{
+	width:100vw;
 }
 
 /* H E A D E R */
@@ -25,4 +25,21 @@
 
 .welcome-hero-btn{
 	background:#131212;
+}
+
+/* CATEGORIAS DEPORTES ICONOS */
+
+.fas{
+	font-size:35px;
+}
+
+/* COMO FUNCIONA ICONOS */
+
+.fa {
+	font-size:35px;
+	vertical-align: middle;
+}
+
+.single-how-works:hover .single-how-works-icon [class^="fa-"]:before, .single-how-works:hover .single-how-works-icon [class*=" fa-"]:before, .single-how-works:hover .single-how-works-icon [class^="fa-"]:after, .single-how-works:hover .single-how-works-icon [class*=" fa-"]:after {
+    color: #ff545a;
 }
