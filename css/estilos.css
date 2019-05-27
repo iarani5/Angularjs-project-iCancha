@@ -26,6 +26,11 @@
 	width:100%;
 }
 
+#list-topics .container{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
 .welcome-hero-btn{
 	background:#131212;
 }
@@ -33,7 +38,7 @@
 /* CATEGORIAS DEPORTES ICONOS */
 
 .fas{
-	font-size:35px;
+  font-size:35px;
 }
 
 /* COMO FUNCIONA ICONOS */
