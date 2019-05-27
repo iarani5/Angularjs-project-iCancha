@@ -23,7 +23,7 @@
 	padding: 0 0 0 30px;
 }
 .single-welcome-hero-form form{
-	width:100%;
+	width:100%!important;
 }
 
 #list-topics .container{
