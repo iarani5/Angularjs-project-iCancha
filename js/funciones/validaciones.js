@@ -1,5 +1,5 @@
 	function validar_nombre_apellido(val){
-		var exp=/^[a-zaeiouαινσϊρ\s]+$/i;
+		var exp=/^[a-zαινσϊρ\s]+$/i;
 		return exp.test( val);
 	}
 	function validar_fecha(val){
