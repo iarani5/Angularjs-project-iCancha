@@ -131,7 +131,7 @@
 			                    <li class=" scroll active"><a href="#home">Home</a></li>
 			                    <li class="scroll"><a href="#works">Cómo funciona</a></li>
 			                    <li class="scroll"><a href="#reviews">Canchas</a></li>
-			                    <li class="scroll"><a href="#contact">contacto</a></li>
+			                    <li class="scroll"><a href="#contact">Contacto</a></li>
 			                    <li class="scroll"><a href="#" data-toggle="modal" data-target="#modalLoginForm">Iniciar sesión</a></li>
 			                    <li class="scroll"><a href="#">Registro</a></li>
 			                </ul>
@@ -162,6 +162,7 @@
 	
 	<div ui-yield-to="modals"></div>
 	
+	<div class="slide-animate" ng-include="modal_login.url"></div>
 
 	<!-- BOOTSTRAP JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -215,12 +216,6 @@
 		
 		<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-		
-		<!-- <script>
-		$(function () {
-			$('#datetimepicker1').datetimepicker();
-		 });
-		</script> -->
 		
 	<!-------- CONTROLLERS --------->
 	
