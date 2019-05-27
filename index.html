@@ -113,11 +113,11 @@
 			            <!-- MENU -->
 			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                    <li class=" scroll active"><a href="#home">Home</a></li>
+			                    <li class=" scroll active"><a href="#home">Home</a></li> <!-- la a lo convierte en un hipervinculo -->
 			                    <li class="scroll"><a href="#works">Cómo funciona</a></li>
 			                    <li class="scroll"><a href="#reviews">Canchas</a></li>
 			                    <li class="scroll"><a href="#contact">Contacto</a></li>
-			                    <li class="scroll"><a href="#" data-toggle="modal" data-target="#modalLoginForm">Iniciar sesión</a></li>
+			                    <li class="scroll"><a href="#/iniciar-sesion/">Iniciar sesión</a></li> <!--data-toggle="modal" data-target="#modalLoginForm"-->
 			                    <li class="scroll"><a href="#">Registro</a></li>
 			                </ul>
 			            </div>
@@ -206,6 +206,7 @@
 	
 	<!--Controller index-->
 	<script src="js/controllers/controller-index.js"></script> 
+	<script src="js/controllers/controller-iniciar-sesion.js"></script> 
 	
 	<!--Controller login--
 	<script src="js/controllers/controller-login.js"></script>
