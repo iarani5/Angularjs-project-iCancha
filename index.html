@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Title -->
+	<title>iCancha</title>
+	
+	<!-- iconos deporte -->
+		<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+		
+	<!--font-family-->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	
+	<!-- para calendario -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+		
+    <!-- favicon png -->
+		<link rel="shortcut icon" type="image/icon" href="img/logo/icancha.png"/>
+       
+	   	<!-- CSS -->
+	
+		<!--slider home-->
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style1.css" />
+		<script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
+
+	    <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+        <!--linear icon css-->
+		<link rel="stylesheet" href="assets/css/linearicons.css">
+
+		<!--animate.css-->
+        <link rel="stylesheet" href="assets/css/animate.css">
+
+		<!--flaticon.css-->
+        <link rel="stylesheet" href="assets/css/flaticon.css">
+
+		<!--slick.css-->
+        <link rel="stylesheet" href="assets/css/slick.css">
+		<link rel="stylesheet" href="assets/css/slick-theme.css">
+		
+		<!--bootstrap.min.css-->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		
+		<!-- bootsnav -->
+<!-- 		<link rel="stylesheet" href="assets/css/bootsnav.css" >	
+ -->        
+        <!--style.css-->
+        <link rel="stylesheet" href="assets/css/style.css">
+        
+        <!--responsive.css-->
+        <link rel="stylesheet" href="assets/css/responsive.css">
+		
+		<!-- BOOTSTRAP CSS --
+		<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"> -->
+		
+		<!-- hoja de estilos personalizada que pisa bootstrap-->
+        <link rel="stylesheet" href="css/estilos.css">
+
+	
+	
+	<!-- AngularJS --> 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+	
+	<!-- angular-google-maps -->
+    <script src="js/modulos/mapa/lodash.underscore.min.js"></script>
+    <script src="js/modulos/mapa/angular-google-maps.min.js"></script>
+	<script src="js/modulos/mapa/dev_deps.js"></script>
+    <script src="http://cdn.rawgit.com/nmccready/angular-simple-logger/0.0.1/dist/index.js"></script>
+	<script src="js/modulos/mapa/angular-google-maps_dev_mapped.js"></script>	
+	
+	<!-- script para upload de imagenes -->
+	<script>
+	FileAPI = {
+        jsPath: 'js/FileAPI.min.js/',
+        staticPath: 'js/FileAPI.flash.swf/',
+    }
+	</script>
+	
+	<!-- angular-upload   -->
+	<script src="js/modulos/ng-file-upload-shim.js"></script> <!--no html5 support -->
+	<script src="js/modulos/ng-file-upload.js"></script>
+   
+</head>
+
+<body ng-app ='iCancha'
+    ng-controller='indexCtrl'>
+	
+	<!---HEADER--->
+	
+		<!-- body app -->
+		 
+		<div id="header">
+			
+			<!-- BUSCADOR -->
+			<!-- <a href="#/buscador" class="pull-right menuIcon">
+			<div class="pull-right" id="buscador">
+				<span class="glyphicon glyphicon-search glyphicon-sm"></span>
+			</div>
+			</a> -->
+		
+		<!-- navBar --> 
+	<!-- 	<div class="scrolleable-min" id="nav-bar">
+		<ul class="nav navbar-nav col-lg-12 col-xs-12 col-sm-12 text-center">
+			<li class=" col-lg-4 col-xs-4 col-sm-4"  ng-repeat="item in items_navbar">  
+				<a href="#/{{item.id}}/{{id_grupo}}" class="item" ng-class="{'active': item.id == estado.activo}" ng-click='cambiar_seccion(item.id)' ng-click="estado.activo=item.id">{{item.titulo}}</a>
+			</li>
+		</ul>	
+		</div> -->
+		<!-- NAVBAR -->
+		<section class="top-area">
+			<div class="header-area">
+			    <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+			        <div class="container">
+			            <div class="navbar-header">
+			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+			                    <i class="fa fa-bars"></i>
+ 			                </button>
+							<img src="img/logo/icancha-min.png" alt="iCancha">
+			            </div>
+						
+			            <!-- MENU -->
+			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+			                    <li class=" scroll active"><a href="#home">Home</a></li>
+			                    <li class="scroll"><a href="#works">Cómo funciona</a></li>
+			                    <li class="scroll"><a href="#reviews">Canchas</a></li>
+			                    <li class="scroll"><a href="#contact">contacto</a></li>
+			                    <li class="scroll"><a href="#" data-toggle="modal" data-target="#modalLoginForm">Iniciar sesión</a></li>
+			                    <li class="scroll"><a href="#">Registro</a></li>
+			                </ul>
+			            </div>
+			        </div>
+			    </nav>
+			</div>
+		    <div class="clearfix"></div>
+
+		</section>
+
+		</div>
+	
+	<!--------  MAIN  --------->
+	<main>
+		<div ng-view>
+		
+		</div>
+	</main>	
+	
+	<!--------  FOOTER  --------->
+	
+	<!-- <div ng-show="header_footer()" ng-include="'vistas/footer.html'"></div>
+	
+	</div> -->
+	
+	<!---- MODAL ---->
+	
+	<div ui-yield-to="modals"></div>
+	
+
+	<!-- BOOTSTRAP JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	
+	<!--Modulos angular-->
+	<script src="js/modulos/mobile-angular-ui.min.js"></script>
+	<script src="js/modulos/mobile-angular-ui.gestures.min.js"></script>
+  	<script src="js/modulos/angular-route.js"></script> 
+	
+	
+	<!--Funciones globales-->
+	<script src="js/funciones/funciones-globales.js"></script>
+  	<script src="js/funciones/validaciones.js"></script>  <!--expresiones regulares en js para validar inputs-->
+	
+	<!--Modulos-->
+	<script src="js/modulos/modulos.js"></script>
+	
+	<!--Rutas-->
+	<script src="js/rutas.js"></script>
+	
+	<!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+		<script src="assets/js/jquery.js"></script>
+        
+        <!--modernizr.min.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		
+		<!--bootstrap.min.js-->
+        <script src="assets/js/bootstrap.min.js"></script>
+		
+		<!-- bootsnav js -->
+ 		<script src="assets/js/bootsnav.js"></script>
+
+        <!--feather.min.js-->
+        <script  src="assets/js/feather.min.js"></script>
+
+        <!-- counter js -->
+		<script src="assets/js/jquery.counterup.min.js"></script>
+		<script src="assets/js/waypoints.min.js"></script>
+
+        <!--slick.min.js-->
+        <script src="assets/js/slick.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+		     
+        <!--Custom JS-->
+        <script src="assets/js/custom.js"></script>
+        
+		<!-- para calendario -->
+		
+		<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+		
+		<!-- <script>
+		$(function () {
+			$('#datetimepicker1').datetimepicker();
+		 });
+		</script> -->
+		
+	<!-------- CONTROLLERS --------->
+	
+	<!--Controller index-->
+	<script src="js/controllers/controller-index.js"></script> 
+	
+	<!--Controller login--
+	<script src="js/controllers/controller-login.js"></script>
+	
+	<!--Controller registro--
+	<script src="js/controllers/controller-registro.js"></script>--->
+
+</body>
+</html>

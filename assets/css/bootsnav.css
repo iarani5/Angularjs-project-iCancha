@@ -483,8 +483,8 @@ nav.navbar.bootsnav.no-background{
 }
 
 .wrap-sticky nav.navbar.bootsnav{
-    position: absolute;
-    width: 100%;
+/*     position: absolute;
+ */    width: 100%;
     left: 0;
     top: 0;
 }

@@ -13,6 +13,9 @@
 .navbar-header img{
 	padding-top: .5em;
 }
+.navbar-default .navbar-nav>.active>a{
+	background:none!important;
+}
 
 /* 	B U S C A D O R */
 
@@ -44,9 +47,23 @@
     color: #ff545a;
 }
 
+/*************** H O M E *************/
 
 
-
+/* #slides_control > div{
+  height: 200px;
+}
+#home img{
+  margin:auto;
+  width: 400px;
+}
+#slides_control {
+  position:absolute;
+  width: 400px;
+  left:50%;
+  top:20px;
+ margin-left:-200px;
+} */
 
 
 
