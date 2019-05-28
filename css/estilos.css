@@ -1,5 +1,9 @@
 /*********************************************** CSS ******************************************/
-/*PRUEBA MEL*/
+
+
+body{
+	background:#eee;
+}
 /* S L I D E R */
 .carousel{
   position: absolute;
@@ -10,12 +14,20 @@
 }
 
 /* H E A D E R */
+
+.navbar{
+	margin-bottom:0!important;
+}
 .navbar-header img{
 	padding-top: .5em;
 }
 .navbar-default .navbar-nav>.active>a{
 	background:none!important;
 }
+
+/* .top-area{
+	height:5em;
+} */
 
 /* 	B U S C A D O R */
 
@@ -56,10 +68,8 @@
 /****************************** HOME ****************************/
 
 #home{
-	height:82vh;
 	overflow:hidden;
 }
-
 
 /****************************** CANCHAS ****************************/
 
@@ -69,3 +79,43 @@
     z-index: 1;
 	padding-top:10vw;
 }
+
+#works{
+	margin-top:5em;
+}
+
+.single-how-works{
+	background:white;
+	    height: 25vw;
+}
+
+/****************************** INICIAR - SESION ****************************/
+
+#login>div>div{
+	box-shadow:0 0px 5px rgba(71,71,71,.2);
+
+}
+
+#login>div{
+	background:#eee!important;
+}
+
+/****************************** REGISTRO ****************************/
+
+
+#registro>div>div{
+	box-shadow:0 0px 5px rgba(71,71,71,.2);
+}
+#registro>div{
+	background:#eee!important;
+}
+
+/******************************  ****************************/
+
+
+
+
+
+
+
+

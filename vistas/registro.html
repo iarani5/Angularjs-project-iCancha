@@ -1,6 +1,6 @@
 <!-- R E G I S T R O -->
 	
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  margin-bottom-sm" >
+<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  margin-bottom-sm" >
       <div>
 		        <h4 class="modal-title w-100 font-weight-bold">Registrarme</h4>
       </div>
@@ -30,4 +30,115 @@
       <div class="d-flex justify-content-center">
         <button class="btn btn-default">Registrarme</button>
       </div>
-</div>
+</div> -->
+
+	
+	<!-- Estilos propios de la vista -->
+ 	<style> @import url("css/forms/util.css"); </style> 
+ 	<style> @import url("css/forms/main.css"); </style> 
+	
+	<!-- vista html -->
+<div class="limiter" id="registro">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+				<form class="login100-form validate-form" class="md-form">
+					<span class="login100-form-title p-b-55">
+						Registro
+					</span>
+
+					<!-- NOMBRE -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate"  placeholder="Nombre">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-envelope"></span>
+						</span>
+					</div>
+
+					<!-- APELLIDO -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+					 <input class="input100"  type="text" id="defaultForm-apellido" class="form-control validate"  placeholder="Apellido">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-envelope"></span>
+						</span>
+					</div>
+					
+					<!-- EMAIL -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100"  type="email" id="defaultForm-email" class="form-control validate"  placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-envelope"></span>
+						</span>
+					</div>
+
+					<!-- CLAVE -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+						<input class="input100" type="password" name="pass" placeholder="Clave">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-lock"></span>
+						</span>
+					</div>
+					
+					<!-- FOTO -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+						<input type="file" class='upload-file usuario-file ' ngf-select ng-model="picFile" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-accept="'image/*'" id="foto">
+
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+ 							<span class="lnr lnr-lock"></span>
+						</span>
+					</div> 
+				
+				
+				
+				
+				
+				
+				
+					<div class="container-login100-form-btn p-t-25">
+						<button class="login100-form-btn">
+							Registrarme
+						</button>
+					</div>
+
+					<div class="text-center w-full p-t-115">
+						<span class="txt1">
+							Ya tenes una cuenta?
+						</span>
+
+						<a class="txt1 bo1 hov1" href="#!/iniciar-sesion">
+							Iniciar sesión						
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
