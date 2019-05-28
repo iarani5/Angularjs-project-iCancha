@@ -114,12 +114,12 @@
 			            <!-- MENU -->
 			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                    <li class=" scroll active"><a href="#home">Home</a></li> <!-- la a lo convierte en un hipervinculo -->
-			                    <li class="scroll"><a href="#works">Cómo funciona</a></li>
-			                    <li class="scroll"><a href="#reviews">Canchas</a></li>
-			                    <li class="scroll"><a href="#contact">Contacto</a></li>
-			                    <li class="scroll"><a href="#/iniciar-sesion/">Iniciar sesión</a></li> <!--data-toggle="modal" data-target="#modalLoginForm"-->
-			                    <li class="scroll"><a href="#">Registro</a></li>
+			                    <li class=" scroll active"><a href="#!/home">Home</a></li> <!-- la a lo convierte en un hipervinculo -->
+			                    <li class="scroll"><a href="#!/como-funciona">Cómo funciona</a></li>
+			                    <li class="scroll"><a href="#!/canchas">Canchas</a></li>
+			                    <li class="scroll"><a href="#!/contact">Contacto</a></li>
+			                    <li class="scroll"><a href="#!/iniciar-sesion">Iniciar sesión</a></li> <!--data-toggle="modal" data-target="#modalLoginForm"-->
+			                    <li class="scroll"><a href="#!/registro">Registro</a></li>
 			                </ul>
 			            </div>
 			        </div>
@@ -159,6 +159,10 @@
 	<script src="js/modulos/mobile-angular-ui.gestures.min.js"></script>
   	<script src="js/modulos/angular-route.js"></script> 
 	
+		<!-- PARA ESTADISTICAS -->
+
+<!-- 	<script type="text/javascript" src="js/modulos/Chart.min.js"></script>
+	<script type="text/javascript" src="js/modulos/angular-chart.min.js"></script> -->
 	
 	<!--Funciones globales-->
 	<script src="js/funciones/funciones-globales.js"></script>
@@ -167,13 +171,14 @@
 	<!--Modulos-->
 	<script src="js/modulos/modulos.js"></script>
 	
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
 	<!--Rutas-->
 	<script src="js/rutas.js"></script>
 	
 	<!-- Include all js compiled plugins (below), or include individual files as needed -->
 
 		<script src="assets/js/jquery.js"></script>
-        
+
         <!--modernizr.min.js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		
@@ -181,8 +186,8 @@
         <script src="assets/js/bootstrap.min.js"></script>
 		
 		<!-- bootsnav js -->
- 		<script src="assets/js/bootsnav.js"></script>
-
+<!--  		<script src="assets/js/bootsnav.js"></script>
+ -->
         <!--feather.min.js-->
         <script  src="assets/js/feather.min.js"></script>
 
@@ -208,7 +213,9 @@
 	<!--Controller index-->
 	<script src="js/controllers/controller-index.js"></script> 
 	<script src="js/controllers/controller-iniciar-sesion.js"></script> 
-	
+	<script src="js/controllers/controller-registro.js"></script> 
+	<script src="js/controllers/controller-canchas.js"></script> 
+
 	<!--Controller login--
 	<script src="js/controllers/controller-login.js"></script>
 	

@@ -52,23 +52,20 @@
     color: #ff545a;
 }
 
-/*************** H O M E *************/
 
+/****************************** HOME ****************************/
 
-/* #slides_control > div{
-  height: 200px;
+#home{
+	height:82vh;
+	overflow:hidden;
 }
-#home img{
-  margin:auto;
-  width: 400px;
+
+
+/****************************** CANCHAS ****************************/
+
+.list-topics-content {
+    position: static;
+    top: 0;
+    z-index: 1;
+	padding-top:10vw;
 }
-#slides_control {
-  position:absolute;
-  width: 400px;
-  left:50%;
-  top:20px;
- margin-left:-200px;
-} */
-
-
-

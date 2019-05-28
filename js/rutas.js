@@ -6,17 +6,20 @@ iCancha.config(function($routeProvider) {
 			templateUrl : 'vistas/home.html',
 			controller : 'indexCtrl'
 		})
-		.when('/iniciar-sesion', { //MODAL LOGIN
+		.when('/iniciar-sesion', { // LOGIN
 			templateUrl : 'vistas/iniciar-sesion.html',
 			controller : 'iniciarSesionCtrl'
 		})
-		.when('/registro', { //MODAL REGISTRO
+		.when('/registro', { // REGISTRO
 			templateUrl : 'vistas/registro.html',
 			controller : 'registroCtrl'
 		})
+		.when('/como-funciona', { //COMO FUNCIONA
+			templateUrl : 'vistas/como-funciona.html',
+		})
 		.when('/canchas', { //LISTADO DE CANCHAS. API GOOGLE MAPS. 
-			templateUrl : 'vistas/canchas-listado.html',
-			controller : 'canchasListadoCtrl'
+			templateUrl : 'vistas/canchas.html',
+			controller : 'canchasCtrl'
 		})
 		.when('/verCancha/:id', { //VER UNA CANCHA
 			templateUrl : 'vistas/cancha-ver.html',
