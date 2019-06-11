@@ -17,6 +17,10 @@ iCancha.config(function($routeProvider) {
 		.when('/como-funciona', { //COMO FUNCIONA
 			templateUrl : 'vistas/como-funciona.html',
 		})
+		.when('/contacto', { // CONTACTO
+			templateUrl : 'vistas/contacto.html',
+			controller : 'contactoCtrl'
+		})
 		.when('/canchas', { //LISTADO DE CANCHAS. API GOOGLE MAPS. 
 			templateUrl : 'vistas/canchas.html',
 			controller : 'canchasCtrl'
