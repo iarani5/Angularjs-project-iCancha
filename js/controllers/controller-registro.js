@@ -2,13 +2,17 @@
  
 iCancha.controller("registroCtrl", function ($location,$http,$scope,$window,$routeParams) {
 
+
+// ****** DISEÑO FORM ****//
 var fileInputTextDiv = document.getElementById('file_input_text_div');
 var fileInput = document.getElementById('file_input_file');
 var fileInputText = document.getElementById('file_input_text');
 
+/* 
 fileInput.addEventListener('change', changeInputText);
 fileInput.addEventListener('change', changeState);
-
+ */
+ 
 function changeInputText() {
   var str = fileInput.value;
   var i;
@@ -31,5 +35,15 @@ function changeState() {
     }
   }
 }
+
+//**** TIPO DE USUARIO ****//
+	
+	$scope.tipo_usuario=[
+		{TITULO: "Cliente"},
+		{TITULO: "Propietario"},
+	];
+				
+				
+				
 
 });

@@ -1,8 +1,18 @@
 <!-- R E G I S T R O -->
 	
+	
+		<!-- ID_USUARIO INT(9) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	
+	TIPO_USUARIO VARCHAR(13) NOT NULL DEFAULT 'Cliente',
+	FOTO_PERFIL VARCHAR(250) NOT NULL DEFAULT 'iCancha/.img',
+	BANNEADO ENUM('Si','No') NOT NULL DEFAULT 'No',
+	BORRADO ENUM('Si','No') NOT NULL DEFAULT 'No'
+	 -->
+	
 	<!-- Estilos propios de la vista -->
  	<style> @import url("css/forms/util.css"); </style> 
  	<style> @import url("css/forms/main.css"); </style> 
+ 	<style> @import url("css/forms/registro.css"); </style> 
 	
 	<!-- vista html -->
 <div class="limiter" id="registro">
@@ -49,6 +59,12 @@
 						</span>
 					</div>
 					
+					<!-- TIPO USUARIO -->
+					<label>Tipo de usuario</label>
+					<select class='select' name='grupo' ng-model='usuario.TIPO_USUARIO' ng-init="usuario.TIPO_USUARIO='Cliente'">
+						<option ng-repeat="tipo in tipo_usuario track by $index "  value='{{ tipo.TITULO }}'>{{ tipo.TITULO }}</option>
+					</select>
+					
 					<!-- FOTO -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
 						<input type="file" class='upload-file usuario-file ' ngf-select ng-model="picFile" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-accept="'image/*'" id="foto">
@@ -58,13 +74,7 @@
  							<span class="lnr lnr-lock"></span>
 						</span>
 					</div> 
-				
-				
-				
-				
-				
-				
-				
+							
 					<div class="container-login100-form-btn p-t-25">
 						<button class="login100-form-btn">
 							Registrarme
