@@ -2,26 +2,31 @@
 
 class Usuario{
 	
+	
+	/* ID_USUARIO INT(9) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	EMAIL VARCHAR(50) NOT NULL UNIQUE,
+	NOMBRE VARCHAR(45) NOT NULL,
+	APELLIDO VARCHAR(45) NOT NULL,
+	CLAVE VARCHAR(255) NOT NULL,
+	TIPO_USUARIO ENUM ('Cliente','Duenio','Propietario','Administrador') DEFAULT 'Cliente',
+	FOTO_PERFIL VARCHAR(250) NOT NULL DEFAULT 'iCancha/.img',
+	BANNEADO ENUM('Si','No') NOT NULL DEFAULT 'No',
+	BORRADO ENUM('Si','No') NOT NULL DEFAULT 'No' */
+	
 	/* A T R I B U T O S */
 	private $codigo_usuario;
 	private $email;
 	private $nombre;
 	private $apellido;
 	private $clave;
-	private $edad;
-	private $longitud;
-	private $latitud;
-	private $direccion;
-	private $direccion_estado;
-	private $fecha_alta;
+	private $tipo_usuario;
+	private $foto_perfil;
 	private $banneado;
-	private $nivel;
-	private $fk_negocio_servicio;
-	private $fk_multimedia;
+	private $borrado;
 	
 	//nombre de la tabla y columnas de la tabla.
 	public static $tabla = "usuario";
-	private static $fila = ['EMAIL', 'NOMBRE','APELLIDO','CLAVE','EDAD','LONGITUD','LATITUD','DIRECCION','DIRECCION_ESTADO','FECHA_ALTA','BANNEADO','NIVEL','BORRADO','FK_NEGOCIO_SERVICIO','FKMULTIMEDIA'];
+	private static $fila = ['EMAIL', 'NOMBRE','APELLIDO','CLAVE','TIPO_USUARIO','FOTO_PERFIL','BANNEADO','BORRADO'];
 
 	/* G E T T E R S  &&  S E T T E R S */
 	public function setCodigoUsuario($a){
@@ -54,53 +59,29 @@ class Usuario{
 	public function getClave(){
 		return $this->clave;
 	}
-	public function setEdad($a){
-		$this->edad = $a;
+	public function setTipoUsuario($a){
+		$this->tipo_usuario = $a;
 	}
-	public function getEdad(){
-		return $this->edad;
+	public function getTipoUsuario(){
+		return $this->tipo_usuario;
 	}
-	public function setLongitud($a){
-		$this->longitud = $a;
+	public function setFotoPerfil($a){
+		$this->foto_perfil = $a;
 	}
-	public function getLongitud(){
-		return $this->longitud;
+	public function getFotoPerfil(){
+		return $this->foto_perfil;
 	}
-	public function setLatitud($a){
-		$this->latitud = $a;
+	public function setBanneado($a){
+		$this->banneado = $a;
 	}
-	public function getLatitud(){
-		return $this->latitud;
+	public function getBanneado(){
+		return $this->banneado;
 	}
-	public function setDireccion($a){
-		$this->direccion = $a;
+	public function setBorrado($a){
+		$this->borrado = $a;
 	}
-	public function getDireccion(){
-		return $this->direccion;
-	}
-	public function setDireccionEstado($a){
-		$this->direccion_estado = $a;
-	}
-	public function getDireccionEstado(){
-		return $this->direccion_estado;
-	}
-	public function setNivel($a){
-		$this->nivel = $a;
-	}
-	public function getNivel(){
-		return $this->nivel;
-	}
-	public function setFkNegocioServicio($a){
-		$this->fk_negocio_servicio = $a;
-	}
-	public function getFkNegocioServicio(){
-		return $this->fk_negocio_servicio;
-	}
-	public function setFkMultimedia($a){
-		$this->fk_multimedia = $a;
-	}
-	public function getFkMultimedia(){
-		return $this->fk_multimedia;
+	public function getBorrado(){
+		return $this->borrado;
 	}
 	
 	/* M E T O D O S   D E   L A   C L A S E */
@@ -128,23 +109,26 @@ class Usuario{
 					case "email":
 						$this->setEmail($valor);
 					break;
-					case "clave":
-						$this->setClave($valor);
-					break;
 					case "nombre":
 						$this->setNombre($valor);
 					break;
 					case "apellido":
 						$this->setApellido($valor);
 					break;
-					case "latitud":
-						$this->setLatitud($valor);
+					case "clave":
+						$this->setClave($valor);
 					break;
-					case "longitud":
-						$this->setLongitud($valor);
+					case "tipo_usuario":
+						$this->setTipoUsuario($valor);
 					break;
-					case "direccion":
-						$this->setDireccion($valor);
+					case "foto_perfil":
+						$this->setFotoPerfil($valor);
+					break;
+					case "banneado":
+						$this->setBanneado($valor);
+					break;
+					case "borrado":
+						$this->setBorrado($valor);
 					break;
 				}
 			}
@@ -152,10 +136,10 @@ class Usuario{
 	}
 	
 	public function crear_usuario($array){  //REGISTRO DE USUARIO
-		$query = "INSERT INTO " . static::$tabla . " (EMAIL, CLAVE, NOMBRE, APELLIDO, EDAD, DIRECCION, LATITUD, LONGITUD, FECHA_ALTA)
+		$query = "INSERT INTO " . static::$tabla . " (EMAIL, CLAVE, NOMBRE, APELLIDO, TIPO_USUARIO, FOTO_PERFIL)
 				VALUES (?, sha2(?, 224), ?, ?, ?, ?, ?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["EMAIL"],$array["CLAVE"],$array["NOMBRE"],$array["APELLIDO"],$array["EDAD"],$array["DIRECCION"],$array["LATITUD"],$array["LONGITUD"],$array["FECHA_ALTA"]]);
+		return $stmt->execute([$array["EMAIL"],$array["CLAVE"],$array["NOMBRE"],$array["APELLIDO"],$array["TIPO_USUARIO"],$array["FOTO_PERFIL"]]);
 	}
 	
 	
@@ -181,11 +165,14 @@ class Usuario{
 			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
 				$usuario = new Usuario;
 				$usuario->codigo_usuario = $fila['ID'];
-				$usuario->usuario = $fila['USUARIO'];
-				$usuario->mail = $fila['MAIL'];
-				$usuario->nivel = $fila['NIVEL'];
-				$usuario->fecha_nacimiento = $fila['FECHA_NACIMIENTO'];
-				$usuario->sexo = $fila['SEXO'];
+				$usuario->email = $fila['EMAIL'];
+				$usuario->nombre = $fila['NOMBRE'];
+				$usuario->apellido = $fila['APELLIDO'];
+				$usuario->clave = $fila['CLAVE'];
+				$usuario->tipo_usuario = $fila['TIPO_USUARIO'];
+				$usuario->foto_perfil = $fila['FOTO_PERFIL'];
+				$usuario->borrado = $fila['BORRADO'];
+				$usuario->banneado = $fila['BANNEADO'];
 				$usuario->cargarDatos($fila);
 				$salida[] = $usuario;
 			}
