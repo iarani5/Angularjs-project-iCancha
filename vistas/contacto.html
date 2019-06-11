@@ -5,6 +5,7 @@
 	<!-- Estilos propios de la vista -->
     <style> @import url("css/forms/util.css"); </style> 
     <style> @import url("css/forms/main.css"); </style> 
+    <style> @import url("css/forms/contacto.css"); </style> 
    
    <!-- vista html -->
 <div class="limiter" id="login">
@@ -32,10 +33,10 @@
                    </div>
                 <!--C O M E N T A R I O-->
                    <div class="wrap-input100 validate-input m-b-16" data-validate = "Comentario requerido">
-                    <textarea class="Comentario input" ></textarea>
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-                        <span class="lnr lnr-lock"></span>
+                    <textarea class="comentario" placeholder="Escribe tu comentario" ></textarea>
+                     <span class="focus-input100"></span>
+                    <span class="">        <!--AGREGAR SIMBOLO
+                        <span class="lnr lnr-lock"></span> -->
                     </span>
                 </div>
                    
@@ -43,17 +44,7 @@
                        <button class="login100-form-btn">
                            Enviar Comentario
                        </button>
-                   </div>
-
-                   <div class="text-center w-full p-t-115">
-                       <span class="txt1">
-                           No tenes una cuenta?
-                       </span>
-
-                       <a class="txt1 bo1 hov1" href="#!/registro">
-                           Registrate						
-                       </a>
-                   </div>
+                   
                </form>
            </div>
        </div>
