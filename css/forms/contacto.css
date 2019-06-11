@@ -1,0 +1,11 @@
+.comentario{
+    font-size: 18px;
+    line-height: 1.2;
+    color: #686868;
+    display: block;
+    width: 100%;
+    background: #e6e6e6;
+    height: 15vh;
+    border-radius: 3px;
+    padding: 15px 15px 0 15px;
+}
