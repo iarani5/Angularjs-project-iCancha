@@ -14,6 +14,10 @@ iCancha.config(function($routeProvider) {
 			templateUrl : 'vistas/registro.html',
 			controller : 'registroCtrl'
 		})
+		.when('/perfil', { // PERFIL USUARIO
+			templateUrl : 'vistas/perfil.html',
+			controller : 'perfilCtrl'
+		})
 		.when('/como-funciona', { //COMO FUNCIONA
 			templateUrl : 'vistas/como-funciona.html',
 		})

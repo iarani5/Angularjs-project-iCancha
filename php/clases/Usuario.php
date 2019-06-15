@@ -135,11 +135,24 @@ class Usuario{
 		}
 	}
 	
-	public function crear_usuario($array){  //REGISTRO DE USUARIO
-		$query = "INSERT INTO " . static::$tabla . " (EMAIL, CLAVE, NOMBRE, APELLIDO, TIPO_USUARIO, FOTO_PERFIL)
-				VALUES (?, sha2(?, 224), ?, ?, ?, ?, ?, ?, ?)";
+	public function chequear_mail($mail){ //VER SI EL MAIL YA EXISTE
+		$query = "SELECT * FROM " . static::$tabla . " WHERE EMAIL=? LIMIT 1";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["EMAIL"],$array["CLAVE"],$array["NOMBRE"],$array["APELLIDO"],$array["TIPO_USUARIO"],$array["FOTO_PERFIL"]]);
+		$array=[];
+		if($stmt->execute([$mail])){
+			while($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				$array=$f;
+			}
+		}
+		$json=json_encode($array);
+		return $json;
+	}
+	
+	public function crear_usuario($array){  //REGISTRO DE USUARIO
+		$query = "INSERT INTO " . static::$tabla . " (EMAIL, CLAVE, NOMBRE, APELLIDO, TIPO_USUARIO)
+				VALUES (?, sha2(?, 224), ?, ?, ?)";
+		$stmt = DBcnx::getStatement($query);
+		return $stmt->execute([$array["EMAIL"],$array["CLAVE"],$array["NOMBRE"],$array["APELLIDO"],$array["TIPO_USUARIO"]]);
 	}
 	
 	

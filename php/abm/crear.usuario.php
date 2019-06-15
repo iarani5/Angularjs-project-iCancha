@@ -6,7 +6,7 @@
 	require_once('../config.php');
 	require_once('../funciones.php');
 	require_once('../clases/DBcnx.php');
-	require_once('../clases/Ususario.php');
+	require_once('../clases/Usuario.php');
 	// require_once('../clases/Validacion.php');	 //para validar datos desde php
 	
 	/***** Validacion *****/
@@ -26,11 +26,11 @@
 		echo $rta;
 		return 0;
 	}
-	else{
+	else{*/
 		
-	/****** Creo usuario ******/
 	$usuario = new Usuario();
-	//si ya existe el mail
+	
+	//me fijo si ya existe el mail
 	$ya_exite=$usuario->chequear_mail($_POST["EMAIL"]);
 	if(count(json_decode($ya_exite))){
 		echo "existe";

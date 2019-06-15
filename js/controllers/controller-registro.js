@@ -1,7 +1,31 @@
 /**************************************** CONTROLLER REGISTRO ***************************************/
- 
-iCancha.controller("registroCtrl", function ($location,$http,$scope,$window,$routeParams) {
 
+//PARA UPLOAD DE IMAGENES
+/* iCancha.controller("registroCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout', function  ($scope, $http, $location, Upload, $timeout) { */  
+ 
+ //*******************************************************************
+  //PARA IMPLEMENTACIONES FUTURAS con upload de imagen para usuario
+	//OBJETO CON DATOS TRAIDOS DE LA VISTA registro.html
+			/* datos_usuario={
+				EMAIL: usuario.EMAIL,
+				NOMBRE: usuario.NOMBRE,
+				APELLIDO: usuario.APELLIDO,
+				CLAVE: usuario.CLAVE,
+				TIPO_USUARIO : usuario.TIPO_USUARIO,
+				FOTO_PERFIL : usuario.FOTO_PERFIL,
+			} */
+			
+			//PARSEAR EL CONENIDO DEL OBJETO A FORMATO PARA SER PASADO POR POST A ARCHIVO PHP
+			/* for(var i in datos_usuario){
+				item.push( i+'='+datos_usuario[i] ); 
+			}
+			var union = item.join('&');	
+		 *
+***********************************************************************/
+
+
+ iCancha.controller("registroCtrl", function ($location,$http,$scope,$window,$routeParams) {
+ 
 
 // ****** DISEÑO FORM ****//
 var fileInputTextDiv = document.getElementById('file_input_text_div');
@@ -46,77 +70,46 @@ function changeState() {
 
 //***** ENVIO DE FORM *****//
 
-$scope.submit=function(usuario){
-	
-	
-	/*
-	ID_USUARIO INT(9) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	EMAIL VARCHAR(50) NOT NULL UNIQUE,
-	NOMBRE VARCHAR(45) NOT NULL,
-	APELLIDO VARCHAR(45) NOT NULL,
-	CLAVE VARCHAR(255) NOT NULL,
-	TIPO_USUARIO ENUM ('Cliente','Duenio','Propietario','Administrador') DEFAULT 'Cliente',
-	FOTO_PERFIL VARCHAR(250) NOT NULL DEFAULT 'iCancha/.img',
-	BANNEADO ENUM('Si','No') NOT NULL DEFAULT 'No',
-	BORRADO ENUM('Si','No') NOT NULL DEFAULT 'No'
-	*/
-			datos_usuario={
-				EMAIL: usuario.EMAIL,
-				NOMBRE: usuario.NOMBRE,
-				APELLIDO: usuario.APELLIDO,
-				CLAVE: usuario.CLAVE,
-				TIPO_USUARIO : usuario.TIPO_USUARIO,
-				FOTO_PERFIL : usuario.FOTO_PERFIL,
+	$scope.submit=function(usuario){
+
+		//falta validacion de datos en onblur y onsubmit
+		
+		//guardo los datos del usuario en formato especifico para pasarlo por el metodo POST a php
+		var item = [];
+		for(var i in usuario){
+			item.push( i+'='+usuario[i] ); 
+		}
+		var union = item.join('&');	
+   
+		//REGISTRO USUARIO
+		$http({
+			method: 'POST',
+			url:"php/abm/crear.usuario.php",
+			data: union,	
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+		})
+		.then(function (response){//EXITO se establecio la conexion
+		
+			if(response.data=="existe"){
+				//mensaje de mail ya existe
 			}
-			
-			//falta validacion de datos en onblur y onsubmit
-			
-				var nombre=datos_usuario["NOMBRE"];
-				if(nombre!=undefined){
-					nombre.upload = Upload.upload({ //envio de form con file. 
-						method: 'POST',
-						url:"php/abm/crear.usuario.php", //archivo php para creacion de usuario
-						data: datos_usuario,
-					})
-					.then(function(response){
-						if(response.data=="1"){
-							
-						}
-						//valido datos php
-						else if(typeof(response.data)=="object"){
-							for (var error in response.data){
-								for(var i=0;i<inputs_publicacion.length;i++){
-									inputs_publicacion[i].style.borderBottom='none';
-									var p=inputs_publicacion[i].nextSibling;
-									if(p.className=="mensaje-validacion"){
-										rc(p.parentNode,p);
-									}
-									
-									if(inputs_publicacion[i].name==error.toLowerCase()){
-										validar_publicacion(inputs_publicacion[i]);
-									}
-								}
-							}
-						}
-						else if(response.data=="formato"){
-							for(var i=0;i<inputs_publicacion.length;i++){
-								var p=inputs_publicacion[i].nextSibling; 
-								if(p.className=="mensaje-validacion"){
-									rc(p.parentNode,p);
-								}
-								if(inputs_publicacion[i].name=="file"){
-									validar_publicacion(inputs_publicacion[i]);
-								}
-							}
-						}
-						else{
-							//modal error
-						}
-					}
-					,function(response){
-						//modal error
-						
-					});
+			else{
+				if(response.data.constructor != Object){ //error no se guardo en la bdd
+					// mensaje de error. vuelva a intentarlo mas tarde.
+				}
+				else{ //exito
+					//redirijo a home porque ya me loguea en el sistema una vez creado el usuario.
+					
+					//paso el objeto a formato json para almacenarlo en la memoria local del browser
+					localStorage.setItem("dts_user",angular.toJson(response.data));
+					
+					//redirecciono a home.
+					$location.path("/");
 				}
 			}
+			
+		},function (error){ //ERROR no se pudo establecer la conexion
+
+		});
+	}
 });

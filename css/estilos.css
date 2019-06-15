@@ -25,6 +25,11 @@ body{
 	background:none!important;
 }
 
+#nombre_usuario{
+    color: white;
+	background:#ff545a;
+}
+
 /* .top-area{
 	height:5em;
 } */
