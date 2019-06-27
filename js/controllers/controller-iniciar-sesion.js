@@ -3,33 +3,35 @@
 iCancha.controller("iniciarSesionCtrl", function ($location,$http,$scope,$window,$routeParams) {
 	
 	//validar inputs en el onblur
-	var datos_login=tn(tn(document,'form',0),'input');
+	/*var datos_login=tn(tn(document,'form',0),'input');
 	for(var i=0;i<datos_login.length;i++){
 		datos_login[i].onblur=function(){
 			this.style.borderBottom='none';
+
 			var p=this.nextSibling;
 			if(p.className=="mensaje-validacion"){
 				rc(p.parentNode,p);
 			}
 			validar_form(this);
 		}
-	}
+	}*/
 	
 	//envio del form
 	$scope.login = function (usuario){
-		var datos={
+	/*	var datos={
 			EMAIL : usuario.EMAIL,
 			CLAVE : usuario.CLAVE
-		}; 
+		};*/ 
 		var item = [];
 		var datos_login=tn(tn(document,'form',0),'input');
 		for(var i in usuario){
 			item.push( i+'='+usuario[i] ); 
 		}
+
 		//validar inputs en el submit
-		var ban=0;
-		for(var i=0;i<datos_login.length;i++){
-			datos_login[i].style.borderBottom='none';
+		/*var ban=0;
+		for(var i=0;i<datos_login.length;i++)
+			/*datos_login[i].style.borderBottom='none';
 			var p=datos_login[i].nextSibling;
 			if(p.className=="mensaje-validacion"){
 				rc(p.parentNode,p);
@@ -40,17 +42,24 @@ iCancha.controller("iniciarSesionCtrl", function ($location,$http,$scope,$window
 				ban=1; 
 			}
 		}
-		if(!ban){
+		if(!ban){*/
 			var union = item.join('&');	
 			//ABM: login
 			$http({
 				method: 'POST',
-				url:"php/abm/login.usuario.php",
+				url:"php/abm/login.php",
 				data: union,	
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
 			})
-			.success(function(data){
-				if(data.BORRADO=="Si"){
+			.then(function (data){//EXITO se establecio la conexion
+				if(response.data.constructor != Object){ //error no se guardo en la bdd
+					// mensaje de error. vuelva a intentarlo mas tarde.
+				}
+				else{ //exito
+					localStorage.setItem("dts_user",angular.toJson(response.data));
+					
+				}
+				/*if(data.BORRADO=="Si"){
 					var p=ce('p');
 					p.className='mensaje-validacion';
 					p.innerHTML='Usuario Eliminado';
@@ -74,12 +83,12 @@ iCancha.controller("iniciarSesionCtrl", function ($location,$http,$scope,$window
 					p.className='mensaje-validacion';
 					p.innerHTML='Mail o contraseĂ±a incorrectos';
 					datos_login[0].parentNode.insertBefore(p,datos_login[0]);
-				}
-			})
-			.error(function(){
-				// Sin conexion 
-			});
-		}
+				}*/
+				console.log(data);
+		},function (error){ //ERROR no se pudo establecer la conexion
+
+		});
+		//}
 	}
 
 

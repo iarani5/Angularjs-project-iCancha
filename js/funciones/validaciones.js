@@ -1,5 +1,5 @@
 	function validar_nombre_apellido(val){
-		var exp=/^[a-záéíóúñ\s]+$/i;
+		var exp=/^[a-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\s]+$/i;
 		return exp.test( val);
 	}
 	function validar_fecha(val){
@@ -11,7 +11,7 @@
 		return exp.test(val); 
 	}
 	function validar_email(val){
-		var exp=/^([a-zA-Z\d\-\.]{3,25}@[a-z]{3,15}\.[a-z]{2,4})?$/;
+		var exp=/^([a-zA-Z\d\-\_\.]{3,25}@[a-z]{3,15}\.[a-z]{2,4})?$/;
 		return exp.test( val);
 	}
 	function validar_clave(val){
