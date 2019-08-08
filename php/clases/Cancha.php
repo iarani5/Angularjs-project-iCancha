@@ -41,17 +41,11 @@ CREATE TABLE Cancha(
 	private static $fila = ['NOMBRE_CANCHA', 'FOTO','TIPO_CANCHA','CLAVE','TIPO_USUARIO','LONGITUD','LATITUD','DIRECCION','BORRADO','TARJETA','CLAVE_TARJETA','FECHA_VENCIMIENTO_TARJETA','PUNTAJE','PRECIO'];
 
 	/* G E T T E R S  &&  S E T T E R S */
-	public function setCodigoUsuario($a){
-		$this->codigo_usuario = $a;
+	public function setCodigoCancha($a){
+		$this->codigo_cancha = $a;
 	}
-	public function getCodigoUsuario(){
-		return $this->codigo_usuario;
-	}
-	public function setEmail($a){
-		$this->email = $a;
-	}
-	public function getEmail(){
-		return $this->email;
+	public function getCodigoCancha(){
+		return $this->codigo_cancha;
 	}
 	public function setNombre($a){
 		$this->nombre = $a;
@@ -59,35 +53,35 @@ CREATE TABLE Cancha(
 	public function getNombre(){
 		return $this->nombre;
 	}
-	public function setApellido($a){
-		$this->apellido = $a;
+	public function setFoto($a){
+		$this->foto = $a;
 	}
-	public function getApellido(){
-		return $this->apellido;
+	public function getFoto(){
+		return $this->foto;
 	}
-	public function setClave($a){
-		$this->clave = $a;
+	public function setTipoCancha($a){
+		$this->tipo_cancha = $a;
 	}
-	public function getClave(){
-		return $this->clave;
+	public function getTipoCancha(){
+		return $this->tipo_cancha;
 	}
-	public function setTipoUsuario($a){
-		$this->tipo_usuario = $a;
+	public function setLongitud($a){
+		$this->longitud = $a;
 	}
-	public function getTipoUsuario(){
-		return $this->tipo_usuario;
+	public function getLongitud(){
+		return $this->longitud;
 	}
-	public function setFotoPerfil($a){
-		$this->foto_perfil = $a;
+	public function setLatitud($a){
+		$this->latitud = $a;
 	}
-	public function getFotoPerfil(){
-		return $this->foto_perfil;
+	public function getLatitud(){
+		return $this->latitud;
 	}
-	public function setBanneado($a){
-		$this->banneado = $a;
+	public function setDireccion($a){
+		$this->direccion = $a;
 	}
-	public function getBanneado(){
-		return $this->banneado;
+	public function getDireccion(){
+		return $this->direccion;
 	}
 	public function setBorrado($a){
 		$this->borrado = $a;
@@ -95,19 +89,43 @@ CREATE TABLE Cancha(
 	public function getBorrado(){
 		return $this->borrado;
 	}
+	public function setTarjeta($a){
+		$this->tarjeta = $a;
+	}
+	public function getTarjeta(){
+		return $this->tarjeta;
+	}
+	public function setClaveTarjeta($a){
+		$this->clave_tarjeta = $a;
+	}
+	public function getClaveTarjeta(){
+		return $this->clave_tarjeta;
+	}
+	public function setFechaVencimientoTarjeta($a){
+		$this->fecha_vencimiento_tarjeta = $a;
+	}
+	public function getFechaVencimientoTarjeta(){
+		return $this->fecha_vencimiento_tarjeta;
+	}
+	public function setPuntaje($a){
+		$this->puntaje = $a;
+	}
+	public function getPuntaje(){
+		return $this->puntaje;
+	}
+	public function setPrecio($a){
+		$this->precio = $a;
+	}
+	public function getPrecio(){
+		return $this->precio;
+	}
+	
+	
 	
 	/* M E T O D O S   D E   L A   C L A S E */
 	
-	public function getByPk($id){ //TRAER ESE USUARIO DE LA BDD (RECIBE POR PARAMETRO EL ID DE ESE USURIO)
+	public function getByPk($id){ //TRAER ESA CANCHA DE LA BDD (RECIBE POR PARAMETRO EL ID DE LA CANCHA)
 		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE ID = $id";
-		$stmt = DBcnx::getStatement($query);
-		$stmt->execute([$id]);
-		return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
-	}
-	
-	public function getNombreUsuario($id){
-		$query = "SELECT NOMBRE FROM " . static::$tabla . "
 					WHERE ID = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
