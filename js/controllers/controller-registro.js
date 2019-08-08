@@ -104,6 +104,7 @@ function changeState() {
 					localStorage.setItem("dts_user",angular.toJson(response.data));
 					
 					//redirecciono a home.
+					sacar_botones("sacar");
 					$location.path("/");
 				}
 			}
