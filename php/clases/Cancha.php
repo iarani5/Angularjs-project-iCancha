@@ -65,30 +65,6 @@ CREATE TABLE Cancha(
 	public function getTipoCancha(){
 		return $this->tipo_cancha;
 	}
-	public function setLongitud($a){
-		$this->longitud = $a;
-	}
-	public function getLongitud(){
-		return $this->longitud;
-	}
-	public function setLatitud($a){
-		$this->latitud = $a;
-	}
-	public function getLatitud(){
-		return $this->latitud;
-	}
-	public function setDireccion($a){
-		$this->direccion = $a;
-	}
-	public function getDireccion(){
-		return $this->direccion;
-	}
-	public function setBorrado($a){
-		$this->borrado = $a;
-	}
-	public function getBorrado(){
-		return $this->borrado;
-	}
 	public function setTarjeta($a){
 		$this->tarjeta = $a;
 	}
