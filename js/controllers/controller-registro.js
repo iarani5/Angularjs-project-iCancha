@@ -61,13 +61,6 @@ function changeState() {
 }
 
 
-if($location.path().search("editar")!="-1"){
-	var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
-	$scope.usuario.NOMBRE=usuario_local.NOMBRE;
-	$scope.usuario.APELLIDO=usuario_local.APELLIDO;
-	$scope.usuario.CLAVE=usuario_local.CLAVE; 
-}
-
 //**** TIPO DE USUARIO ****//
 	
 	$scope.tipo_usuario=[
@@ -120,5 +113,35 @@ if($location.path().search("editar")!="-1"){
 		},function (error){ //ERROR no se pudo establecer la conexion
 
 		});
+	}	
+		
+	if($location.path().search("editar")!="-1"){
+		var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
+		var datos_registro=tn(tn(document,'form',0),'input');
+		for(var i=0;i<datos_registro.length;i++){
+			console.log(datos_registro[i].id);
+			switch(datos_registro[i].id){
+				case "defaultForm-nombre":
+					datos_registro[i].value=usuario_local.NOMBRE;
+				break;
+				case "defaultForm-apellido":
+					datos_registro[i].value=usuario_local.APELLIDO;
+				break;
+				case "defaultForm-email":
+					datos_registro[i].value=usuario_local.EMAIL;
+				break;
+			}
+		}
 	}
 });
+
+
+
+
+
+
+
+
+
+
+
