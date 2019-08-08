@@ -38,7 +38,7 @@ CREATE TABLE Cancha(
 	
 	//nombre de la tabla y columnas de la tabla.
 	public static $tabla = "cancha";
-	private static $fila = ['NOMBRE_CANCHA', 'FOTO','TIPO_CANCHA','CLAVE','TIPO_USUARIO','LONGITUD','LATITUD','DIRECCION','BORRADO','TARJETA','CLAVE_TARJETA','FECHA_VENCIMIENTO_TARJETA','PUNTAJE','PRECIO'];
+	private static $fila = ['NOMBRE_CANCHA', 'FOTO','TIPO_CANCHA','CLAVE','LONGITUD','LATITUD','DIRECCION','BORRADO','TARJETA','CLAVE_TARJETA','FECHA_VENCIMIENTO_TARJETA','PUNTAJE','PRECIO'];
 
 	/* G E T T E R S  &&  S E T T E R S */
 	public function setCodigoCancha($a){
@@ -64,6 +64,30 @@ CREATE TABLE Cancha(
 	}
 	public function getTipoCancha(){
 		return $this->tipo_cancha;
+	}
+	public function setLongitud($a){
+		$this->longitud = $a;
+	}
+	public function getLongitud(){
+		return $this->longitud;
+	}
+	public function setLatitud($a){
+		$this->latitud = $a;
+	}
+	public function getLatitud(){
+		return $this->latitud;
+	}
+	public function setDireccion($a){
+		$this->direccion = $a;
+	}
+	public function getDireccion(){
+		return $this->direccion;
+	}
+	public function setBorrado($a){
+		$this->borrado = $a;
+	}
+	public function getBorrado(){
+		return $this->borrado;
 	}
 	public function setTarjeta($a){
 		$this->tarjeta = $a;
@@ -96,8 +120,6 @@ CREATE TABLE Cancha(
 		return $this->precio;
 	}
 	
-	
-	
 	/* M E T O D O S   D E   L A   C L A S E */
 	
 	public function getByPk($id){ //TRAER ESA CANCHA DE LA BDD (RECIBE POR PARAMETRO EL ID DE LA CANCHA)
@@ -108,57 +130,60 @@ CREATE TABLE Cancha(
 		return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
 	}
 	
-	public function cargarDatos($fila){ //RECIBE LA FILA DE LA BDD Y CARGA LOS DATOS EN LA CLASE USUARIO PHP (USA LOS SETTERS DE LA CLASE)
+	public function cargarDatos($fila){ //RECIBE LA FILA DE LA BDD Y CARGA LOS DATOS EN LA CLASE CANCHA PHP (USA LOS SETTERS DE LA CLASE)
 		foreach($fila as $prop => $valor) {
 			if(in_array($prop, static::$fila)) {
 				switch($prop){
-					case "email":
-						$this->setEmail($valor);
+					case "codigo_cancha":
+						$this->setCodigoCancha($valor);
 					break;
-					case "nombre":
+					case "nombre_cancha":
 						$this->setNombre($valor);
 					break;
-					case "apellido":
-						$this->setApellido($valor);
+					case "foto":
+						$this->setFoto($valor);
 					break;
-					case "clave":
-						$this->setClave($valor);
+					case "tipo_cancha":
+						$this->setTipoCancha($valor);
 					break;
-					case "tipo_usuario":
-						$this->setTipoUsuario($valor);
+					case "longitud":
+						$this->setLongitud($valor);
 					break;
-					case "foto_perfil":
-						$this->setFotoPerfil($valor);
+					case "latitud":
+						$this->setLatitud($valor);
 					break;
-					case "banneado":
-						$this->setBanneado($valor);
+					case "direccion":
+						$this->setDireccion($valor);
 					break;
 					case "borrado":
 						$this->setBorrado($valor);
 					break;
+					case "tarjeta":
+						$this->setTarjeta($valor);
+					break;
+					case "clave_tarjeta":
+						$this->setClaveTarjeta($valor);
+					break;
+					case "fecha_vencimiento_tarjeta":
+						$this->setFechaVencimientoTarjeta($valor);
+					break;
+					case "puntaje":
+						$this->setPuntaje($valor);
+					break;
+					case "precio":
+						$this->setPrecio($valor);
+					break;
+			
 				}
 			}
 		}
 	}
 	
-	public function chequear_mail($mail){ //VER SI EL MAIL YA EXISTE
-		$query = "SELECT * FROM " . static::$tabla . " WHERE EMAIL=? LIMIT 1";
+	public function crear_cancha($array){  //REGISTRO DE CANCHA	
+		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,FOTO,TIPO_CANCHA,CLAVE,LONGITUD,LATITUD,DIRECCION,BORRADO,TARJETA,CLAVE_TARJETA,FECHA_VENCIMIENTO_TARJETA,PUNTAJE,PRECIO)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
-		$array=[];
-		if($stmt->execute([$mail])){
-			while($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$array=$f;
-			}
-		}
-		$json=json_encode($array);
-		return $json;
-	}
-	
-	public function crear_usuario($array){  //REGISTRO DE USUARIO
-		$query = "INSERT INTO " . static::$tabla . " (EMAIL, CLAVE, NOMBRE, APELLIDO, TIPO_USUARIO)
-				VALUES (?, sha2(?, 224), ?, ?, ?)";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["EMAIL"],$array["CLAVE"],$array["NOMBRE"],$array["APELLIDO"],$array["TIPO_USUARIO"]]);
+		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["FOTO"],$array["TIPO_CANCHA"],$array["CLAVE"],$array["LONGITUD"],$array["LATITUD"],$array["DIRECCION"],$array["BORRADO"],$array["TARJETA"],$array["CLAVE_TARJETA"],$array["FECHA_VENCIMIENTO_TARJETA"],$array["PUNTAJE"],$array["PRECIO"]]);
 	}
 	
 	
