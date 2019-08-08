@@ -60,6 +60,14 @@ function changeState() {
   }
 }
 
+
+if($location.path().search("editar")!="-1"){
+	var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
+	$scope.usuario.NOMBRE=usuario_local.NOMBRE;
+	$scope.usuario.APELLIDO=usuario_local.APELLIDO;
+	$scope.usuario.CLAVE=usuario_local.CLAVE; 
+}
+
 //**** TIPO DE USUARIO ****//
 	
 	$scope.tipo_usuario=[
