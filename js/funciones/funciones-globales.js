@@ -1,15 +1,15 @@
 /****************************************FUNCIONES GLOBALES****************************************/
 
-function ce(e){
+function ce(e){ //crea elemento
 	return document.createElement(e);
 }
-function ac(p,e){
+function ac(p,e){ //lo hace aparecer en la vista
 	return p.appendChild(e);
 }
-function rc(p,e){
+function rc(p,e){ //lo elimina de la vista
 	return p.removeChild(e);
 }
-function tn(p,e,n){
+function tn(p,e,n){ //trae elementos de la vista (si no pones ningun numero en los corchetes te trae una array)
 	if(!isNaN(n)){
 		return p.getElementsByTagName(e)[n];
 	}

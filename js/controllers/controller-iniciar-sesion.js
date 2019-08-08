@@ -18,14 +18,17 @@ iCancha.controller("iniciarSesionCtrl", function ($location,$http,$scope,$window
 	
 	//envio del form
 	$scope.login = function (usuario){
-	/*	var datos={
-			EMAIL : usuario.EMAIL,
-			CLAVE : usuario.CLAVE
-		};*/ 
+		/*usuario.EMAIL,
+		usuario.CLAVE */ 
+		
+		var datos_login=tn(tn(document,'form',0),'input'); //para validacion de datos, lo usamos despues
+
+		
 		var item = [];
-		var datos_login=tn(tn(document,'form',0),'input');
-		for(var i in usuario){
+		for(var i in usuario){ //recorre objeto y crea un array
 			item.push( i+'='+usuario[i] ); 
+			//i es Email y Clave, 
+			//usuario[i] es el contendio email y clave
 		}
 
 		//validar inputs en el submit
@@ -43,10 +46,10 @@ iCancha.controller("iniciarSesionCtrl", function ($location,$http,$scope,$window
 			}
 		}
 		if(!ban){*/
-			var union = item.join('&');	
+			var union = item.join('&');	//me une el array con un &
 			//ABM: login
-			$http({
-				method: 'POST',
+			$http({ //esto conecta a php
+				method: 'POST', //tambien existe GET
 				url:"php/abm/login.php",
 				data: union,	
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
