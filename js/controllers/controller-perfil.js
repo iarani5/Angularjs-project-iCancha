@@ -2,11 +2,17 @@
 
 iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout', function  ($scope, $http, $location, Upload, $timeout) { 
 
-	if(localStorage.getItem("dts_user")!=null){ 
+	if(localStorage.getItem("dts_user")!=null){
+							sacar_botones("sacar"); //Funcion. no recibe nada, vuelve a cargar los botones del menu.
+		
 		var usuario=[];
 		usuario=angular.fromJson(localStorage.getItem("dts_user"));
 		$scope.nombre=usuario.NOMBRE;
 		$scope.apellido=usuario.APELLIDO;
+		
+		if(usuario.TIPO_USUARIO=="Propietario"){
+			$scope.es_propietario=true;
+		}
 			
 		//************************************* LOGOUT
 		$scope.logout=function(){
