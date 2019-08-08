@@ -7,6 +7,31 @@ iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$t
 		usuario=angular.fromJson(localStorage.getItem("dts_user"));
 		$scope.nombre=usuario.NOMBRE;
 		$scope.apellido=usuario.APELLIDO;
+			
+		//************************************* LOGOUT
+		$scope.logout=function(){
+				$http({
+						method: 'POST',
+						url:"php/abm/logout.php",
+						headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+					})
+					.then(function (data){ //EXITO se establecio la conexion
+						if(data.data=="1"){
+							localStorage.removeItem("dts_user");
+							sacar_botones(); //Funcion. no recibe nada, vuelve a cargar los botones del menu.
+							$location.path("#!/home"); 
+						}
+						else{
+							// mensaje de error. vuelva a intentarlo mas tarde.
+						}
+						
+				},function (error){ //ERROR no se pudo establecer la conexion
+
+				});
+		}
+	}
+	else{
+		$location.path("#!/home");  //usuario no logueado, redireccion a home
 	}
  
  //*******************************************************************
@@ -28,5 +53,8 @@ iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$t
 			var union = item.join('&');	
 		 *
 ***********************************************************************/
+
+
+	
 
 }]);

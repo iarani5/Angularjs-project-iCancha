@@ -52,11 +52,15 @@ iCancha.controller("iniciarSesionCtrl", function ($location,$http,$scope,$window
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
 			})
 			.then(function (data){//EXITO se establecio la conexion
-				if(response.data.constructor != Object){ //error no se guardo en la bdd
-					// mensaje de error. vuelva a intentarlo mas tarde.
+				if(data.data.ID_USUARIO!="undefined"){ //exito
+					localStorage.setItem("dts_user",angular.toJson(data.data));
+					
+					sacar_botones("sacar"); //Funcion. saco los botones de login, registrarse y como funciona
+					$location.path("#!/home"); 
 				}
-				else{ //exito
-					localStorage.setItem("dts_user",angular.toJson(response.data));
+				else{ //error no se guardo en la bdd
+					// mensaje de error. vuelva a intentarlo mas tarde.
+					
 					
 				}
 				/*if(data.BORRADO=="Si"){
@@ -84,7 +88,6 @@ iCancha.controller("iniciarSesionCtrl", function ($location,$http,$scope,$window
 					p.innerHTML='Mail o contraseĂ±a incorrectos';
 					datos_login[0].parentNode.insertBefore(p,datos_login[0]);
 				}*/
-				console.log(data);
 		},function (error){ //ERROR no se pudo establecer la conexion
 
 		});

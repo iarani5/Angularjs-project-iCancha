@@ -19,13 +19,6 @@ iCancha.controller("indexCtrl", function ($location,$http,$scope,$window,$routeP
 			ac(tn(id("navbar-menu"),"ul",0), li);
 		}
 		
-		//saco los botones de login, registrarse y como funciona
-		var botones=document.getElementsByClassName("sin_usuario");
-		for(var i=0;i<botones.length;i++){
-			rc(botones[i].parentNode, botones[i]);
-		}
-		
-		
 	}
 	else{
 		//no hay usuario logueado

@@ -21,3 +21,24 @@ function id(e){
 function txt(s){
 	return document.createTextNode(s);
 }
+
+// FUNCION PARA ITEMS DEL MENU
+
+function sacar_botones(estado){
+	if(estado=="sacar"){
+		//saco los botones de login, registrarse y como funciona
+		var botones=document.getElementsByClassName("sin_usuario");
+		for(var i=0;i<botones.length;i++){
+			botones[i].style.display="none";
+		}
+	}
+	else{
+		var botones=document.getElementsByClassName("sin_usuario");
+		for(var i=0;i<botones.length;i++){
+			botones[i].style.display="inline-block";
+		}
+		//elimino boton perfil
+		rc(id("nombre_usuario").parentNode,id("nombre_usuario"));
+	}
+		
+}
