@@ -22,8 +22,8 @@ CREATE TABLE Cancha(
 */
 	
 	/* A T R I B U T O S */
-	private $codigo_cancha;
-	private $nombre;
+	private $id_cancha;
+	private $nombre_cancha;
 	private $foto;
 	private $tipo_cancha;
 	private $longitud;
@@ -36,22 +36,22 @@ CREATE TABLE Cancha(
 	private $puntaje;
 	private $precio;
 	
-	//nombre de la tabla y columnas de la tabla.
+	//nombre_cancha de la tabla y columnas de la tabla.
 	public static $tabla = "cancha";
 	private static $fila = ['NOMBRE_CANCHA', 'FOTO','TIPO_CANCHA','CLAVE','LONGITUD','LATITUD','DIRECCION','BORRADO','TARJETA','CLAVE_TARJETA','FECHA_VENCIMIENTO_TARJETA','PUNTAJE','PRECIO'];
 
 	/* G E T T E R S  &&  S E T T E R S */
-	public function setCodigoCancha($a){
-		$this->codigo_cancha = $a;
+	public function setIdCancha($a){
+		$this->id_cancha = $a;
 	}
-	public function getCodigoCancha(){
-		return $this->codigo_cancha;
+	public function getIdCancha(){
+		return $this->id_cancha;
 	}
-	public function setNombre($a){
-		$this->nombre = $a;
+	public function setNombre_cancha($a){
+		$this->nombre_cancha = $a;
 	}
-	public function getNombre(){
-		return $this->nombre;
+	public function getNombre_cancha(){
+		return $this->nombre_cancha;
 	}
 	public function setFoto($a){
 		$this->foto = $a;
@@ -134,11 +134,11 @@ CREATE TABLE Cancha(
 		foreach($fila as $prop => $valor) {
 			if(in_array($prop, static::$fila)) {
 				switch($prop){
-					case "codigo_cancha":
-						$this->setCodigoCancha($valor);
+					case "id_cancha":
+						$this->setIdCancha($valor);
 					break;
 					case "nombre_cancha":
-						$this->setNombre($valor);
+						$this->setNombre_cancha($valor);
 					break;
 					case "foto":
 						$this->setFoto($valor);
@@ -180,45 +180,34 @@ CREATE TABLE Cancha(
 	}
 	
 	public function crear_cancha($array){  //REGISTRO DE CANCHA	
-		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,FOTO,TIPO_CANCHA,CLAVE,LONGITUD,LATITUD,DIRECCION,BORRADO,TARJETA,CLAVE_TARJETA,FECHA_VENCIMIENTO_TARJETA,PUNTAJE,PRECIO)
+		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,FOTO,TIPO_CANCHA,LONGITUD,LATITUD,DIRECCION,BORRADO,TARJETA,CLAVE_TARJETA,FECHA_VENCIMIENTO_TARJETA,PUNTAJE,PRECIO)
 				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["FOTO"],$array["TIPO_CANCHA"],$array["CLAVE"],$array["LONGITUD"],$array["LATITUD"],$array["DIRECCION"],$array["BORRADO"],$array["TARJETA"],$array["CLAVE_TARJETA"],$array["FECHA_VENCIMIENTO_TARJETA"],$array["PUNTAJE"],$array["PRECIO"]]);
+		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["FOTO"],$array["TIPO_CANCHA"],$array["LONGITUD"],$array["LATITUD"],$array["DIRECCION"],$array["BORRADO"],$array["TARJETA"],$array["CLAVE_TARJETA"],$array["FECHA_VENCIMIENTO_TARJETA"],$array["PUNTAJE"],$array["PRECIO"]]);
 	}
-	
-	
-	public function verificar_usuario($mail, $contrasenia){ //LOGIN DE USUARIO
-		$query = "SELECT * FROM " . static::$tabla . " WHERE EMAIL=? AND CLAVE=sha2(?, 224)";
-		$stmt = DBcnx::getStatement($query);
-		$array=[];
-		if($stmt->execute([$mail,$contrasenia])){
-			while($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$array=$f;
-			}
-		}
-		$json=json_encode($array);
-		return $json;
-	}
-	
-	
-	public static function all(){ //LISTAR TODO EL LISTADO DE LA TABLA USUARIO
+		
+	public static function all(){ //LISTAR TODO EL LISTADO DE LA TABLA CANCHA
 		$salida = [];
 		$query = "SELECT * FROM " . static::$tabla;
 		$stmt = DBcnx::getStatement($query);
 		if($stmt->execute()) {
 			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$usuario = new Usuario;
-				$usuario->codigo_usuario = $fila['ID'];
-				$usuario->email = $fila['EMAIL'];
-				$usuario->nombre = $fila['NOMBRE'];
-				$usuario->apellido = $fila['APELLIDO'];
-				$usuario->clave = $fila['CLAVE'];
-				$usuario->tipo_usuario = $fila['TIPO_USUARIO'];
-				$usuario->foto_perfil = $fila['FOTO_PERFIL'];
-				$usuario->borrado = $fila['BORRADO'];
-				$usuario->banneado = $fila['BANNEADO'];
-				$usuario->cargarDatos($fila);
-				$salida[] = $usuario;
+				$cancha = new Cancha;
+				$cancha->id_cancha = $fila['ID_CANCHA'];
+				$cancha->nombre_cancha = $fila['NOMBRE_CANCHA'];
+				$cancha->foto = $fila['FOTO'];
+				$cancha->tipo_cancha = $fila['TIPO_CANCHA'];
+				$cancha->longitud = $fila['LONGITUD'];
+				$cancha->latitud = $fila['LATITUD'];
+				$cancha->direccion = $fila['DIRECCION'];
+				$cancha->borrado = $fila['BORRADO'];
+				$cancha->tarjeta = $fila['TARJETA'];
+				$cancha->clave_tarjetta = $fila['CLAVE_TARJETA'];
+				$cancha->fechavencimientotarjeta = $fila['FECHA_VENCIMIENTO_TARJETA'];
+				$cancha->puntaje = $fila['PUNTAJE'];
+				$cancha->precio = $fila['PRECIO'];
+				$cancha->cargarDatos($fila);
+				$salida[] = $cancha;
 			}
 		}
 		return $salida;
