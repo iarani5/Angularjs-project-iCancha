@@ -155,6 +155,17 @@ class Usuario{
 		return $stmt->execute([$array["EMAIL"],$array["CLAVE"],$array["NOMBRE"],$array["APELLIDO"],$array["TIPO_USUARIO"]]);
 	}
 	
+	public function editar_usuario($variable,$array){ //EDICION DE DATOS DE USUARIO
+		$query = "UPDATE " . static::$tabla . " SET $variable=? WHERE ID=?";
+		$stmt = DBcnx::getStatement($query);
+		return $stmt->execute([$array["VALOR"],$array["ID"]]);
+	}
+	
+	public function editar_clave($contrasenia,$id){ //EDICION DE CLAVE
+		$query = "UPDATE " . static::$tabla . " SET CLAVE=sha2(?, 224) WHERE ID=?";
+		$stmt = DBcnx::getStatement($query);
+		return $stmt->execute([$contrasenia,$id]);
+	}
 	
 	public function verificar_usuario($mail, $contrasenia){ //LOGIN DE USUARIO
 		$query = "SELECT * FROM " . static::$tabla . " WHERE EMAIL=? AND CLAVE=sha2(?, 224)";

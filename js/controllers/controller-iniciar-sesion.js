@@ -23,6 +23,8 @@ iCancha.controller("iniciarSesionCtrl", function ($location,$http,$scope,$window
 		
 		var datos_login=tn(tn(document,'form',0),'input'); //para validacion de datos, lo usamos despues
 
+		//Guardo largo de clave.
+		localStorage.setItem("largo_clave",usuario.CLAVE.length);
 		
 		var item = [];
 		for(var i in usuario){ //recorre objeto y crea un array

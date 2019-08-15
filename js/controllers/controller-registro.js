@@ -59,6 +59,7 @@ function changeState() {
     }
   }
 }
+		$scope.valor="Cliente";
 
 
 //**** TIPO DE USUARIO ****//
@@ -81,7 +82,11 @@ function changeState() {
 			item.push( i+'='+usuario[i] ); 
 		}
 		var union = item.join('&');	
-   
+	
+		//Pregunto si el usuario esta editando sus datos
+		if($location.path().search("editar")!="-1"){
+			union+="&edicion=1";
+		}
 		//REGISTRO USUARIO
 		$http({
 			method: 'POST',
@@ -90,7 +95,6 @@ function changeState() {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
 		})
 		.then(function (response){//EXITO se establecio la conexion
-		
 			if(response.data=="existe"){
 				//mensaje de mail ya existe
 			}
@@ -114,25 +118,45 @@ function changeState() {
 
 		});
 	}	
+			
 		
 	if($location.path().search("editar")!="-1"){
-		var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
+/* 		rc(document.getElementsByClassName("p-t-115").parentNode,document.getElementsByClassName("p-t-115"));
+ */		var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
 		var datos_registro=tn(tn(document,'form',0),'input');
-		for(var i=0;i<datos_registro.length;i++){
-			console.log(datos_registro[i].id);
-			switch(datos_registro[i].id){
-				case "defaultForm-nombre":
-					datos_registro[i].value=usuario_local.NOMBRE;
-				break;
-				case "defaultForm-apellido":
-					datos_registro[i].value=usuario_local.APELLIDO;
-				break;
-				case "defaultForm-email":
-					datos_registro[i].value=usuario_local.EMAIL;
-				break;
-			}
+		
+		
+		//creo string de * segun cantidad de digitos de clave. Como esta guardado en string lo paso a int al nunmero que busco en el almacenamiento local de la web.
+		var cantidad_digitos=parseInt(localStorage.getItem("largo_clave"), 10);
+		var largo_clave="";
+		for(var i=0;i<cantidad_digitos;i++){
+			largo_clave+="*";
 		}
-	}
+		
+		$scope.usuario = { 
+			NOMBRE: usuario_local.NOMBRE,
+			APELLIDO: usuario_local.APELLIDO,
+			EMAIL: usuario_local.EMAIL,
+			CLAVE: largo_clave,
+		};
+		
+		//hago que los inputs de emial y nivel de usuario no sean editables
+		document.getElementById("defaultForm-email").readOnly = true;
+		var select=tn(document,"select",0);
+		var tipo_usr=ce("p");
+		tipo_usr.innerHTML=usuario_local.TIPO_USUARIO;
+		select.parentNode.style.width="100%";
+		tipo_usr.style.cssFloat="right";
+ 		ac(select.parentNode,tipo_usr);
+		select.style.display="none";
+		
+		//cambiar nombre de boton a editar
+ 		tn(tn(document,"form",0),"button",0).innerHTML="Editar";
+		
+		var divs=tn(tn(document,"form",0),"div");
+		rc(divs[divs.length-1].parentNode,divs[divs.length-1]);
+		
+	} 
 });
 
 
