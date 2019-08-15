@@ -6,8 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"><!--content="width=device-width, initial-scale=1"-->
-	
-	
+
 	<!-- Title -->
 	<title>iCancha</title> 
 	
@@ -87,6 +86,10 @@
 	<!-- angular-upload   -->
 	<script src="js/modulos/ng-file-upload-shim.js"></script> <!--no html5 support Prueba de commit-->
 	<script src="js/modulos/ng-file-upload.js"></script>
+	
+	<!-- para ventanas modales -->
+	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.9.0.js"></script>
+	
    
 </head>
 
@@ -145,10 +148,8 @@
 	
 	<!---- MODAL ---->
 	
-	<div ui-yield-to="modals"></div>
-	
-	<div class="slide-animate" ng-include="modal_login.url"></div>
-
+<!-- 	<div ui-yield-to="modals"></div>
+ -->	
 	<!-- BOOTSTRAP JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
@@ -215,24 +216,10 @@
 	<script src="js/controllers/controller-canchas.js"></script> 
 	<script src="js/controllers/controller-contacto.js"></script> 
 	<script src="js/controllers/controller-perfil.js"></script> 
-
+<!-- 	<script src="js/controllers/controller-modal.js"></script> 
+ -->
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!--

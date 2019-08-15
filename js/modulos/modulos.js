@@ -5,7 +5,8 @@ var iCancha = angular.module('iCancha', [
   'mobile-angular-ui', //angular
   'mobile-angular-ui.gestures', //gestos (ej: arrastrar el dedo)
   'ngFileUpload', //upload imagenes
-  'uiGmapgoogle-maps' //mapa
+  'uiGmapgoogle-maps', //mapa
+  'ui.bootstrap' //modal
 ])
 
 /////ADAPTACION DE PANTALLA

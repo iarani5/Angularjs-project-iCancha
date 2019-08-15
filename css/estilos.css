@@ -117,7 +117,15 @@ body{
 
 /******************************  ****************************/
 
+.modal{
+	display:inline-block;
+	    background: rgba(0,0,0,0.2);
+}
 
+.modal-contenct .col-sm-8 .col-sm-offset-2{
+	background:white;
+	width: 100%;
+}
 
 
 

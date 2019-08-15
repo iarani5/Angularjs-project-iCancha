@@ -98,7 +98,6 @@ function changeState() {
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
 		})
 		.then(function (response){//EXITO se establecio la conexion
-		console.log(response);
 			if(response.data=="existe"){
 				//mensaje de mail ya existe
 			}
@@ -125,10 +124,23 @@ function changeState() {
 			
 		
 	if($location.path().search("editar")!="-1"){
+		/* 
+		var spans=tn(document,"span");
+		for(var i=0;i<spans.length;i++){
+			rc(spans[i].parentNode,spans[i]);
+		} */
+		
+		
+		
 /* 		rc(document.getElementsByClassName("p-t-115").parentNode,document.getElementsByClassName("p-t-115"));
  */		var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
 		var datos_registro=tn(tn(document,'form',0),'input');
-		
+		$scope.editable=true; //habilito boton para editar clave
+		id("achicar").style.width="55%";
+		id("achicar").style.cssFloat="right";
+		id("achicar").style.display="inline-block";
+		document.getElementById("defaultForm-clave").readOnly = true;
+
 		
 		//creo string de * segun cantidad de digitos de clave. Como esta guardado en string lo paso a int al nunmero que busco en el almacenamiento local de la web.
 		var cantidad_digitos=parseInt(localStorage.getItem("largo_clave"), 10);
@@ -153,9 +165,35 @@ function changeState() {
 		tipo_usr.style.cssFloat="right";
  		ac(select.parentNode,tipo_usr);
 		select.style.display="none";
+ 		tn(tn(document,"form",0),"button",0).style.width="40%";
+ 		tn(tn(document,"form",0),"button",0).style.cssFloat="right";
+		
+		
+		//EDITAR CLAVE
+		$scope.clave=function(){
+			
+			if(tn(tn(document,"form",0),"button",0).innerHTML=="X"){
+				id("defaultForm-clave").style.display="inline-block";
+				rc(id("clave_nueva").parentNode,id("clave_nueva"));
+				tn(tn(document,"form",0),"button",0).innerHTML="Cambiar clave";
+				id("achicar").style.width="40%";
+			}
+			else{
+				var nueva=ce("input");
+				nueva.id="clave_nueva";
+				nueva.placeholder="Clave nueva";
+				nueva.className="input100";
+				nueva.type="password";
+				ac(id("achicar"),nueva);
+				id("achicar").style.width="100%";
+				id("defaultForm-clave").style.display="none";
+				tn(tn(document,"form",0),"button",0).innerHTML="X";
+			}
+		}
+		
 		
 		//cambiar nombre de boton a editar
- 		tn(tn(document,"form",0),"button",0).innerHTML="Editar";
+ 		tn(tn(document,"form",0),"button",1).innerHTML="Guardar";
 		
 		var divs=tn(tn(document,"form",0),"div");
 		rc(divs[divs.length-1].parentNode,divs[divs.length-1]);

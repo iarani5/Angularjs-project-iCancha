@@ -1,0 +1,33 @@
+
+
+ <div class="modal">
+ <div class="modal-dialog" role="document">
+    <div class="modal-content">
+	
+<div >
+
+<div class="modal-header">
+    <h3>Cambiar clave</h3>
+</div>
+<form name="form.userForm" ng-submit="submitForm(claves)" novalidate>
+    <div class="modal-body">
+        <div class="form-group">
+            <input type="password" name="name" class="form-control" ng-model="claves.clave_actual" required placeholder="Clave actual">
+<!--             <p ng-show="form.userForm.name.$invalid && !form.userForm.name.$pristine" class="help-block">Clave actual</p>
+ -->        </div>
+
+        <div class="form-group">
+            <input type="password" name="name" class="form-control" ng-model="claves.clave_nueva" required placeholder="Clave nueva">
+<!--             <p ng-show="form.userForm.name.$invalid && !form.userForm.name.$pristine" placeholder="Clave nueva" class="help-block">Clave nueva</p>
+ -->        </div>
+		
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" ng-disabled="form.userForm.$invalid">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</form>
+    </div>
+    </div>
+    </div>
+    </div>
