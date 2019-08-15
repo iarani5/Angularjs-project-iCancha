@@ -88,7 +88,7 @@ class Usuario{
 	
 	public function getByPk($id){ //TRAER ESE USUARIO DE LA BDD (RECIBE POR PARAMETRO EL ID DE ESE USURIO)
 		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE ID = $id";
+					WHERE ID_USUARIO = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
 		return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
@@ -96,7 +96,7 @@ class Usuario{
 	
 	public function getNombreUsuario($id){
 		$query = "SELECT NOMBRE FROM " . static::$tabla . "
-					WHERE ID = $id";
+					WHERE ID_USUARIO = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
 		return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
@@ -156,13 +156,14 @@ class Usuario{
 	}
 	
 	public function editar_usuario($variable,$array){ //EDICION DE DATOS DE USUARIO
-		$query = "UPDATE " . static::$tabla . " SET $variable=? WHERE ID=?";
+		$query = "UPDATE " . static::$tabla . " SET $variable=? WHERE ID_USUARIO=?";
+		var_dump($query);
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["VALOR"],$array["ID"]]);
+		return $stmt->execute([$array["VALOR"],$array["ID_USUARIO"]]);
 	}
 	
 	public function editar_clave($contrasenia,$id){ //EDICION DE CLAVE
-		$query = "UPDATE " . static::$tabla . " SET CLAVE=sha2(?, 224) WHERE ID=?";
+		$query = "UPDATE " . static::$tabla . " SET CLAVE=sha2(?, 224) WHERE ID_USUARIO=?";
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$contrasenia,$id]);
 	}
@@ -188,7 +189,7 @@ class Usuario{
 		if($stmt->execute()) {
 			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
 				$usuario = new Usuario;
-				$usuario->codigo_usuario = $fila['ID'];
+				$usuario->codigo_usuario = $fila['ID_USUARIO'];
 				$usuario->email = $fila['EMAIL'];
 				$usuario->nombre = $fila['NOMBRE'];
 				$usuario->apellido = $fila['APELLIDO'];

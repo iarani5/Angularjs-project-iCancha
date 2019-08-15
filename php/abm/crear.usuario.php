@@ -30,24 +30,12 @@
 		
 	$usuario = new Usuario();
 	
-	//pregunto si esta editando los datos 
-	if(!isset($_POST["edicion"]){
 		//me fijo si ya existe el mail
 		$ya_exite=$usuario->chequear_mail($_POST["EMAIL"]);
 		if(count(json_decode($ya_exite))){
 			echo "existe";
 			return 0;
 		}
-	}
-	else{ //Edito datos de usario
-		$_POST["ID"]=$_SESSION['s_id'];
-		$_POST["VALOR"]=$_POST["NOMBRE"];
-		$fin2=json_decode($usuario->editar_usuario("NOMBRE", $_POST),true);
-		$_POST["VALOR"]=$_POST["APELLIDO"];
-		$fin2=json_decode($usuario->editar_usuario("APELLIDO", $_POST),true);
-		
-		$fin2=json_decode($usuario->editar_clave($_POST["CLAVE"], $_POST["ID"]),true);
-	}
 	
 	/****** Creo el usuario ******/
 	$fin=json_decode($usuario->crear_usuario($_POST),true);
@@ -58,10 +46,10 @@
 				foreach ($fin2 as $k => $v) {
 					/***** Guardado de datos en SESSION ****/
 					switch($k){
-						case "ID":
+						case "ID_USUARIO":
 							$_SESSION['s_id'] = $v;
 						break;
-						case "NIVEL":
+						case "TIPO_USUARIO":
 							$_SESSION['s_nivel'] = $v;
 						break;
 					}

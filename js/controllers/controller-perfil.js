@@ -2,8 +2,25 @@
 
 iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout', function  ($scope, $http, $location, Upload, $timeout) { 
 
+			//me fijo si la sesion sigue activa
+				/* $http({
+						method: 'POST',
+						url:"php/abm/logueado.php",
+						headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+					})
+					.then(function (data){ //No esta activa, elimino datos de almacenamiento local y redirecciono a home
+						if(data.data!=" 0"){
+							sacar_botones();
+							localStorage.removeItem("dts_user");
+ 							$location.path("#!/home"); 
+ 						}
+						
+				},function (error){ //ERROR no se pudo establecer la conexion
+
+				}); */
+				
 	if(localStorage.getItem("dts_user")!=null){
-							sacar_botones("sacar"); //Funcion. no recibe nada, vuelve a cargar los botones del menu.
+		sacar_botones("sacar"); //Funcion. vuelve a cargar los botones del menu.
 		
 		var usuario=[];
 		usuario=angular.fromJson(localStorage.getItem("dts_user"));

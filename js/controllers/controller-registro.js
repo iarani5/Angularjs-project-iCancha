@@ -82,19 +82,23 @@ function changeState() {
 			item.push( i+'='+usuario[i] ); 
 		}
 		var union = item.join('&');	
-	
+		
 		//Pregunto si el usuario esta editando sus datos
 		if($location.path().search("editar")!="-1"){
-			union+="&edicion=1";
+			var enlace = "php/abm/editar.usuario.php";
+		}
+		else{
+			var enlace = "php/abm/crear.usuario.php";
 		}
 		//REGISTRO USUARIO
 		$http({
 			method: 'POST',
-			url:"php/abm/crear.usuario.php",
+			url: enlace,
 			data: union,	
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
 		})
 		.then(function (response){//EXITO se establecio la conexion
+		console.log(response);
 			if(response.data=="existe"){
 				//mensaje de mail ya existe
 			}

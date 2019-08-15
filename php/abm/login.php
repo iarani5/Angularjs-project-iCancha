@@ -9,15 +9,15 @@
 if(isset($_POST)){
     $usuario = new Usuario();
 
-$fin2=json_decode($usuario->verificar_usuario($_POST["EMAIL"], $_POST["CLAVE"]),true);
+$fin2=json_decode($usuario->verificar_usuario($_POST["EMAIL"], $_POST["CLAVE"]),true); //me fijo si existe el usuario en la base de datos, si existe almaceno sus datos en la variable $_SESSION
 if(count($fin2)){
     foreach ($fin2 as $k => $v) {
         /***** Guardado de datos en SESSION ****/
         switch($k){
-            case "ID":
+            case "ID_USUARIO":
                 $_SESSION['s_id'] = $v;
             break;
-            case "NIVEL":
+            case "TIPO_USUARIO":
                 $_SESSION['s_nivel'] = $v;
             break;
         }
