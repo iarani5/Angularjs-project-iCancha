@@ -16,10 +16,9 @@
 		
 		$_POST["VALOR"]=$_POST["NOMBRE"];
 		$fin=$usuario->editar_usuario("NOMBRE", $_POST);
-		
+	
 		$_POST["VALOR"]=$_POST["APELLIDO"];
 		$fin2=$usuario->editar_usuario("APELLIDO", $_POST);
-		
 		
 		//editar clave usuario
 		//$fin2=json_decode($usuario->editar_clave($_POST["CLAVE"], $_POST["ID"]),true);

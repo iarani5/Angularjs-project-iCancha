@@ -172,6 +172,8 @@ function changeState() {
 		//EDITAR CLAVE
 		$scope.clave=function(){
 			
+					modal_msj("mensaje");
+
 			if(tn(tn(document,"form",0),"button",0).innerHTML=="X"){
 				id("defaultForm-clave").style.display="inline-block";
 				rc(id("clave_nueva").parentNode,id("clave_nueva"));
