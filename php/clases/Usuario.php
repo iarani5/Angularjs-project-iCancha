@@ -157,7 +157,6 @@ class Usuario{
 	
 	public function editar_usuario($variable,$array){ //EDICION DE DATOS DE USUARIO
 		$query = "UPDATE " . static::$tabla . " SET $variable=? WHERE ID_USUARIO=?";
-		var_dump($query);
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$array["VALOR"],$array["ID_USUARIO"]]);
 	}

@@ -15,7 +15,7 @@
 					</span>
 
 					<!-- NOMBRE -->
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
 					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate"  placeholder="Nombre" required ng-model="usuario.NOMBRE">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -24,7 +24,7 @@
 					</div>
 
 					<!-- APELLIDO -->
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid lastname is required">
 					 <input class="input100"  type="text" id="defaultForm-apellido" class="form-control validate"  placeholder="Apellido" required ng-model="usuario.APELLIDO">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -42,14 +42,13 @@
 					</div>
 
 					<!-- CLAVE -->
-					<div class="wrap-input100 validate-input m-b-16" id="achicar" data-validate = "Password is required">
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
 						<input class="input100" type="password" name="pass" id="defaultForm-clave" placeholder="Clave" required ng-model="usuario.CLAVE">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-lock"></span>
 						</span>
 					</div>
-						<button ng-show="editable" class="login100-form-btn" ng-click="clave()">Cambiar clave</button>
 					
 					<div>
 						<!-- TIPO USUARIO -->
@@ -83,8 +82,3 @@
 			</div>
 		</div>
 	</div>
-	
-	   <!--  <div id="es_modal">
-			<div ng-include="'vistas/modal.html'"></div>
-		</div>
- -->

@@ -32,11 +32,6 @@ var fileInputTextDiv = document.getElementById('file_input_text_div');
 var fileInput = document.getElementById('file_input_file');
 var fileInputText = document.getElementById('file_input_text');
 
-/* 
-fileInput.addEventListener('change', changeInputText);
-fileInput.addEventListener('change', changeState);
- */
- 
 function changeInputText() {
   var str = fileInput.value;
   var i;
@@ -59,7 +54,7 @@ function changeState() {
     }
   }
 }
-		$scope.valor="Cliente";
+	$scope.valor="Cliente";
 
 
 //**** TIPO DE USUARIO ****//
@@ -72,10 +67,8 @@ function changeState() {
 
 //***** ENVIO DE FORM *****//
 
-	$scope.submit=function(usuario){
-
-		//falta validacion de datos en onblur y onsubmit
-		
+	$scope.submit=function(usuario){		
+	
 		//guardo los datos del usuario en formato especifico para pasarlo por el metodo POST a php
 		var item = [];
 		for(var i in usuario){
@@ -90,7 +83,7 @@ function changeState() {
 		else{
 			var enlace = "php/abm/crear.usuario.php";
 		}
-		//REGISTRO USUARIO
+		//ABM USUARIO
 		$http({
 			method: 'POST',
 			url: enlace,
@@ -101,59 +94,56 @@ function changeState() {
 			if(response.data=="existe"){
 				//mensaje de mail ya existe
 			}
-			else{
-				if(response.data.constructor != Object){ //error no se guardo en la bdd
-					// mensaje de error. vuelva a intentarlo mas tarde.
+			else{				
+					if(enlace == "php/abm/editar.usuario.php"){
+						localStorage.setItem("dts_user",angular.toJson(response.data));
+						/* function mensaje() {
+							modal_msj("Datos editados con éxito"); 
+						} setTimeout(mensaje,3000); */
+						if(tn(tn(document,"form",0),"input",3).value!=""){
+							function mensaje() {
+								modal_msj("Datos editados con éxito"); 
+							} setTimeout(mensaje,3000); 
+							mensaje();
+						}						
+						$window.location.reload();
+					}
+					else{
+						//paso el objeto a formato json para almacenarlo en la memoria local del browser
+						localStorage.setItem("dts_user",angular.toJson(response.data));
+						sacar_botones("sacar");
+						//redirijo a home porque ya me loguea en el sistema una vez creado el usuario.
+						$location.path("/");
+					}
 				}
-				else{ //exito
-					//redirijo a home porque ya me loguea en el sistema una vez creado el usuario.
-					
-					//paso el objeto a formato json para almacenarlo en la memoria local del browser
-					localStorage.setItem("dts_user",angular.toJson(response.data));
-					
-					//redirecciono a home.
-					sacar_botones("sacar");
-					$location.path("/");
-				}
-			}
 			
 		},function (error){ //ERROR no se pudo establecer la conexion
 
 		});
 	}	
-			
 		
 	if($location.path().search("editar")!="-1"){
+		var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
 		/* 
-		var spans=tn(document,"span");
-		for(var i=0;i<spans.length;i++){
-			rc(spans[i].parentNode,spans[i]);
-		} */
-		
-		
-		
-/* 		rc(document.getElementsByClassName("p-t-115").parentNode,document.getElementsByClassName("p-t-115"));
- */		var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
 		var datos_registro=tn(tn(document,'form',0),'input');
 		$scope.editable=true; //habilito boton para editar clave
 		id("achicar").style.width="55%";
 		id("achicar").style.cssFloat="right";
 		id("achicar").style.display="inline-block";
 		document.getElementById("defaultForm-clave").readOnly = true;
-
+ */
 		
 		//creo string de * segun cantidad de digitos de clave. Como esta guardado en string lo paso a int al nunmero que busco en el almacenamiento local de la web.
-		var cantidad_digitos=parseInt(localStorage.getItem("largo_clave"), 10);
+		/* var cantidad_digitos=parseInt(localStorage.getItem("largo_clave"), 10);
 		var largo_clave="";
 		for(var i=0;i<cantidad_digitos;i++){
 			largo_clave+="*";
-		}
+		} */
 		
 		$scope.usuario = { 
 			NOMBRE: usuario_local.NOMBRE,
 			APELLIDO: usuario_local.APELLIDO,
 			EMAIL: usuario_local.EMAIL,
-			CLAVE: largo_clave,
 		};
 		
 		//hago que los inputs de emial y nivel de usuario no sean editables
@@ -165,42 +155,40 @@ function changeState() {
 		tipo_usr.style.cssFloat="right";
  		ac(select.parentNode,tipo_usr);
 		select.style.display="none";
- 		tn(tn(document,"form",0),"button",0).style.width="40%";
+ 		/* tn(tn(document,"form",0),"button",0).style.width="40%";
  		tn(tn(document,"form",0),"button",0).style.cssFloat="right";
+		 */
 		
-		
-		//EDITAR CLAVE
-		$scope.clave=function(){
-			
-					modal_msj("mensaje");
-
-			if(tn(tn(document,"form",0),"button",0).innerHTML=="X"){
-				id("defaultForm-clave").style.display="inline-block";
-				rc(id("clave_nueva").parentNode,id("clave_nueva"));
-				tn(tn(document,"form",0),"button",0).innerHTML="Cambiar clave";
-				id("achicar").style.width="40%";
-			}
-			else{
-				var nueva=ce("input");
-				nueva.id="clave_nueva";
-				nueva.placeholder="Clave nueva";
-				nueva.className="input100";
-				nueva.type="password";
-				ac(id("achicar"),nueva);
-				id("achicar").style.width="100%";
-				id("defaultForm-clave").style.display="none";
-				tn(tn(document,"form",0),"button",0).innerHTML="X";
-			}
-		}
-		
+		tn(tn(document,"form",0),"input",3).placeholder="Nueva clave";
+		tn(tn(document,"form",0),"input",3).required = false;
 		
 		//cambiar nombre de boton a editar
- 		tn(tn(document,"form",0),"button",1).innerHTML="Guardar";
+ 		tn(tn(document,"form",0),"button",0).innerHTML="Guardar";
 		
 		var divs=tn(tn(document,"form",0),"div");
-		rc(divs[divs.length-1].parentNode,divs[divs.length-1]);
-		
-	} 
+		rc(divs[divs.length-1].parentNode,divs[divs.length-1]);	
+	}
+	
+	/* //EDITAR CLAVE
+	$scope.clave=function(){
+		if(tn(tn(document,"form",0),"button",0).innerHTML=="X"){
+			id("defaultForm-clave").style.display="inline-block";
+			rc(id("clave_nueva").parentNode,id("clave_nueva"));
+			tn(tn(document,"form",0),"button",0).innerHTML="Cambiar clave";
+			id("achicar").style.width="40%";
+		}
+		else{
+			var nueva=ce("input");
+			nueva.id="clave_nueva";
+			nueva.placeholder="Clave nueva";
+			nueva.className="input100";
+			nueva.type="password";
+			ac(id("achicar"),nueva);
+			id("achicar").style.width="100%";
+			id("defaultForm-clave").style.display="none";
+			tn(tn(document,"form",0),"button",0).innerHTML="X";
+		}
+	} */
 });
 
 
