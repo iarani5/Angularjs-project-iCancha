@@ -57,7 +57,8 @@ iCancha.controller("iniciarSesionCtrl", function ($location,$http,$scope,$window
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
 			})
 			.then(function (data){//EXITO se establecio la conexion
-				if(data.data.ID_USUARIO!="undefined"){ //exito
+			console.log(data);
+				if(data.data.ID_USUARIO!="undefined"&&data.data!=""){ //exito
 					localStorage.setItem("dts_user",angular.toJson(data.data));
 					
 					sacar_botones("sacar"); //Funcion. saco los botones de login, registrarse y como funciona

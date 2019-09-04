@@ -62,18 +62,16 @@
 		
 		<!-- hoja de estilos personalizada que pisa bootstrap y el template-->
         <link rel="stylesheet" href="css/estilos.css">
-
 	
-	
-	<!-- AngularJS --> 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-	
-	<!-- angular-google-maps -->
-    <script src="js/modulos/mapa/lodash.underscore.min.js"></script>
+		<!-- AngularJS --> 
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+		
+		<!-- angular-google-maps -->
+	<script src="js/modulos/mapa/lodash.underscore.min.js"></script>
     <script src="js/modulos/mapa/angular-google-maps.min.js"></script>
 	<script src="js/modulos/mapa/dev_deps.js"></script>
     <script src="http://cdn.rawgit.com/nmccready/angular-simple-logger/0.0.1/dist/index.js"></script>
-	<script src="js/modulos/mapa/angular-google-maps_dev_mapped.js"></script>	
+	<script src="js/modulos/mapa/angular-google-maps_dev_mapped.js"></script>
 	
 	<!-- script para upload de imagenes -->
 	<script>
@@ -171,8 +169,8 @@
 	<!--Modulos-->
 	<script src="js/modulos/modulos.js"></script>
 	
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
-	<!--Rutas-->
+<!--         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
+ -->	<!--Rutas-->
 	<script src="js/rutas.js"></script>
 	
 	<!-- Include all js compiled plugins (below), or include individual files as needed -->
@@ -207,17 +205,22 @@
 		
 		<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-		
+		 
 	<!-------- CONTROLLERS --------->
 	
 	<script src="js/controllers/controller-index.js"></script> 
 	<script src="js/controllers/controller-iniciar-sesion.js"></script> 
 	<script src="js/controllers/controller-registro.js"></script> 
 	<script src="js/controllers/controller-canchas.js"></script> 
+	<script src="js/controllers/controller-mis-canchas.js"></script> 
 	<script src="js/controllers/controller-contacto.js"></script> 
 	<script src="js/controllers/controller-perfil.js"></script> 
-<!-- 	<script src="js/controllers/controller-modal.js"></script> 
- -->
+	
+	<!-- mapa &amp;callback=initMap-->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClnZo-qIve_StI8CYOjMy0rn8bL4-dgTU&amp;libraries=places&amp;callback=initMap"
+         async defer></script>
+	
+	
 </body>
 </html>
 

@@ -1,0 +1,98 @@
+<!-- P E R F I L -->
+
+	<!-- Estilos propios de la vista -->
+ 	<style> @import url("css/forms/util.css"); </style> 
+ 	<style> @import url("css/forms/main.css"); </style> 
+ 	<style> @import url("css/forms/registro.css"); </style> 
+ 	<style> @import url("css/mapa.css"); </style> 
+	
+		<section id="works" class="works">
+			<div class="container">
+				<div class="section-header">
+					<h1>Mis canchas</h1>
+				</div>
+				<div class="works-content"> 
+<!-- 					<table>
+					  <tr ng-repeat="x in canchas">
+						<td>{{ x.NOMBRE_CANCHA }}</td>
+						<td>{{ x.FOTO }}</td>
+						<td>{{ x.TIPO_CANCHA }}</td>
+						<td>{{ x.DIRECCION }}</td>
+						<td>{{ x.BORRADO }}</td>
+						<td>{{ x.TARJETA }}</td>
+						<td>{{ x.PUNTAJE }}</td>
+						<td>{{ x.PRECIO }}</td>
+					  </tr>
+					</table> -->
+
+				</div>
+			</div>
+		
+		</section>
+		
+		<section>
+
+		<form ng-submit="crear_cancha(cancha)" class="login100-form validate-form" class="md-form">
+					<span class="login100-form-title p-b-55">
+						Crear Cancha
+					</span>
+
+					<!-- NOMBRE_CANCHA -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
+					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate"  placeholder="Nombre" required ng-model="cancha.NOMBRE">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-envelope"></span>
+						</span>
+					</div>
+					
+					<!-- direccion -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
+					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate"  placeholder="Nombre" required ng-model="cancha.NOMBRE">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-envelope"></span>
+						</span>
+					</div>
+					
+					
+					<div>
+						<!-- TIPO_CANCHA -->
+						<label>Tipo de cancha</label>
+						<select class='select' name='grupo' ng-model='cancha.TIPO_CANCHA' ng-init="cancha.TIPO_CANCHA=valor">
+							<option ng-repeat="tipo in tipo_cancha track by $index "  value='{{ tipo.TITULO }}'>{{ tipo.TITULO }}</option>
+						</select>
+					</div>
+					
+					<!-- FOTO -->
+					 <div class="wrap-input100 validate-input m-b-16">
+						<input type="file" class='upload-file cancha-file ' ngf-select ng-model="cancha.FOTO_PERFIL" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-accept="'image/*'" id="foto">
+					</div> 
+					
+					<div class="container-login100-form-btn p-t-25">
+						<button class="login100-form-btn">
+							Crear cancha
+						</button>
+					</div>
+				    </form>
+
+
+<!-- Dirección container-->
+			<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<!-- Formulario -->
+				<form>
+					<!-- Dirección  -->
+					<p>Unite a un grupo o crea uno nuevo</p>
+					<input type="text" name="Direccion" id="pac-input" class="form-control" placeholder="Dirección" required> 
+				</form>
+			</div>
+			
+    <div id="map"></div>
+
+
+
+
+
+		</section>
+		
+		

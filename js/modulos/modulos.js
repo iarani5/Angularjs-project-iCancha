@@ -6,6 +6,7 @@ var iCancha = angular.module('iCancha', [
   'mobile-angular-ui.gestures', //gestos (ej: arrastrar el dedo)
   'ngFileUpload', //upload imagenes
   'uiGmapgoogle-maps', //mapa
+  //'google-maps', //mapa
   'ui.bootstrap' //modal
 ])
 

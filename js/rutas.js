@@ -33,6 +33,10 @@ iCancha.config(function($routeProvider) {
 			templateUrl : 'vistas/canchas.html',
 			controller : 'canchasCtrl'
 		})
+		.when('/mis-canchas', { //LISTADO DE CANCHAS. API GOOGLE MAPS. 
+			templateUrl : 'vistas/mis-canchas.html',
+			controller : 'misCanchasCtrl'
+		})
 		.when('/verCancha/:id', { //VER UNA CANCHA
 			templateUrl : 'vistas/cancha-ver.html',
 			controller : 'canchaVerCtrl'
