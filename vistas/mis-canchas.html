@@ -74,24 +74,15 @@
 							Crear cancha
 						</button>
 					</div>
+					
 				    </form>
-
-
-<!-- Dirección container-->
-			<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<!-- Formulario -->
-				<form>
-					<!-- Dirección  -->
-					<p>Unite a un grupo o crea uno nuevo</p>
-					<input type="text" name="Direccion" id="pac-input" class="form-control" placeholder="Dirección" required> 
-				</form>
-			</div>
-			
-    <div id="map"></div>
-
-
-
-
+<!-- Dirección container--
+ <div id="map"></div>
+    <div id="repeat" ng-repeat="marker in markers | orderBy : 'title'">
+         <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
+         <label id="names" >{{marker.title}}</label></a>
+    </div>
+-->
 
 		</section>
 		
