@@ -55,9 +55,10 @@ class Duenio{
 		return $stmt->execute([$array["FK_ID_CANCHA"],$array["FK_ID_USUARIO"]]);
 	}
 		
-	public static function all(){ 
+	public function all($id){ 
 		$salida = [];
-		$query = "SELECT * FROM " . static::$tabla;
+		$query = "SELECT * FROM " . static::$tabla . "
+					WHERE FK_ID_USUARIO = $id";
 		$stmt = DBcnx::getStatement($query);
 		if($stmt->execute()) {
 			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -67,7 +68,8 @@ class Duenio{
 				$duenio->cargarDatos($fila);
 				$salida[] = $duenio;
 			}
-		}
 		return $salida;
 	}
+	}
 }
+?>

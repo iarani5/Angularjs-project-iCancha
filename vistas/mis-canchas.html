@@ -8,26 +8,8 @@
 	
 		<section id="works" class="works">
 			<div class="container">
-				<div class="section-header">
-					<h1>Mis canchas</h1>
-				</div>
-				<div class="works-content"> 
-<!-- 					<table>
-					  <tr ng-repeat="x in canchas">
-						<td>{{ x.NOMBRE_CANCHA }}</td>
-						<td>{{ x.FOTO }}</td>
-						<td>{{ x.TIPO_CANCHA }}</td>
-						<td>{{ x.DIRECCION }}</td>
-						<td>{{ x.BORRADO }}</td>
-						<td>{{ x.TARJETA }}</td>
-						<td>{{ x.PUNTAJE }}</td>
-						<td>{{ x.PRECIO }}</td>
-					  </tr>
-					</table> -->
-
-				</div>
-						
-		<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+			
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 
 		<form ng-submit="crear_cancha(cancha)" class="login100-form validate-form" class="md-form">
 					<span class="login100-form-title p-b-55">
@@ -105,6 +87,65 @@
 					
 				    </form>
 	</div>
+			
+				<div class="section-header">
+					<h1>Mis canchas</h1>
+				</div>
+				<div class="works-content"> 
+					<ul ng-repeat="x in mis_canchas" class="table">
+					
+						<li>
+							<img ng-src=" {{ x.FOTO }} " alt="foto cancha"/> 
+
+						 </li>
+						 <li>
+						<table  class="table">
+
+						<tr>
+							<td scope="col">Nombre:</td><td>{{ x.NOMBRE_CANCHA }}</td>
+						 </tr>
+						 <tr>
+							<td scope="col">Tipo de cancha:</td><td>{{ x.TIPO_CANCHA }}</td>
+							 </tr>
+						 <tr>
+							<td scope="col">Dirección:</td><td>{{ x.DIRECCION }}</td>
+							 </tr>
+						 <tr>
+							<td scope="col">Borrado:</td><td>{{ x.BORRADO }}</td>
+							 </tr>
+						 <tr>
+							<td scope="col">Tarjeta:</td><td>{{ x.TARJETA }}</td>
+							 </tr>
+						 <tr>
+							<td scope="col">Tarjeta clave:</td><td>{{ x.CLAVE_TARJETA }}</td>
+							 </tr>
+						 <tr>
+							<td scope="col">Fecha vencimiento tarjeta:</td><td>{{ x.FECHA_VENCIMIENTO_TARJETA }}</td>
+							 </tr>
+						 <tr>
+							<td scope="col">Puntaje:</td><td>{{ x.PUNTAJE }}</td>
+							 </tr>
+						 <tr>
+							<td scope="col">Precio por hora:</td><td>{{ x.PRECIO }}</td>
+							 </tr>
+						 <tr>
+					</table> 
+							</li>
+							<li>
+							<div class="container-login100-form-btn p-t-25">
+						<button class="login100-form-btn">
+							Editar
+						</button>
+						
+						<button class="login100-form-btn">
+							Eliminar
+						</button>
+						</div>
+							</li>
+					
+					</ul> 
+
+				</div>
 	</div>
 
 		</section>

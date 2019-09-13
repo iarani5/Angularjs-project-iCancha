@@ -222,8 +222,36 @@ CREATE TABLE Cancha(
 				$cancha->direccion = $fila['DIRECCION'];
 				$cancha->borrado = $fila['BORRADO'];
 				$cancha->tarjeta = $fila['TARJETA'];
-				$cancha->clave_tarjetta = $fila['CLAVE_TARJETA'];
-				$cancha->fechavencimientotarjeta = $fila['FECHA_VENCIMIENTO_TARJETA'];
+				$cancha->clave_tarjeta = $fila['CLAVE_TARJETA'];
+				$cancha->fecha_vencimiento_tarjeta = $fila['FECHA_VENCIMIENTO_TARJETA'];
+				$cancha->puntaje = $fila['PUNTAJE'];
+				$cancha->precio = $fila['PRECIO'];
+				$cancha->cargarDatos($fila);
+				$salida[] = $cancha;
+			}
+		}
+		return $salida;
+	}
+	
+	public static function mis_canchas($id){ //LISTAR TODO EL LISTADO DE LA TABLA CANCHA POR DUENIO		
+		$salida = [];
+		$query = "SELECT * FROM " . static::$tabla . "
+					WHERE ID_CANCHA = $id";
+		$stmt = DBcnx::getStatement($query);
+		if($stmt->execute([$id])) {
+			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				$cancha = new Cancha;
+				$cancha->id_cancha = $fila['ID_CANCHA'];
+				$cancha->nombre_cancha = $fila['NOMBRE_CANCHA'];
+				$cancha->foto = $fila['FOTO'];
+				$cancha->tipo_cancha = $fila['TIPO_CANCHA'];
+				$cancha->longitud = $fila['LONGITUD'];
+				$cancha->latitud = $fila['LATITUD'];
+				$cancha->direccion = $fila['DIRECCION'];
+				$cancha->borrado = $fila['BORRADO'];
+				$cancha->tarjeta = $fila['TARJETA'];
+				$cancha->clave_tarjeta = $fila['CLAVE_TARJETA'];
+				$cancha->fecha_vencimiento_tarjeta = $fila['FECHA_VENCIMIENTO_TARJETA'];
 				$cancha->puntaje = $fila['PUNTAJE'];
 				$cancha->precio = $fila['PRECIO'];
 				$cancha->cargarDatos($fila);

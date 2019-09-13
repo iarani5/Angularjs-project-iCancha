@@ -2,6 +2,20 @@
        * element that contains the map. */
 	   
 
+	#works ul li{
+		display:inline-block;
+		width:50vw;
+	}
+	#works h1{
+		padding-top:2em;
+	}
+	.table .table{
+		background:none!important;
+	}
+	ul .login100-form-btn{
+		width:40%;
+		margin: auto 1em;
+	}
       #map {
         height: 500px;
 		width:73vw;

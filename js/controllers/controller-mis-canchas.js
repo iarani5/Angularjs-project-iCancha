@@ -1,6 +1,36 @@
 /**************************************** CONTROLLER MIS CANCHAS ***************************************/
  iCancha.controller("misCanchasCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout', function  ($scope, $http, $location, Upload, $timeout) { 
  
+	//********************* LISTAR CANCHAS
+	
+	$http({
+		method: 'POST',
+		url: "php/abm/listar.canchas.php",
+		headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+	})
+	.then(function (response){//EXITO se establecio la conexion
+		if(response.data.length){
+			for(var i in response.data){
+				var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
+				response.data[i].FOTO=foto;
+			}
+			
+			
+			
+			$scope.mis_canchas=angular.fromJson(response.data);
+			console.log(response.data);
+		}
+		else{
+			$scope.mensaje="Aún no tienes canchas cargadas";
+		}
+		
+	},function (error){ //ERROR no se pudo establecer la conexion
+
+	});
+	
+	
+	
+	//*************************** CREAR CANCHA
 	
 	var search =id("pac-input");
 	var map =id("map");
