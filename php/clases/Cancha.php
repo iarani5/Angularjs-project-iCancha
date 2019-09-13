@@ -191,6 +191,11 @@ CREATE TABLE Cancha(
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$array["FOTO"],$array["ID_CANCHA"]]);
 	}
+	public function eliminar_cancha($id){ //BORRADO
+		$query = "UPDATE " . static::$tabla . " SET BORRADO='Si' WHERE ID_CANCHA=$id";
+		$stmt = DBcnx::getStatement($query);
+		return $stmt->execute();
+	}
 	
 	public function ultima_cancha_creada(){ //ULTIMA CANCHA CREADA
 		$query = "SELECT ID_CANCHA FROM " . static::$tabla . " ORDER BY ID_CANCHA DESC LIMIT 1";

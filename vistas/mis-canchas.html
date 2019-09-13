@@ -92,7 +92,7 @@
 					<h1>Mis canchas</h1>
 				</div>
 				<div class="works-content"> 
-					<ul ng-repeat="x in mis_canchas" class="table">
+					<ul ng-repeat="x in mis_canchas" class="table" ng-show="x.BORRADO=='No'">
 					
 						<li>
 							<img ng-src=" {{ x.FOTO }} " alt="foto cancha"/> 
@@ -109,9 +109,6 @@
 							 </tr>
 						 <tr>
 							<td scope="col">Dirección:</td><td>{{ x.DIRECCION }}</td>
-							 </tr>
-						 <tr>
-							<td scope="col">Borrado:</td><td>{{ x.BORRADO }}</td>
 							 </tr>
 						 <tr>
 							<td scope="col">Tarjeta:</td><td>{{ x.TARJETA }}</td>
@@ -137,7 +134,7 @@
 							Editar
 						</button>
 						
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" ng-click="eliminar_cancha( x.ID_CANCHA )">
 							Eliminar
 						</button>
 						</div>

@@ -1,5 +1,5 @@
 /**************************************** CONTROLLER MIS CANCHAS ***************************************/
- iCancha.controller("misCanchasCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout', function  ($scope, $http, $location, Upload, $timeout) { 
+ iCancha.controller("misCanchasCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window', function  ($scope, $http, $location, Upload, $timeout, $window) { 
  
 	//********************* LISTAR CANCHAS
 	
@@ -15,10 +15,7 @@
 				response.data[i].FOTO=foto;
 			}
 			
-			
-			
 			$scope.mis_canchas=angular.fromJson(response.data);
-			console.log(response.data);
 		}
 		else{
 			$scope.mensaje="Aún no tienes canchas cargadas";
@@ -28,7 +25,23 @@
 
 	});
 	
-	
+	//ELIMINAR CANCHA
+	$scope.eliminar_cancha=function(id){
+		$http({
+			method: 'POST',
+			url: "php/abm/eliminar.cancha.php",
+			data: "ID_CANCHA="+id,			 
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.then(function (response){
+			if(response.data=="1"){
+				alert("cancha eliminada con éxito");
+				$window.location.reload();
+			}
+		},function (error){ //ERROR no se pudo establecer la conexion
+
+		});
+	}
 	
 	//*************************** CREAR CANCHA
 	
