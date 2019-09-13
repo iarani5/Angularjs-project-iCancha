@@ -3,8 +3,22 @@
 	   
 
       #map {
-        height: 50%;
+        height: 500px;
+		width:73vw;
       }
+	  .wrap-login100{
+		width:80vw;
+	  }	
+	  select{
+		margin-bottom:1em;
+	  }
+	  
+	  #pac-input{
+		width:54vw;
+		  visibility: visible;
+
+		margin-top:.7em;
+	  }
       #description {
         font-family: Roboto;
         font-size: 15px;
@@ -51,6 +65,7 @@
       }
 
       #pac-input {
+		display:inline-block;
         background-color: #fff;
         font-family: Roboto;
         font-size: 15px;
@@ -58,7 +73,6 @@
         margin-left: 12px;
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
-        width: 400px;
       }
 
       #pac-input:focus {

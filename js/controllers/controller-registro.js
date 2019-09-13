@@ -124,21 +124,6 @@ function changeState() {
 		
 	if($location.path().search("editar")!="-1"){
 		var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
-		/* 
-		var datos_registro=tn(tn(document,'form',0),'input');
-		$scope.editable=true; //habilito boton para editar clave
-		id("achicar").style.width="55%";
-		id("achicar").style.cssFloat="right";
-		id("achicar").style.display="inline-block";
-		document.getElementById("defaultForm-clave").readOnly = true;
- */
-		
-		//creo string de * segun cantidad de digitos de clave. Como esta guardado en string lo paso a int al nunmero que busco en el almacenamiento local de la web.
-		/* var cantidad_digitos=parseInt(localStorage.getItem("largo_clave"), 10);
-		var largo_clave="";
-		for(var i=0;i<cantidad_digitos;i++){
-			largo_clave+="*";
-		} */
 		
 		$scope.usuario = { 
 			NOMBRE: usuario_local.NOMBRE,
@@ -155,9 +140,6 @@ function changeState() {
 		tipo_usr.style.cssFloat="right";
  		ac(select.parentNode,tipo_usr);
 		select.style.display="none";
- 		/* tn(tn(document,"form",0),"button",0).style.width="40%";
- 		tn(tn(document,"form",0),"button",0).style.cssFloat="right";
-		 */
 		
 		tn(tn(document,"form",0),"input",3).placeholder="Nueva clave";
 		tn(tn(document,"form",0),"input",3).required = false;

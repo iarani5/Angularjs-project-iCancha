@@ -222,7 +222,7 @@
 		
 		</div>
 	</main>	
-	 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+	 <input id="pac-input" class="controls input100" type="text" placeholder="Dirección">
     <div id="map"></div>
 	<!--------  FOOTER  --------->
 	
@@ -314,6 +314,9 @@
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
         searchBox.addListener('places_changed', function() {
+		
+			localStorage.setItem("direccion_cancha",searchBox.getPlaces()[0].name);
+
           var places = searchBox.getPlaces();
 
           if (places.length == 0) {
@@ -355,7 +358,18 @@
             } else {
               bounds.extend(place.geometry.location);
             }
+			
+			//gardado de geolocalizacion en localstorage
+			var position={
+				LATITUD : place.geometry.location.lat(),
+				LONGITUD : place.geometry.location.lng()
+			}
+				
+			localStorage.setItem("posicion_cancha",JSON.stringify(position));
+								
           });
+		  
+		  	
           map.fitBounds(bounds);
         });
       }

@@ -128,6 +128,11 @@ body{
 	width: 100%;
 }
 
+/********************* MAPA **********************/
+
+#pac-input{
+  visibility: hidden;
+}
 
 
 

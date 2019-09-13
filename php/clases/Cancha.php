@@ -180,12 +180,32 @@ CREATE TABLE Cancha(
 	}
 	
 	public function crear_cancha($array){  //REGISTRO DE CANCHA	
-		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,FOTO,TIPO_CANCHA,LONGITUD,LATITUD,DIRECCION,BORRADO,TARJETA,CLAVE_TARJETA,FECHA_VENCIMIENTO_TARJETA,PUNTAJE,PRECIO)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,TIPO_CANCHA,LONGITUD,LATITUD,DIRECCION,TARJETA,CLAVE_TARJETA,FECHA_VENCIMIENTO_TARJETA,PUNTAJE,PRECIO)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["FOTO"],$array["TIPO_CANCHA"],$array["LONGITUD"],$array["LATITUD"],$array["DIRECCION"],$array["BORRADO"],$array["TARJETA"],$array["CLAVE_TARJETA"],$array["FECHA_VENCIMIENTO_TARJETA"],$array["PUNTAJE"],$array["PRECIO"]]);
+		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["TIPO_CANCHA"],$array["LONGITUD"],$array["LATITUD"],$array["DIRECCION"],$array["TARJETA"],$array["CLAVE_TARJETA"],$array["FECHA_VENCIMIENTO_TARJETA"],$array["PUNTAJE"],$array["PRECIO"]]);
 	}
-		
+	
+	public function foto($array){ //FOTO
+		$query = "UPDATE " . static::$tabla . " SET FOTO=? WHERE ID_CANCHA=?";
+		$stmt = DBcnx::getStatement($query);
+		return $stmt->execute([$array["FOTO"],$array["ID_CANCHA"]]);
+	}
+	
+	public function ultima_cancha_creada(){ //ULTIMA CANCHA CREADA
+		$query = "SELECT ID_CANCHA FROM " . static::$tabla . " ORDER BY ID_CANCHA DESC LIMIT 1";
+		$stmt = DBcnx::getStatement($query);
+		if($stmt->execute()) {
+			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				$cancha = new Cancha;
+				$cancha->id_cancha = $fila['ID_CANCHA'];
+				$cancha->cargarDatos($fila);
+			}
+			return $cancha;
+		}
+		return 0;
+	}
+	
 	public static function all(){ //LISTAR TODO EL LISTADO DE LA TABLA CANCHA
 		$salida = [];
 		$query = "SELECT * FROM " . static::$tabla;

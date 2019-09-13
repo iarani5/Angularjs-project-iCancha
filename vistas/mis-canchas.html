@@ -26,16 +26,21 @@
 					</table> -->
 
 				</div>
-			</div>
-		
-		</section>
-		
-		<section>
+						
+		<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 
 		<form ng-submit="crear_cancha(cancha)" class="login100-form validate-form" class="md-form">
 					<span class="login100-form-title p-b-55">
 						Crear Cancha
 					</span>
+					
+					<div>
+						<!-- TIPO_CANCHA -->
+						<label>Tipo de cancha</label>
+						<select class='select' name='grupo' ng-model='cancha.TIPO_CANCHA' ng-init="cancha.TIPO_CANCHA='Futbol'">
+							<option ng-repeat="tipo in tipo_cancha track by $index "  value='{{ tipo.TITULO }}'>{{ tipo.TITULO }}</option>
+						</select>
+					</div>
 
 					<!-- NOMBRE_CANCHA -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
@@ -46,27 +51,50 @@
 						</span>
 					</div>
 					
-					<!-- direccion -->
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
-					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate"  placeholder="Nombre" required ng-model="cancha.NOMBRE">
+					<!-- TARJETA -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid number is required">
+					 <input class="input100"  type="number" id="defaultForm-tarjeta" class="form-control validate"  placeholder="Numero de Tarjeta" required ng-model="cancha.TARJETA">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-envelope"></span>
 						</span>
 					</div>
 					
-					
-					<div>
-						<!-- TIPO_CANCHA -->
-						<label>Tipo de cancha</label>
-						<select class='select' name='grupo' ng-model='cancha.TIPO_CANCHA' ng-init="cancha.TIPO_CANCHA=valor">
-							<option ng-repeat="tipo in tipo_cancha track by $index "  value='{{ tipo.TITULO }}'>{{ tipo.TITULO }}</option>
-						</select>
+					<!-- TARJETA -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid number is required">
+					 <input class="input100"  type="date" id="defaultForm-tarjeta" class="form-control validate"  placeholder="Fecha vencimiento" required ng-model="cancha.FECHA_VENCIMIENTO_TARJETA">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-envelope"></span>
+						</span>
 					</div>
+					
+					<!-- CLAVE -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid number is required">
+					 <input class="input100"  type="number" id="defaultForm-clave" class="form-control validate"  placeholder="Clave de Tarjeta" required ng-model="cancha.CLAVE">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-envelope"></span>
+						</span>
+					</div>
+					
+					<!-- PRECIO -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid number is required">
+					 <input class="input100"  type="number" id="defaultForm-precio" class="form-control validate"  placeholder="Precio" required ng-model="cancha.PRECIO">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-envelope"></span>
+						</span>
+					</div>
+					
+					<!-- DIRECCION -->
+					 <div id="direccion">
+						 
+					</div> 
 					
 					<!-- FOTO -->
 					 <div class="wrap-input100 validate-input m-b-16">
-						<input type="file" class='upload-file cancha-file ' ngf-select ng-model="cancha.FOTO_PERFIL" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-accept="'image/*'" id="foto">
+						<input type="file" class='upload-file cancha-file ' ngf-select ng-model="cancha.FOTO" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-pattern="'image/*'" ngf-accept="'.jpg,.jpeg,.png'" id="foto">
 					</div> 
 					
 					<div class="container-login100-form-btn p-t-25">
@@ -76,13 +104,8 @@
 					</div>
 					
 				    </form>
-<!-- Dirección container--
- <div id="map"></div>
-    <div id="repeat" ng-repeat="marker in markers | orderBy : 'title'">
-         <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
-         <label id="names" >{{marker.title}}</label></a>
-    </div>
--->
+	</div>
+	</div>
 
 		</section>
 		
