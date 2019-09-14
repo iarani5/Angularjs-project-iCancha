@@ -291,26 +291,69 @@
 		
 		<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-		 <!-- mapa &amp;callback=initMap-->
 		 <script>
-		 
-		 
-		function cargar_posicion_cancha(){
-			initAutocomplete();
+		
+		//var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+		/*var marker = new google.maps.Marker({
+			position: myLatlng,
+			title:"Hello World!"
+		});*/
+
+		// To add the marker to the map, call setMap();
+		//marker.setMap(map);
+
+		function initAutocomplete() {
+		var myLatlng;
+		
+		if(esta_cancha!=undefined&&esta_cancha!=null){
+			myLatlng = new google.maps.LatLng(parseFloat(esta_cancha["LATITUD"]),parseFloat(esta_cancha["LONGITUD"]));
+		}
+		else{
+			myLatlng = {lat: -34.56, lng: -58.47};
 		}
 
-
-		 function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.56, lng: -58.47},
-          zoom: 13,
-          mapTypeId: 'roadmap'
+		var map = new google.maps.Map(document.getElementById('map'), {
+			  center: myLatlng,
+			  zoom: 13,
+			  mapTypeId: 'roadmap'
         });
 
-        // Create the search box and link it to the UI element.
+		/*function cargar_marker(){
+		//POSICION DE LA CANCHA
+
+		  	if(esta_cancha!=undefined){
+				//creo el lugar de la cancha
+				var lugar = {lat: parseFloat(esta_cancha["LATITUD"]), lng: parseFloat(esta_cancha["LONGITUD"])};
+
+				//creo el icono 
+				 var icon = {
+					url: place.icon,
+					size: new google.maps.Size(100, 100),
+					origin: new google.maps.Point(0, 0),
+					anchor: new google.maps.Point(17, 34),
+					scaledSize: new google.maps.Size(50, 60)
+				  };
+				  
+				  // crear un marker para el lugar donde esta la cancha
+				  markers.push(new google.maps.Marker({
+					map: map,
+					icon: icon,
+					title: esta_cancha["NOMBRE_CANCHA"],
+					mas: markers.length, //numero de array que ocupa el objeto
+					position: lugar
+				  }));
+				  
+					//modal con info de la cancha en el mapa
+					infowindow.push(new google.maps.InfoWindow({ 
+						content: '<div class="informacion"><img alt="cancha" src="'+esta_cancha["FOTO"]+'"></img><h3>'+esta_cancha["NOMBRE_CANCHA"]+'</h3><span>'+esta_cancha["TIPO_CANCHA"]+'</span></div>'
+					  }));  				  
+				}
+			}
+		
+		/*********************************/
+		
         var input = document.getElementById('pac-input');
-		console.log(input);
         var searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -320,29 +363,31 @@
         });
 
         var markers = [];
+		
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
+		
         searchBox.addListener('places_changed', function() {
 		
 		  localStorage.setItem("direccion_cancha",searchBox.getPlaces()[0].name);
 
           var places = searchBox.getPlaces();
-
           if (places.length == 0) {
             return;
           }
 
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
+        // Clear out the old markers.
+        markers.forEach(function(marker) {
+          marker.setMap(null);
+        });
+		  
           markers = [];
-
 			// For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
-		  
-          places.forEach(function(place) {
-            if (!place.geometry) {
+		  		 
+        places.forEach(function(place) {
+			  
+		 if (!place.geometry) {
               console.log("Returned place contains no geometry");
               return;
             }
@@ -361,7 +406,7 @@
               title: place.name,
               position: place.geometry.location
             }));
-
+			
             if (place.geometry.viewport) {
               // Only geocodes have viewport.
               bounds.union(place.geometry.viewport);
@@ -376,13 +421,12 @@
 			}
 				
 			localStorage.setItem("posicion_cancha",JSON.stringify(position));
-								
-          });
-		  
-		  	
-          map.fitBounds(bounds);
+	
         });
-      }
+		
+		map.fitBounds(bounds);
+	});
+}
 		 
 		 </script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClnZo-qIve_StI8CYOjMy0rn8bL4-dgTU&libraries=places&callback=initAutocomplete"

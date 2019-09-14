@@ -1,11 +1,11 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 	   
-
+/* 
 	#works ul li{
 		display:inline-block;
 		width:50vw;
-	}
+	} */
 	#works h1{
 		padding-top:2em;
 	}
@@ -13,13 +13,28 @@
 		background:none!important;
 	}
 	ul .login100-form-btn{
-		width:40%;
+		width:20%;
 		margin: auto 1em;
 	}
       #map {
         height: 500px;
 		width:73vw;
       }
+	  
+	 form ul li label{
+		 font-weight:0;
+	 }
+	 
+	 form ul li{
+		 text-align:right;
+		 width:32vw;
+	 }
+	 
+	 form ul{
+		display:inline-block;
+		width:50%;
+	 }
+	  
 	  .wrap-login100{
 		width:80vw;
 	  }	

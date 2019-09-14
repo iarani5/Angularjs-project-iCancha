@@ -1,56 +1,106 @@
 <!-- BUSCAR POR TIPO DE CANCHA -->
+		<style> 
+			@import "css/sin-mapa.css";
+		</style>
 		
 		<section id="list-topics" class="list-topics">
 			<div class="container">
 				<div class="list-topics-content">
 					<ul>
 						<li>
-							<div class="single-list-topics-content">
+							<div class="single-list-topics-content" ng-click="listar_canchas('Futbol');">
 								<div class="single-list-topics-icon">
 									<i class="fas fa-futbol"></i>
 								</div>
-								<h2><a href="#">FUTBOL</a></h2>
-								<p>150 canchas</p>
+								<h2><a>FUTBOL</a></h2>
+								<p>{{ cantidad_futbol }} canchas</p>
 							</div>
 						</li>
 						<li>
-							<div class="single-list-topics-content">
+							<div class="single-list-topics-content" ng-click="listar_canchas('Basket');">
 								<div class="single-list-topics-icon">
 									<i class="fas fa-basketball-ball"></i>
 								</div>
-								<h2><a href="#">BASKET</a></h2>
-								<p>234 canchas</p>
+								<h2><a>BASKET</a></h2>
+								<p>{{ cantidad_basket }} canchas</p>
 							</div>
 						</li>
 						<li>
-							<div class="single-list-topics-content">
+							<div class="single-list-topics-content" ng-click="listar_canchas('Hokey');">
 								<div class="single-list-topics-icon">
 									<i class="fas fa-hockey-puck"></i>
 								</div>
-								<h2><a href="#">HOCKEY</a></h2>
-								<p>214 canchas</p>
+								<h2><a>HOCKEY</a></h2>
+								<p>{{ cantidad_hokey }} canchas</p>
 							</div>
 						</li>
 						<li>
-							<div class="single-list-topics-content">
+							<div class="single-list-topics-content" ng-click="listar_canchas('Tenis');">
 								<div class="single-list-topics-icon">
 									<i class="fas fa-table-tennis"></i>
 								</div>
-								<h2><a href="#">TENIS</a></h2>
-								<p>185 canchas</p>
+								<h2><a>TENIS</a></h2>
+								<p>{{ cantidad_tenis }} canchas</p>
 							</div>
 						</li>
 						<li>
-							<div class="single-list-topics-content">
+							<div class="single-list-topics-content" ng-click="listar_canchas('Rugby');">
 								<div class="single-list-topics-icon">
 									<i class="fas fa-football-ball"></i>
 								</div>
-								<h2><a href="#">RUGBY</a></h2>
-								<p>200 canchas</p>
+								<h2><a>RUGBY</a></h2>
+								<p>{{ cantidad_rugby }} canchas</p>
 							</div>
 						</li>
 					</ul>
 				</div>
 			</div>
-
+			<!-- listado detallado de canchas -->
 		</section>
+		
+		<section id="explore" class="explore" ng-show="mostrar==true">
+			<div class="container">
+				<div class="section-header">
+					<h2>{{ titulo }}</h2>
+				</div>
+				<div class="explore-content">
+					<div class="row">
+						<div class=" col-md-4 col-sm-6"  ng-repeat="x in canchas">
+							<div class="single-explore-item">
+								<div class="single-explore-img">
+									<img ng-src="{{ x.FOTO }}" alt="explore image">
+									<div class="single-explore-img-info">
+										<button ng-click="mostrar_horarios(x.ID)">Ver horarios</button>
+									</div>
+								</div>
+								<div class="single-explore-txt bg-theme-1">
+									<h2><a>{{ x.NOMBRE_CANCHA }}</a></h2>
+									<p class="explore-rating-price">
+										<span class="explore-rating">5.0</span>
+										<span class="explore-price-box">
+											Precio por hora
+											<span class="explore-price">${{ x.PRECIO }}</span>
+										</span>
+										 <a>{{ x.DIRECCION }}</a>
+									</p>
+					
+									<div class="explore-open-close-part">
+										<div class="row">
+											<div class="col-sm-5">
+												<button class="close-btn open-btn" onclick="window.location.href='#'">Reservar cancha</button>
+											</div>
+											<div class="col-sm-7">
+												<div class="explore-map-icon">
+													<a href="#"><i data-feather="map-pin"></i></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!--/.container-->
+
+		</section><!--/.explore-->

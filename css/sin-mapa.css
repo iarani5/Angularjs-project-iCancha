@@ -1,0 +1,9 @@
+/********************* MAPA **********************/
+
+#pac-input, #map{
+  visibility: hidden;
+  height:0;
+}
+.explore{
+  background:#eeeeee;
+}

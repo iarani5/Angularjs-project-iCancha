@@ -18,7 +18,7 @@
 			$scope.mis_canchas=angular.fromJson(response.data);
 		}
 		else{
-			$scope.mensaje="Aún no tienes canchas cargadas";
+			$scope.mensaje="Aún no tenes canchas cargadas";
 		}
 		
 	},function (error){ //ERROR no se pudo establecer la conexion
@@ -43,16 +43,22 @@
 		});
 	}
 	
+	$scope.titulo_formulario="Crear cancha";
 	//EDITAR CANCHA
 	$scope.editar_cancha=function(cancha){
-			
+		$scope.titulo_formulario="Editar cancha";
+		window.scrollTo(300, 0);
+		
+		//la guardo en variable global para acceder a su posicion con google maps
+		localStorage.setItem("esta_cancha",angular.toJson(cancha));
+		
 		//parsear fecha
 		var parts = cancha.FECHA_VENCIMIENTO_TARJETA.split('-');
 		var mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
 
 		//direccion
 		id("pac-input").value=cancha.DIRECCION;
-
+				
 		$scope.cancha={
 			NOMBRE: cancha.NOMBRE_CANCHA,
 			//FOTO: cancha.FOTO,
@@ -113,7 +119,10 @@
 		}
 	];
 	
+	/******** CREAR CANCHA Y HORARIO ********/
 	$scope.crear_cancha=function(cancha){
+		
+		console.log(cancha);
 		
 		//location
 		var posicion=angular.fromJson(localStorage.getItem("posicion_cancha"));

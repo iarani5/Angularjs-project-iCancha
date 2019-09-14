@@ -22,6 +22,9 @@ function txt(s){
 	return document.createTextNode(s);
 }
 
+//VARIABLES GLOBALES
+ var esta_cancha;
+ 
 // FUNCION PARA ITEMS DEL MENU
 
 function sacar_botones(estado){
@@ -52,6 +55,60 @@ function modal_msj(mensaje,boton1){
 	/* var di=document.createElement("div");
 	di.className="modal-backdrop in";
 	div.appendChild(di); */
+	var di=document.createElement("div");
+	di.className="modal-dialog";
+	div.appendChild(di);
+	var d=document.createElement("div");
+	d.className="modal-content";
+
+	/**cargo mensaje**/
+		var p=ce("p");
+		p.innerHTML=mensaje;
+	//
+	
+	var btn2=document.createElement("button");
+	btn2.type="button";
+	btn2.id="cerrar_modal";
+	btn2.className="btn btn-lg btn-danger";
+	btn2.innerHTML="X";
+	btn2.id="cerrar_modal";
+	ac(caja_modal,btn2);
+	
+	d.id="ventana_modal";
+	var div2=document.createElement("div");
+	div2.className="form-group botones";
+	var h4=document.createElement("h4");
+	h4.className="modal-header";
+	h4.style.textAlign='center';
+	caja_modal.className="modal-body";
+	d.appendChild(caja_modal);
+	di.appendChild(d);
+	ac(caja_modal,p);
+	/**cargo botones**/
+	if(boton1!=undefined){
+		var btn1=document.createElement("button");
+		btn1.type="button";
+		btn1.className="btn btn-lg btn-success";
+		btn1.innerHTML=boton1;
+		ac(caja_modal,btn1);
+	}
+	else{
+		caja_modal.style.paddingBottom="1em";
+	}
+	document.getElementsByTagName("body")[0].appendChild(div);
+	
+	//cerrar modal
+	id("cerrar_modal").onclick=function(){
+		document.getElementsByTagName("body")[0].removeChild(div);
+	} 
+}
+
+
+////////// MODAL HORARIOS
+function modal_horarios(mensaje,boton1){
+	var div=document.createElement("div");
+	div.className="modal";
+	var caja_modal=document.createElement("div");
 	var di=document.createElement("div");
 	di.className="modal-dialog";
 	div.appendChild(di);
