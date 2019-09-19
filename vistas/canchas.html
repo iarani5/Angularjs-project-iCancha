@@ -26,12 +26,12 @@
 							</div>
 						</li>
 						<li>
-							<div class="single-list-topics-content" ng-click="listar_canchas('Hokey');">
+							<div class="single-list-topics-content" ng-click="listar_canchas('Hockey');">
 								<div class="single-list-topics-icon">
 									<i class="fas fa-hockey-puck"></i>
 								</div>
 								<h2><a>HOCKEY</a></h2>
-								<p>{{ cantidad_hokey }} canchas</p>
+								<p>{{ cantidad_hockey }} canchas</p>
 							</div>
 						</li>
 						<li>
@@ -70,7 +70,7 @@
 								<div class="single-explore-img">
 									<img ng-src="{{ x.FOTO }}" alt="explore image">
 									<div class="single-explore-img-info">
-										<button ng-click="mostrar_horarios(x.ID)">Ver horarios</button>
+										<button ng-click="mostrar_horarios(x.ID_CANCHA)">Ver horarios</button>
 									</div>
 								</div>
 								<div class="single-explore-txt bg-theme-1">

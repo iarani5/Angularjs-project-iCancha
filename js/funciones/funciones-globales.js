@@ -43,7 +43,6 @@ function sacar_botones(estado){
 		//elimino boton perfil
 		rc(id("nombre_usuario").parentNode,id("nombre_usuario"));
 	}
-		
 }
 
 
@@ -105,7 +104,7 @@ function modal_msj(mensaje,boton1){
 
 
 ////////// MODAL HORARIOS
-function modal_horarios(mensaje,boton1){
+function modal_horarios(horarios){
 	var div=document.createElement("div");
 	div.className="modal";
 	var caja_modal=document.createElement("div");
@@ -115,45 +114,49 @@ function modal_horarios(mensaje,boton1){
 	var d=document.createElement("div");
 	d.className="modal-content";
 
-	/**cargo mensaje**/
-		var p=ce("p");
-		p.innerHTML=mensaje;
-	//
-	
+	/**cargo horarios**/
+	var ul=ce("ul");
+	for(var i=0; i<horarios.length; i++){
+		var li=ce("li");
+		li.innerHTML=horarios[i]["HORARIO"];
+		if(horarios[i].ESTADO=="Desocupado"){
+			li.className="libre";
+			var radio=ce("input");
+			radio.type="radio";			
+			radio.name="este_horario";
+			ac(li,radio);
+		}
+		else{
+			li.className="Ocupado";
+		}
+		ac(ul,li);
+	}
+		
 	var btn2=document.createElement("button");
 	btn2.type="button";
 	btn2.id="cerrar_modal";
 	btn2.className="btn btn-lg btn-danger";
 	btn2.innerHTML="X";
-	btn2.id="cerrar_modal";
 	ac(caja_modal,btn2);
 	
 	d.id="ventana_modal";
 	var div2=document.createElement("div");
 	div2.className="form-group botones";
 	var h4=document.createElement("h4");
+	h4.innerHTML="Listado de horarios";
 	h4.className="modal-header";
 	h4.style.textAlign='center';
 	caja_modal.className="modal-body";
 	d.appendChild(caja_modal);
 	di.appendChild(d);
-	ac(caja_modal,p);
-	/**cargo botones**/
-	if(boton1!=undefined){
-		var btn1=document.createElement("button");
-		btn1.type="button";
-		btn1.className="btn btn-lg btn-success";
-		btn1.innerHTML=boton1;
-		ac(caja_modal,btn1);
-	}
-	else{
-		caja_modal.style.paddingBottom="1em";
-	}
+	ac(caja_modal,ul);
+	
 	document.getElementsByTagName("body")[0].appendChild(div);
 	
 	//cerrar modal
-	id("cerrar_modal").onclick=function(){
-		document.getElementsByTagName("body")[0].removeChild(div);
+	btn2.onclick=function(){
+		rc(div.parentNode,div);
 	} 
+	
 }
 

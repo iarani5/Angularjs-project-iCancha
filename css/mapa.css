@@ -16,21 +16,22 @@
 		width:20%;
 		margin: auto 1em;
 	}
-      #map {
-        height: 500px;
-		width:73vw;
-      }
-	  
-	 form ul li label{
-		 font-weight:0;
+	
+    #map {
+      height: 500px;
+	width:73vw;
+    }
+	
+	 form div ul li label{
+		 font-weight:normal;
 	 }
 	 
-	 form ul li{
+	 form div ul li{
 		 text-align:right;
 		 width:32vw;
 	 }
 	 
-	 form ul{
+	 form div ul{
 		display:inline-block;
 		width:50%;
 	 }
@@ -44,8 +45,7 @@
 	  
 	  #pac-input{
 		width:54vw;
-		  visibility: visible;
-
+		visibility: visible;
 		margin-top:.7em;
 	  }
       #description {

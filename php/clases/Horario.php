@@ -113,7 +113,7 @@ CREATE TABLE Horario(
 	
 	public static function all($id){ //LISTAR TODO
 		$salida = [];
-		$query = "SELECT * FROM " . static::$tabla . " WHERE ID_HORARIO=$id AND BORRADO='No'";
+		$query = "SELECT * FROM " . static::$tabla . " WHERE FK_ID_CANCHA=$id AND BORRADO='No'";
 		$stmt = DBcnx::getStatement($query);
 		if($stmt->execute()) {
 			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {

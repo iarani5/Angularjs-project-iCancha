@@ -119,14 +119,95 @@
 		}
 	];
 	
+	$scope.dia=[
+		{
+			DIA: "Lunes"
+		},
+		{
+			DIA: "Martes"
+		},
+		{
+			DIA: "Miercoles"
+		},
+		{
+			DIA: "Jueves"
+		},
+		{
+			DIA: "Viernes"
+		},
+		{
+			DIA: "Sabado"
+		},
+		{
+			DIA: "Domingo"
+		}
+	];
+	
 	/******** CREAR CANCHA Y HORARIO ********/
 	$scope.crear_cancha=function(cancha){
-		
-		console.log(cancha);
-		
+				
 		//location
 		var posicion=angular.fromJson(localStorage.getItem("posicion_cancha"));
 		var direccion=localStorage.getItem("direccion_cancha");
+			
+		//horario
+		
+		var horarios=[];
+			if(cancha.horario1){
+				horarios.push("7:00am a 8:00am");
+			}
+			if(cancha.horario2){
+				horarios.push("8:00am a 9:00am");
+			}
+			if(cancha.horario3){
+				horarios.push("9:00am a 10:00am");
+			}
+			if(cancha.horario4){
+				horarios.push("10:00am a 11:00am");
+			}
+			if(cancha.horario5){
+				horarios.push("11:00am a 12:00pm");
+			}
+			if(cancha.horario6){
+				horarios.push("12:00pm a 1:00pm");
+			}
+			if(cancha.horario7){
+				horarios.push("1:00pm a 2:00pm");
+			}
+			if(cancha.horario8){
+				horarios.push("2:00pm a 3:00pm");
+			}
+			if(cancha.horario9){
+				horarios.push("3:00pm a 4:00pm");
+			}
+			if(cancha.horario10){
+				horarios.push("4:00pm a 5:00pm");
+			}
+			if(cancha.horario11){
+				horarios.push("5:00pm a 6:00pm");
+			}
+			if(cancha.horario12){
+				horarios.push("6:00pm a 7:00pm");
+			}
+			if(cancha.horario13){
+				horarios.push("7:00pm a 8:00pm");
+			}
+			if(cancha.horario14){
+				horarios.push("8:00pm a 9:00pm");
+			}
+			if(cancha.horario15){
+				horarios.push("9:00pm a 10:00pm");
+			}
+			if(cancha.horario16){
+				horarios.push("10:00pm a 11:00pm");
+			}
+			if(cancha.horario17){
+				horarios.push("11:00pm a 12:00am");
+			}
+			if(cancha.horario18){
+				horarios.push("12:00am a 1:00am");
+			}
+			
 			
 		//cancha
 		if(posicion!=null&&posicion!=undefined&&direccion!=undefined&&direccion!=null&&
@@ -136,8 +217,10 @@
 			cancha.CLAVE!=undefined&&
 			cancha.PRECIO!=undefined&&
 			cancha.FOTO!=undefined&&
-			cancha.FECHA_VENCIMIENTO_TARJETA!=undefined){
-		 
+			cancha.FECHA_VENCIMIENTO_TARJETA!=undefined&&
+			horarios.length>0
+		){
+			
 			var datos_cancha={
 				NOMBRE_CANCHA: cancha.NOMBRE,
 				FOTO: cancha.FOTO,
@@ -149,25 +232,25 @@
 				CLAVE_TARJETA: cancha.CLAVE,
 				FECHA_VENCIMIENTO_TARJETA: cancha.FECHA_VENCIMIENTO_TARJETA,
 				PRECIO: cancha.PRECIO,
-				PUNTAJE: "0"
+				PUNTAJE: "0",
+				HORARIOS: horarios
 			}
 			
-				if(cancha.FOTO!=undefined){
-					cancha.FOTO.upload = Upload.upload({
-						method: 'POST',
-						url:"php/abm/crear.cancha.php",
-						data: datos_cancha,
-					})
-					.then(function(response){
-						console.log(response);
-					}
-					,function(response){
-						//modal error
-						console.log(response);
-						
-					});
+			if(cancha.FOTO!=undefined){
+				cancha.FOTO.upload = Upload.upload({
+					method: 'POST',
+					url:"php/abm/crear.cancha.php",
+					data: datos_cancha,
+				})
+				.then(function(response){
+					console.log(response);
 				}
-				
+				,function(response){
+					//modal error
+					console.log(response);
+					
+				});
+			}				
 		}
 		else{
 			alert("Formulario incompleto, todos los datos son requeridos");

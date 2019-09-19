@@ -8,6 +8,7 @@
 	require_once('../clases/DBcnx.php');
 	require_once('../clases/Cancha.php');
 	require_once('../clases/Duenio.php');
+	require_once('../clases/Horario.php');
 	
 	if(isset($_SESSION["s_id"])){
 
@@ -36,6 +37,7 @@
 			$destino = 'C:/xampp/htdocs/iCancha/img/canchas/'.$carpeta.'/'.$foto; //almacenamiento local
 			
 			/**** RESIZE ****/
+			
 			$ruta_temporal = $_FILES['FOTO']['tmp_name']; 
 			if($_FILES['FOTO']['type']=='image/png'){
 				$original=imagecreatefrompng( $ruta_temporal );
@@ -55,9 +57,10 @@
 			
 			imagedestroy($copia);
 			imagedestroy($original);
+			
 			/***************/
 			
-			//upload de foto a cancha
+			// upload de foto a cancha
 			$_POST["FOTO"]=$destino;
 			$cancha=$cancha->ultima_cancha_creada();
 			$_POST["ID_CANCHA"]=$cancha->getIdCancha();
@@ -70,8 +73,19 @@
 				$array["FK_ID_USUARIO"]=$_SESSION["s_id"];
 				$duenio = new Duenio();
 				$fin=json_decode($duenio->crear_duenio($array),true);
+				
+				// cargo horarios de la cancha
+				$horario = new Horario();
+				
+				for($i=0;$i<sizeof($_POST["HORARIOS"]);$i++){
+					$array_horarios=[];
+					$array_horarios["FK_ID_CANCHA"]=$array["FK_ID_CANCHA"];
+					$array_horarios["HORARIO"]=$_POST["HORARIOS"][$i];
+					$fin=json_decode($horario->crear_horario($array_horarios),true);
+				}
 			}
-	
+			
+			
 			echo $fin;
 	}
 }
