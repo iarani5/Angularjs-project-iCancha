@@ -4,7 +4,7 @@ iCancha.config(function($routeProvider) {
 	$routeProvider
 		.when('/', { //HOME, BUSCADOR DE CANCHAS. CÓMO FUNCIONA LA WEB
 			templateUrl : 'vistas/home.html',
-			controller : 'indexCtrl'
+			controller : 'homeCtrl'
 		})
 		.when('/iniciar-sesion', { // LOGIN
 			templateUrl : 'vistas/iniciar-sesion.html',

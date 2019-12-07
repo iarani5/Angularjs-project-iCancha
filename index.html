@@ -62,103 +62,11 @@
 		
 		<!-- hoja de estilos personalizada que pisa bootstrap y el template-->
         <link rel="stylesheet" href="css/estilos.css">
-		
-		<style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #description {
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-      }
-
-      #infowindow-content .title {
-        font-weight: bold;
-      }
-
-      #infowindow-content {
-        display: none;
-      }
-
-      #map #infowindow-content {
-        display: inline;
-      }
-
-      .pac-card {
-        margin: 10px 10px 0 0;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        background-color: #fff;
-        font-family: Roboto;
-      }
-
-      #pac-container {
-        padding-bottom: 12px;
-        margin-right: 12px;
-      }
-
-      .pac-controls {
-        display: inline-block;
-        padding: 5px 11px;
-      }
-
-      .pac-controls label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-
-      #pac-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-      }
-
-      #pac-input:focus {
-        border-color: #4d90fe;
-      }
-
-      #title {
-        color: #fff;
-        background-color: #4d90fe;
-        font-size: 25px;
-        font-weight: 500;
-        padding: 6px 12px;
-      }
-      #target {
-        width: 345px;
-      }
-    </style>
-	
 	
 		<!-- AngularJS --> 
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-		
-		<!-- angular-google-maps -->
-	<script src="js/modulos/mapa/lodash.underscore.min.js"></script>
-    <script src="js/modulos/mapa/angular-google-maps.min.js"></script>
-	<script src="js/modulos/mapa/dev_deps.js"></script>
-    <script src="http://cdn.rawgit.com/nmccready/angular-simple-logger/0.0.1/dist/index.js"></script>
-	<script src="js/modulos/mapa/angular-google-maps_dev_mapped.js"></script>
-	
-	<!-- script para upload de imagenes -->
+
+	 <!-- script para upload de imagenes -->
 	<script>
 	FileAPI = {
         jsPath: 'js/FileAPI.min.js/',
@@ -169,7 +77,7 @@
 	<!-- angular-upload   -->
 	<script src="js/modulos/ng-file-upload-shim.js"></script> <!--no html5 support Prueba de commit-->
 	<script src="js/modulos/ng-file-upload.js"></script>
-	
+
 	<!-- para ventanas modales -->
 	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.9.0.js"></script>
 	
@@ -194,18 +102,24 @@
 			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 			                    <i class="fa fa-bars"></i>
  			                </button>
-							<a href="#!/home"><img src="img/logo/icancha-min.png" alt="iCancha"></a>
+							<a href="#!/"><img src="img/logo/icancha-min.png" alt="iCancha"></a>
 			            </div>
 						
 			            <!-- MENU -->
 			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                    <li class="scroll sin_usuario"><a href="#!/como-funciona">Cómo funciona</a></li><!-- la a lo convierte en un hipervinculo -->
-			                    <li class="scroll"><a href="#!/canchas">Canchas</a></li>
-			                    <li class="scroll"><a href="#!/contacto">Contacto</a></li>
-			                    <li class="scroll sin_usuario"><a href="#!/iniciar-sesion">Iniciar sesión</a></li> 
-			                    <li class="scroll sin_usuario"><a href="#!/registro">Registro</a></li>
-			                </ul>
+			                <ul ng-show="!no_user"  class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+			                    <li class="scroll"><a href="#!/perfil" id="nombre" style="background: #ff545a; color: white;">{{ nombre_usuario }}</a></li>
+								<li class="scroll"><a href="#!/canchas">Canchas</a></li>
+								<li class="scroll"><a ng-click="logout()">Logout</a></li>
+							</ul>
+							<ul ng-show="no_user"  class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+								<li class="scroll sin_usuario"><a href="#!/como-funciona">Cómo funciona</a></li><!-- la a lo convierte en un hipervinculo -->
+								<li class="scroll"><a href="#!/canchas">Canchas</a></li>
+								<li class="scroll sin_usuario"><a href="#!/iniciar-sesion">Iniciar sesión</a></li>
+								<li class="scroll sin_usuario"><a href="#!/registro">Registro</a></li>
+								<li class="scroll"><a href="#!/contacto">Contacto</a></li>
+
+							</ul>
 			            </div>
 			        </div>
 			    </nav>
@@ -222,8 +136,6 @@
 		
 		</div>
 	</main>	
-	 <input id="pac-input" class="controls input100" type="text" placeholder="Dirección">
-    <div id="map"></div>
 	<!--------  FOOTER  --------->
 	
 	<!-- <div ng-show="header_footer()" ng-include="'vistas/footer.html'"></div>
@@ -291,146 +203,7 @@
 		
 		<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-		 <script>
-		
-		//var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-		/*var marker = new google.maps.Marker({
-			position: myLatlng,
-			title:"Hello World!"
-		});*/
-
-		// To add the marker to the map, call setMap();
-		//marker.setMap(map);
-
-		function initAutocomplete() {
-		var myLatlng;
-		
-		if(esta_cancha!=undefined&&esta_cancha!=null){
-			myLatlng = new google.maps.LatLng(parseFloat(esta_cancha["LATITUD"]),parseFloat(esta_cancha["LONGITUD"]));
-		}
-		else{
-			myLatlng = {lat: -34.56, lng: -58.47};
-		}
-
-		var map = new google.maps.Map(document.getElementById('map'), {
-			  center: myLatlng,
-			  zoom: 13,
-			  mapTypeId: 'roadmap'
-        });
-
-		/*function cargar_marker(){
-		//POSICION DE LA CANCHA
-
-		  	if(esta_cancha!=undefined){
-				//creo el lugar de la cancha
-				var lugar = {lat: parseFloat(esta_cancha["LATITUD"]), lng: parseFloat(esta_cancha["LONGITUD"])};
-
-				//creo el icono 
-				 var icon = {
-					url: place.icon,
-					size: new google.maps.Size(100, 100),
-					origin: new google.maps.Point(0, 0),
-					anchor: new google.maps.Point(17, 34),
-					scaledSize: new google.maps.Size(50, 60)
-				  };
-				  
-				  // crear un marker para el lugar donde esta la cancha
-				  markers.push(new google.maps.Marker({
-					map: map,
-					icon: icon,
-					title: esta_cancha["NOMBRE_CANCHA"],
-					mas: markers.length, //numero de array que ocupa el objeto
-					position: lugar
-				  }));
-				  
-					//modal con info de la cancha en el mapa
-					infowindow.push(new google.maps.InfoWindow({ 
-						content: '<div class="informacion"><img alt="cancha" src="'+esta_cancha["FOTO"]+'"></img><h3>'+esta_cancha["NOMBRE_CANCHA"]+'</h3><span>'+esta_cancha["TIPO_CANCHA"]+'</span></div>'
-					  }));  				  
-				}
-			}
-		
-		/*********************************/
-		
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-
-        var markers = [];
-		
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-		
-        searchBox.addListener('places_changed', function() {
-		
-		  localStorage.setItem("direccion_cancha",searchBox.getPlaces()[0].name);
-
-          var places = searchBox.getPlaces();
-          if (places.length == 0) {
-            return;
-          }
-
-        // Clear out the old markers.
-        markers.forEach(function(marker) {
-          marker.setMap(null);
-        });
-		  
-          markers = [];
-			// For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-		  		 
-        places.forEach(function(place) {
-			  
-		 if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-              map: map,
-              icon: icon,
-              title: place.name,
-              position: place.geometry.location
-            }));
-			
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-			
-			//gardado de geolocalizacion en localstorage
-			var position={
-				LATITUD : place.geometry.location.lat(),
-				LONGITUD : place.geometry.location.lng()
-			}
-				
-			localStorage.setItem("posicion_cancha",JSON.stringify(position));
-	
-        });
-		
-		map.fitBounds(bounds);
-	});
-}
-		 
-		 </script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClnZo-qIve_StI8CYOjMy0rn8bL4-dgTU&libraries=places&callback=initAutocomplete"
-         async defer></script>
 	<!-------- CONTROLLERS --------->
 	
 	<script src="js/controllers/controller-index.js"></script> 
@@ -440,7 +213,8 @@
 	<script src="js/controllers/controller-mis-canchas.js"></script> 
 	<script src="js/controllers/controller-contacto.js"></script> 
 	<script src="js/controllers/controller-perfil.js"></script> 
-	
+	<script src="js/controllers/controller-home.js"></script>
+
 	
 	
 </body>

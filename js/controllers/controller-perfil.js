@@ -1,57 +1,37 @@
 /**************************************** CONTROLLER REGISTRO ***************************************/
 
-iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout', function  ($scope, $http, $location, Upload, $timeout) { 
+iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout', function  ($scope, $http, $location, Upload, $timeout) {
 
-			//me fijo si la sesion sigue activa
-				/* $http({
-						method: 'POST',
-						url:"php/abm/logueado.php",
-						headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
-					})
-					.then(function (data){ //No esta activa, elimino datos de almacenamiento local y redirecciono a home
-						if(data.data!=" 0"){
-							sacar_botones();
-							localStorage.removeItem("dts_user");
- 							$location.path("#!/home"); 
- 						}
-						
-				},function (error){ //ERROR no se pudo establecer la conexion
+	$scope.eliminar_cuenta=function(){
+		$http({
+			method: 'POST',
+			url:"php/abm/eliminar.cuenta.php",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.then(function (response){
+			if(response.data==="1"){
+				alert("cuenta eliminada con éxito!");
+				$scope.logout();
+			}
+			else{
+				alert("Ups! Hubo un error, vuela a intentarlo más tarde");
+			}
 
-				}); */
-				
-	if(localStorage.getItem("dts_user")!=null){
-		sacar_botones("sacar"); //Funcion. vuelve a cargar los botones del menu.
-		
-		var usuario=[];
-		usuario=angular.fromJson(localStorage.getItem("dts_user"));
+		},function (error){
+
+		});
+
+	};
+
+	if(localStorage.getItem("dts_user")!==null){
+		var usuario=angular.fromJson(localStorage.getItem("dts_user"));
 		$scope.nombre=usuario.NOMBRE;
 		$scope.apellido=usuario.APELLIDO;
 		
-		if(usuario.TIPO_USUARIO=="Propietario"){
+		if(usuario.TIPO_USUARIO==="Propietario"){
 			$scope.es_propietario=true;
 		}
-			
-		//************************************* LOGOUT
-		$scope.logout=function(){
-				$http({
-						method: 'POST',
-						url:"php/abm/logout.php",
-						headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
-					})
-					.then(function (data){ //EXITO se establecio la conexion
-						if(data.data=="1"){
-							localStorage.removeItem("dts_user");
-							sacar_botones(); //Funcion. no recibe nada, vuelve a cargar los botones del menu.
-							$location.path("#!/home"); 
-						}
-						else{
-							// mensaje de error. vuelva a intentarlo mas tarde.
-						}
-						
-				},function (error){ //ERROR no se pudo establecer la conexion
 
-				});
-		}
 	}
 	else{
 		$location.path("#!/home");  //usuario no logueado, redireccion a home

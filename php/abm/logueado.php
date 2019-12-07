@@ -10,5 +10,3 @@
 		session_destroy();
 		echo 0;
 	}
-	
-?>

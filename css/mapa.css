@@ -22,18 +22,21 @@
 	width:73vw;
     }
 	
-	 form div ul li label{
+	.horarios ul li label{
 		 font-weight:normal;
 	 }
 	 
-	 form div ul li{
+	 .horarios ul li{
 		 text-align:right;
 		 width:32vw;
 	 }
 	 
-	 form div ul{
+	 .horarios ul{
 		display:inline-block;
-		width:50%;
+	 }
+	 
+	 .horarios label{
+		display:block;
 	 }
 	  
 	  .wrap-login100{

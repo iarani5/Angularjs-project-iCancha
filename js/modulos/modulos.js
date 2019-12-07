@@ -13,6 +13,7 @@ var iCancha = angular.module('iCancha', [
 
 
 
+
 /////ADAPTACION DE PANTALLA
 
 iCancha.run(function($transform) {

@@ -12,7 +12,7 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 		headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
 	})
 	.then(function (response){ //EXITO se establecio la conexion
-		 if(response.data.length){
+		if(response.data.length){
 			$scope.cantidad_futbol=0;
 			$scope.cantidad_basket=0;
 			$scope.cantidad_hockey=0;
@@ -22,7 +22,7 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 			for(var i in response.data){
 				var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
 				response.data[i].FOTO=foto;
-				if(response.data[i].BORRADO=="No"){
+				if(response.data[i].BORRADO==="No"){
 					
 					switch(response.data[i].TIPO_CANCHA){
 						case "Futbol":

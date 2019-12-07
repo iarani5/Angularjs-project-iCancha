@@ -21,33 +21,42 @@
 				</div>
 				
 				<!--BUSCADOR -->
+
 				<div class="welcome-hero-serch-box">
 					<div class="welcome-hero-form">
 						<div class="single-welcome-hero-form">
+							<h3>Barrio</h3>
+							<select class='selectpicker' name='grupo' ng-model='cancha.BARRIO' ng-init="cancha.BARRIO='Belgrano'" style="padding-left: 2em;">
+								<option ng-repeat="barrio in barrios track by $index "  value='{{ barrio.TITULO }}'>{{ barrio.TITULO }}</option>
+							</select>
+						</div>
+						<div class="single-welcome-hero-form" style="border-right: 1px solid #edeff1;">
 							<h3>Tipo</h3>
-							<form action="index.html">
-								<input type="text" placeholder="Ej: football, tenis, hockey" />
-							</form>
+							<!-- TIPO_CANCHA -->
+							<select class='selectpicker' name='grupo' ng-model='cancha.TIPO_CANCHA' ng-init="cancha.TIPO_CANCHA='Futbol'" style="padding-left: 2em;">
+								<option ng-repeat="tipo in tipo_cancha track by $index "  value='{{ tipo.TITULO }}'>{{ tipo.TITULO }}</option>
+							</select>
+
+
 						</div>
 						<div class="single-welcome-hero-form">
+							<h3>Día</h3>
+							<select class='selectpicker' name='grupo' ng-model='cancha.DIA' ng-init="cancha.DIA='Lunes'" style="padding-left: 2em;">
+								<option ng-repeat="dia in dias track by $index "  value='{{ dia.DIA }}'>{{ dia.DIA }}</option>
+							</select>
 							<h3>Horario</h3>
-							<form action="index.html">
-								 <div class='input-group date' id='datetimepicker1'>
-									 <input type='text' class="form-control" />
-									 <span class="input-group-addon">
-									 <span class="glyphicon glyphicon-calendar"></span>
-									 </span>
-								  </div>
-							</form>
+							<select class='selectpicker' name='grupo' ng-model='cancha.HORARIO' ng-init="cancha.HORARIO='2:00pm a 3:00pm'" style="padding-left: 2em;">
+								<option ng-repeat="un_horario in listado_horarios track by $index "  value='{{ un_horario.hora }}'>{{ un_horario.hora }}</option>
+							</select>
 						</div>
 					</div>
 					<div class="welcome-hero-serch">
-						<button class="welcome-hero-btn" onclick="window.location.href='#'">
-							 Buscar  <i data-feather="search"></i> 
+						<button class="welcome-hero-btn" ng-click="buscar_cancha(cancha)">
+							search  <i data-feather="search"></i>
 						</button>
 					</div>
 				</div>
-				
+
 			</div>
 
 		</section>

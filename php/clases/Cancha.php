@@ -9,8 +9,7 @@ CREATE TABLE Cancha(
 	NOMBRE_CANCHA VARCHAR(10) NOT NULL,
 	FOTO VARCHAR(250) NOT NULL,
 	TIPO_CANCHA ENUM ('Futbol','Tenis','Basket','Hockey','Rugby') DEFAULT 'Futbol',
-	LONGITUD INT(9) NOT NULL,
-	LATITUD INT(9) NOT NULL,
+	BARRIO VARCHAR(45) NOT NULL,
 	DIRECCION VARCHAR(45) NOT NULL,
 	BORRADO ENUM('Si','No') NOT NULL DEFAULT 'No',
 	TARJETA INT(16) NOT NULL,
@@ -26,8 +25,7 @@ CREATE TABLE Cancha(
 	private $nombre_cancha;
 	private $foto;
 	private $tipo_cancha;
-	private $longitud;
-	private $latitud;
+	private $barrio;
 	private $direccion;
 	private $borrado;
 	private $tarjeta;
@@ -38,7 +36,7 @@ CREATE TABLE Cancha(
 	
 	//nombre_cancha de la tabla y columnas de la tabla.
 	public static $tabla = "cancha";
-	private static $fila = ['NOMBRE_CANCHA', 'FOTO','TIPO_CANCHA','CLAVE','LONGITUD','LATITUD','DIRECCION','BORRADO','TARJETA','CLAVE_TARJETA','FECHA_VENCIMIENTO_TARJETA','PUNTAJE','PRECIO'];
+	private static $fila = ['NOMBRE_CANCHA', 'FOTO','TIPO_CANCHA','CLAVE','BARRIO', 'DIRECCION','BORRADO','TARJETA','CLAVE_TARJETA','FECHA_VENCIMIENTO_TARJETA','PUNTAJE','PRECIO'];
 
 	/* G E T T E R S  &&  S E T T E R S */
 	public function setIdCancha($a){
@@ -65,17 +63,11 @@ CREATE TABLE Cancha(
 	public function getTipoCancha(){
 		return $this->tipo_cancha;
 	}
-	public function setLongitud($a){
-		$this->longitud = $a;
+	public function setBarrio($a){
+		$this->barrio = $a;
 	}
-	public function getLongitud(){
-		return $this->longitud;
-	}
-	public function setLatitud($a){
-		$this->latitud = $a;
-	}
-	public function getLatitud(){
-		return $this->latitud;
+	public function getBarrio(){
+		return $this->barrio;
 	}
 	public function setDireccion($a){
 		$this->direccion = $a;
@@ -146,11 +138,8 @@ CREATE TABLE Cancha(
 					case "tipo_cancha":
 						$this->setTipoCancha($valor);
 					break;
-					case "longitud":
-						$this->setLongitud($valor);
-					break;
-					case "latitud":
-						$this->setLatitud($valor);
+					case "barrio":
+						$this->setBarrio($valor);
 					break;
 					case "direccion":
 						$this->setDireccion($valor);
@@ -180,10 +169,10 @@ CREATE TABLE Cancha(
 	}
 	
 	public function crear_cancha($array){  //REGISTRO DE CANCHA	
-		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,TIPO_CANCHA,LONGITUD,LATITUD,DIRECCION,TARJETA,CLAVE_TARJETA,FECHA_VENCIMIENTO_TARJETA,PUNTAJE,PRECIO)
-				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,TIPO_CANCHA,BARRIO,DIRECCION,TARJETA,CLAVE_TARJETA,FECHA_VENCIMIENTO_TARJETA,PUNTAJE,PRECIO)
+				VALUES (?, ?, ?, ?, ?, ?,  ?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["TIPO_CANCHA"],$array["LONGITUD"],$array["LATITUD"],$array["DIRECCION"],$array["TARJETA"],$array["CLAVE_TARJETA"],$array["FECHA_VENCIMIENTO_TARJETA"],$array["PUNTAJE"],$array["PRECIO"]]);
+		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["TIPO_CANCHA"],$array["BARRIO"],$array["DIRECCION"],$array["TARJETA"],$array["CLAVE_TARJETA"],$array["FECHA_VENCIMIENTO_TARJETA"],$array["PUNTAJE"],$array["PRECIO"]]);
 	}
 	
 	public function foto($array){ //FOTO
@@ -222,8 +211,7 @@ CREATE TABLE Cancha(
 				$cancha->nombre_cancha = $fila['NOMBRE_CANCHA'];
 				$cancha->foto = $fila['FOTO'];
 				$cancha->tipo_cancha = $fila['TIPO_CANCHA'];
-				$cancha->longitud = $fila['LONGITUD'];
-				$cancha->latitud = $fila['LATITUD'];
+				$cancha->barrio = $fila['BARRIO'];
 				$cancha->direccion = $fila['DIRECCION'];
 				$cancha->borrado = $fila['BORRADO'];
 				$cancha->tarjeta = $fila['TARJETA'];
@@ -250,8 +238,7 @@ CREATE TABLE Cancha(
 				$cancha->nombre_cancha = $fila['NOMBRE_CANCHA'];
 				$cancha->foto = $fila['FOTO'];
 				$cancha->tipo_cancha = $fila['TIPO_CANCHA'];
-				$cancha->longitud = $fila['LONGITUD'];
-				$cancha->latitud = $fila['LATITUD'];
+				$cancha->barrio = $fila['BARRIO'];
 				$cancha->direccion = $fila['DIRECCION'];
 				$cancha->borrado = $fila['BORRADO'];
 				$cancha->tarjeta = $fila['TARJETA'];
