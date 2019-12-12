@@ -10,23 +10,6 @@
 	// require_once('../clases/Validacion.php');	 //para validar datos desde php
 	
 	/***** Validacion *****/
-	
-	/* $reglas = [
-		'EMAIL' => 'required|email',
-		'NOMBRE' => 'required|nombre',
-		'APELLIDO' => 'required|apellido',
-		'CLAVE' => 'required|clave',
-	];
-
-	$validacion = new Validacion($_POST, $reglas);
-	$rta= json_encode($validacion->getErrores())."\n"; 
-
-	//validacion
-	if(count(json_decode($rta))){
-		echo $rta;
-		return 0;
-	}
-	else{*/
 		
 	$usuario = new Usuario();
 	

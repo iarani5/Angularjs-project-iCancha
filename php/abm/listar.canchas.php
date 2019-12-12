@@ -25,13 +25,9 @@
 				"NOMBRE_CANCHA"=>$unaCancha->getNombre_cancha(),
 				"FOTO"=>$unaCancha->getFoto(),
 				"TIPO_CANCHA"=>$unaCancha->getTipoCancha(),
-				"LONGITUD"=>$unaCancha->getLongitud(),
-				"LATITUD"=>$unaCancha->getLatitud(),
+				"BARRIO"=>$unaCancha->getBarrio(),
 				"DIRECCION"=>$unaCancha->getDireccion(),
 				"BORRADO"=>$unaCancha->getBorrado(),
-				"TARJETA"=>$unaCancha->getTarjeta(),
-				"CLAVE_TARJETA"=>$unaCancha->getClaveTarjeta(),
-				"FECHA_VENCIMIENTO_TARJETA"=>$unaCancha->getFechaVencimientoTarjeta(),
 				"PUNTAJE"=>$unaCancha->getPuntaje(),
 				"PRECIO"=>$unaCancha->getPrecio()
 			];
@@ -42,4 +38,3 @@
 	}		
 		echo json_encode($arrayFinal);
 
-?> 

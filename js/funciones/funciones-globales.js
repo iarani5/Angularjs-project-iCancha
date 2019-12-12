@@ -51,9 +51,6 @@ function modal_msj(mensaje,boton1){
 	var div=document.createElement("div");
 	div.className="modal";
 	var caja_modal=document.createElement("div");
-	/* var di=document.createElement("div");
-	di.className="modal-backdrop in";
-	div.appendChild(di); */
 	var di=document.createElement("div");
 	di.className="modal-dialog";
 	div.appendChild(di);
@@ -105,6 +102,7 @@ function modal_msj(mensaje,boton1){
 
 ////////// MODAL HORARIOS
 function modal_horarios(horarios){
+
 	var div=document.createElement("div");
 	div.className="modal";
 	var caja_modal=document.createElement("div");
@@ -116,10 +114,13 @@ function modal_horarios(horarios){
 
 	/**cargo horarios**/
 	var ul=ce("ul");
+	ul.style.paddingLeft="3em";
 	for(var i=0; i<horarios.length; i++){
 		var li=ce("li");
-		li.innerHTML=horarios[i]["HORARIO"];
-		if(horarios[i].ESTADO=="Desocupado"){
+		li.style.borderBottom="solid 1px #eee";
+		li.style.padding=".5em";
+		li.innerHTML=horarios[i]["DIA_VALOR"]+" "+horarios[i]["HORA_VALOR"];
+		if(horarios[i].ESTADO==="Desocupado"){
 			li.className="libre";
 			var radio=ce("input");
 			radio.type="radio";			
@@ -131,7 +132,13 @@ function modal_horarios(horarios){
 		}
 		ac(ul,li);
 	}
-		
+
+	if(horarios.length===0){
+		var p=ce("p");
+		p.innerHTML="Aún no hay horarios cargados para esta cancha.";
+		ac(caja_modal,p);
+
+	}
 	var btn2=document.createElement("button");
 	btn2.type="button";
 	btn2.id="cerrar_modal";

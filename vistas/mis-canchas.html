@@ -10,11 +10,17 @@
 			<div class="container">
 			
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-
-		<form ng-submit="crear_cancha(cancha)" class="login100-form validate-form" class="md-form" id="crear_cancha">
 					<span class="login100-form-title p-b-55">
 						{{ titulo_formulario }}
 					</span>
+					<span class="login100-form-title p-b-55">
+						HORARIOS
+					</span>
+				<div class="container_horarios" id="horarios_de_cancha" style="margin-bottom: 15em;">
+					<div id="select" ng-model="cancha_editar.HORARIOS" ></div>
+				</div>
+		<form ng-show="titulo_formulario==='Crear cancha'" id="crear" ng-submit="crear_cancha(cancha)" class="login100-form validate-form" class="md-form" id="crear_cancha">
+
 					
 					<div class="selects">
 						<!-- TIPO_CANCHA -->
@@ -33,266 +39,39 @@
 
 					<!-- DIRECCION -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
-					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate"  placeholder="direccion" required ng-model="cancha.DIRECCION">
+					 <input class="input100"  type="text" class="form-control validate" name="direccion"  placeholder="direccion" required ng-model="cancha.DIRECCION">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<span class="lnr lnr-envelope"></span>
 						</span>
 					</div>
+
 					<!-- NOMBRE_CANCHA -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
-					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate"  placeholder="nombre" required ng-model="cancha.NOMBRE">
+					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate" name="nombre"  placeholder="nombre" required ng-model="cancha.NOMBRE">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<span class="lnr lnr-envelope"></span>
-						</span>
-					</div>
-					
-					<!-- TARJETA -->
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid number is required">
-					 <input class="input100"  type="number" id="defaultForm-tarjeta" class="form-control validate"  placeholder="Numero de Tarjeta" required ng-model="cancha.TARJETA">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<span class="lnr lnr-envelope"></span>
-						</span>
-					</div>
-					
-					<!-- TARJETA -->
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid number is required">
-					 <input class="input100"  type="date" id="defaultForm-tarjeta" class="form-control validate"  placeholder="Fecha vencimiento" required ng-model="cancha.FECHA_VENCIMIENTO_TARJETA">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<span class="lnr lnr-envelope"></span>
-						</span>
-					</div>
-					
-					<!-- CLAVE -->
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid number is required">
-					 <input class="input100"  type="number" id="defaultForm-clave" class="form-control validate"  placeholder="Clave de Tarjeta" required ng-model="cancha.CLAVE">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<span class="lnr lnr-envelope"></span>
 						</span>
 					</div>
 					
 					<!-- PRECIO -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid number is required">
-					 <input class="input100"  type="number" id="defaultForm-precio" class="form-control validate"  placeholder="Precio" required ng-model="cancha.PRECIO">
+					 <input class="input100"  type="number" id="defaultForm-precio" class="form-control validate" name="precio" placeholder="Precio" required ng-model="cancha.PRECIO">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<span class="lnr lnr-envelope"></span>
 						</span>
 					</div>
-					
-					<!-- DIRECCION -->
-					 <div id="direccion">
-						 
-					</div> 
-					
+
 					<!-- FOTO -->
-					 <div class="wrap-input100 validate-input m-b-16">
+					 <div class="wrap-input100 validate-input m-b-16" ng-show="titulo_formulario!='Editar cancha'">
 						<input type="file" class='upload-file cancha-file ' ngf-select ng-model="cancha.FOTO" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-pattern="'image/*'" ngf-accept="'.jpg,.jpeg,.png'" id="foto">
 					</div> 
-				    
+				    <!--
 					<span class="login100-form-title p-b-55">
 						HORARIOS 
 					</span>
-					<div class="container_horarios">
-						<div id="select" ng-model="cancha.HORARIOS"></div>
-					</div>
-					
-						<!-- TIPO_CANCHA
-					
-					<div class="horarios">
-						<label>Lunes</label>
-						<ul>
-							<li><label>7:00am a 8:00am <input type="checkbox" ng-model="cancha.lunes1"></label></li>
-							<li><label>8:00am a 9:00am <input type="checkbox" ng-model="cancha.lunes2"></label></li>
-							<li><label>9:00am a 10:00am <input type="checkbox" ng-model="cancha.lunes3"></label></li>
-							<li><label>10:00am a 11:00am <input type="checkbox" ng-model="cancha.lunes4"></label></li>
-							<li><label>11:00am a 12:00pm <input type="checkbox" ng-model="cancha.lunes5"></label></li>
-							<li><label>12:00pm a 1:00pm <input type="checkbox" ng-model="cancha.lunes6"></label></li>
-							<li><label>1:00pm a 2:00pm <input type="checkbox" ng-model="cancha.lunes7"></label></li>
-							<li><label>2:00pm a 3:00pm <input type="checkbox" ng-model="cancha.lunes8"></label></li>
-							<li><label>3:00pm a 4:00pm <input type="checkbox" ng-model="cancha.lunes9"></label></li>
-						</ul>
-						<ul>
-							<li><label>4:00pm a 5:00pm <input type="checkbox" ng-model="cancha.lunes10"></label></li>
-							<li><label>5:00pm a 6:00pm <input type="checkbox" ng-model="cancha.lunes11"></label></li>
-							<li><label>6:00pm a 7:00pm <input type="checkbox" ng-model="cancha.lunes12"></label></li>
-							<li><label>7:00pm a 8:00pm <input type="checkbox" ng-model="cancha.lunes13"></label></li>
-							<li><label>8:00pm a 9:00pm <input type="checkbox" ng-model="cancha.lunes14"></label></li>
-							<li><label>9:00pm a 10:00pm <input type="checkbox" ng-model="cancha.lunes15"></label></li>
-							<li><label>10:00pm a 11:00pm <input type="checkbox" ng-model="cancha.lunes16"></label></li>
-							<li><label>11:00pm a 12:00am <input type="checkbox" ng-model="cancha.lunes17"></label></li>
-							<li><label>12:00am a 1:00am <input type="checkbox" ng-model="cancha.lunes18"></label></li>
-						</ul>
-						
-					</div>
-
-					
-					<div class="horarios">
-					<label>Martes</label>
-						<ul>
-							<li><label>7:00am a 8:00am <input type="checkbox" ng-model="cancha.martes1"></label></li>
-							<li><label>8:00am a 9:00am <input type="checkbox" ng-model="cancha.martes2"></label></li>
-							<li><label>9:00am a 10:00am <input type="checkbox" ng-model="cancha.martes3"></label></li>
-							<li><label>10:00am a 11:00am <input type="checkbox" ng-model="cancha.martes4"></label></li>
-							<li><label>11:00am a 12:00pm <input type="checkbox" ng-model="cancha.martes5"></label></li>
-							<li><label>12:00pm a 1:00pm <input type="checkbox" ng-model="cancha.martes6"></label></li>
-							<li><label>1:00pm a 2:00pm <input type="checkbox" ng-model="cancha.martes7"></label></li>
-							<li><label>2:00pm a 3:00pm <input type="checkbox" ng-model="cancha.martes8"></label></li>
-							<li><label>3:00pm a 4:00pm <input type="checkbox" ng-model="cancha.martes9"></label></li>
-						</ul>
-						<ul>
-							<li><label>4:00pm a 5:00pm <input type="checkbox" ng-model="cancha.martes10"></label></li>
-							<li><label>5:00pm a 6:00pm <input type="checkbox" ng-model="cancha.martes11"></label></li>
-							<li><label>6:00pm a 7:00pm <input type="checkbox" ng-model="cancha.martes12"></label></li>
-							<li><label>7:00pm a 8:00pm <input type="checkbox" ng-model="cancha.martes13"></label></li>
-							<li><label>8:00pm a 9:00pm <input type="checkbox" ng-model="cancha.martes14"></label></li>
-							<li><label>9:00pm a 10:00pm <input type="checkbox" ng-model="cancha.martes15"></label></li>
-							<li><label>10:00pm a 11:00pm <input type="checkbox" ng-model="cancha.martes16"></label></li>
-							<li><label>11:00pm a 12:00am <input type="checkbox" ng-model="cancha.martes17"></label></li>
-							<li><label>12:00am a 1:00am <input type="checkbox" ng-model="cancha.martes18"></label></li>
-						</ul>	
-					</div>
-						 TIPO_CANCHA
-					
-					<div class="horarios">
-						<label>Miercoles</label>
-						<ul>
-							<li><label>7:00am a 8:00am <input type="checkbox" ng-model="cancha.miercoles1"></label></li>
-							<li><label>8:00am a 9:00am <input type="checkbox" ng-model="cancha.miercoles2"></label></li>
-							<li><label>9:00am a 10:00am <input type="checkbox" ng-model="cancha.miercoles3"></label></li>
-							<li><label>10:00am a 11:00am <input type="checkbox" ng-model="cancha.miercoles4"></label></li>
-							<li><label>11:00am a 12:00pm <input type="checkbox" ng-model="cancha.miercoles5"></label></li>
-							<li><label>12:00pm a 1:00pm <input type="checkbox" ng-model="cancha.miercoles6"></label></li>
-							<li><label>1:00pm a 2:00pm <input type="checkbox" ng-model="cancha.miercoles7"></label></li>
-							<li><label>2:00pm a 3:00pm <input type="checkbox" ng-model="cancha.miercoles8"></label></li>
-							<li><label>3:00pm a 4:00pm <input type="checkbox" ng-model="cancha.miercoles9"></label></li>
-						</ul>
-						<ul>
-							<li><label>4:00pm a 5:00pm <input type="checkbox" ng-model="cancha.miercoles10"></label></li>
-							<li><label>5:00pm a 6:00pm <input type="checkbox" ng-model="cancha.miercoles11"></label></li>
-							<li><label>6:00pm a 7:00pm <input type="checkbox" ng-model="cancha.miercoles12"></label></li>
-							<li><label>7:00pm a 8:00pm <input type="checkbox" ng-model="cancha.miercoles13"></label></li>
-							<li><label>8:00pm a 9:00pm <input type="checkbox" ng-model="cancha.miercoles14"></label></li>
-							<li><label>9:00pm a 10:00pm <input type="checkbox" ng-model="cancha.miercoles15"></label></li>
-							<li><label>10:00pm a 11:00pm <input type="checkbox" ng-model="cancha.miercoles16"></label></li>
-							<li><label>11:00pm a 12:00am <input type="checkbox" ng-model="cancha.miercoles17"></label></li>
-							<li><label>12:00am a 1:00am <input type="checkbox" ng-model="cancha.miercoles18"></label></li>
-						</ul>
-
-					</div>
-					
-					<div class="horarios">
-						<label>Jueves</label>
-						<ul>
-							<li><label>7:00am a 8:00am <input type="checkbox" ng-model="cancha.jueves1"></label></li>
-							<li><label>8:00am a 9:00am <input type="checkbox" ng-model="cancha.jueves2"></label></li>
-							<li><label>9:00am a 10:00am <input type="checkbox" ng-model="cancha.jueves3"></label></li>
-							<li><label>10:00am a 11:00am <input type="checkbox" ng-model="cancha.jueves4"></label></li>
-							<li><label>11:00am a 12:00pm <input type="checkbox" ng-model="cancha.jueves5"></label></li>
-							<li><label>12:00pm a 1:00pm <input type="checkbox" ng-model="cancha.jueves6"></label></li>
-							<li><label>1:00pm a 2:00pm <input type="checkbox" ng-model="cancha.jueves7"></label></li>
-							<li><label>2:00pm a 3:00pm <input type="checkbox" ng-model="cancha.jueves8"></label></li>
-							<li><label>3:00pm a 4:00pm <input type="checkbox" ng-model="cancha.jueves9"></label></li>
-						</ul>
-						<ul>
-							<li><label>4:00pm a 5:00pm <input type="checkbox" ng-model="cancha.jueves10"></label></li>
-							<li><label>5:00pm a 6:00pm <input type="checkbox" ng-model="cancha.jueves11"></label></li>
-							<li><label>6:00pm a 7:00pm <input type="checkbox" ng-model="cancha.jueves12"></label></li>
-							<li><label>7:00pm a 8:00pm <input type="checkbox" ng-model="cancha.jueves13"></label></li>
-							<li><label>8:00pm a 9:00pm <input type="checkbox" ng-model="cancha.jueves14"></label></li>
-							<li><label>9:00pm a 10:00pm <input type="checkbox" ng-model="cancha.jueves15"></label></li>
-							<li><label>10:00pm a 11:00pm <input type="checkbox" ng-model="cancha.jueves16"></label></li>
-							<li><label>11:00pm a 12:00am <input type="checkbox" ng-model="cancha.jueves17"></label></li>
-							<li><label>12:00am a 1:00am <input type="checkbox" ng-model="cancha.jueves18"></label></li>
-						</ul>
-
-					</div>
-					
-					<div class="horarios">
-						<label>Viernes</label>
-						<ul>
-							<li><label>7:00am a 8:00am <input type="checkbox" ng-model="cancha.viernes1"></label></li>
-							<li><label>8:00am a 9:00am <input type="checkbox" ng-model="cancha.viernes2"></label></li>
-							<li><label>9:00am a 10:00am <input type="checkbox" ng-model="cancha.viernes3"></label></li>
-							<li><label>10:00am a 11:00am <input type="checkbox" ng-model="cancha.viernes4"></label></li>
-							<li><label>11:00am a 12:00pm <input type="checkbox" ng-model="cancha.viernes5"></label></li>
-							<li><label>12:00pm a 1:00pm <input type="checkbox" ng-model="cancha.viernes6"></label></li>
-							<li><label>1:00pm a 2:00pm <input type="checkbox" ng-model="cancha.viernes7"></label></li>
-							<li><label>2:00pm a 3:00pm <input type="checkbox" ng-model="cancha.viernes8"></label></li>
-							<li><label>3:00pm a 4:00pm <input type="checkbox" ng-model="cancha.viernes9"></label></li>
-						</ul>
-						<ul>
-							<li><label>4:00pm a 5:00pm <input type="checkbox" ng-model="cancha.viernes10"></label></li>
-							<li><label>5:00pm a 6:00pm <input type="checkbox" ng-model="cancha.viernes11"></label></li>
-							<li><label>6:00pm a 7:00pm <input type="checkbox" ng-model="cancha.viernes12"></label></li>
-							<li><label>7:00pm a 8:00pm <input type="checkbox" ng-model="cancha.viernes13"></label></li>
-							<li><label>8:00pm a 9:00pm <input type="checkbox" ng-model="cancha.viernes14"></label></li>
-							<li><label>9:00pm a 10:00pm <input type="checkbox" ng-model="cancha.viernes15"></label></li>
-							<li><label>10:00pm a 11:00pm <input type="checkbox" ng-model="cancha.viernes16"></label></li>
-							<li><label>11:00pm a 12:00am <input type="checkbox" ng-model="cancha.viernes17"></label></li>
-							<li><label>12:00am a 1:00am <input type="checkbox" ng-model="cancha.viernes18"></label></li>
-						</ul>
-
-					</div>
-					
-					<div class="horarios">
-						<label>Sabado</label>
-						<ul>
-							<li><label>7:00am a 8:00am <input type="checkbox" ng-model="cancha.sabado1"></label></li>
-							<li><label>8:00am a 9:00am <input type="checkbox" ng-model="cancha.sabado2"></label></li>
-							<li><label>9:00am a 10:00am <input type="checkbox" ng-model="cancha.sabado3"></label></li>
-							<li><label>10:00am a 11:00am <input type="checkbox" ng-model="cancha.sabado4"></label></li>
-							<li><label>11:00am a 12:00pm <input type="checkbox" ng-model="cancha.sabado5"></label></li>
-							<li><label>12:00pm a 1:00pm <input type="checkbox" ng-model="cancha.sabado6"></label></li>
-							<li><label>1:00pm a 2:00pm <input type="checkbox" ng-model="cancha.sabado7"></label></li>
-							<li><label>2:00pm a 3:00pm <input type="checkbox" ng-model="cancha.sabado8"></label></li>
-							<li><label>3:00pm a 4:00pm <input type="checkbox" ng-model="cancha.sabado9"></label></li>
-						</ul>
-						<ul>
-							<li><label>4:00pm a 5:00pm <input type="checkbox" ng-model="cancha.sabado10"></label></li>
-							<li><label>5:00pm a 6:00pm <input type="checkbox" ng-model="cancha.sabado11"></label></li>
-							<li><label>6:00pm a 7:00pm <input type="checkbox" ng-model="cancha.sabado12"></label></li>
-							<li><label>7:00pm a 8:00pm <input type="checkbox" ng-model="cancha.sabado13"></label></li>
-							<li><label>8:00pm a 9:00pm <input type="checkbox" ng-model="cancha.sabado14"></label></li>
-							<li><label>9:00pm a 10:00pm <input type="checkbox" ng-model="cancha.sabado15"></label></li>
-							<li><label>10:00pm a 11:00pm <input type="checkbox" ng-model="cancha.sabado16"></label></li>
-							<li><label>11:00pm a 12:00am <input type="checkbox" ng-model="cancha.sabado17"></label></li>
-							<li><label>12:00am a 1:00am <input type="checkbox" ng-model="cancha.sabado18"></label></li>
-						</ul>
-
-					</div>
-					
-					<div class="horarios">
-						<label>Domingo</label>
-						<ul>
-							<li><label>7:00am a 8:00am <input type="checkbox" ng-model="cancha.domingo1"></label></li>
-							<li><label>8:00am a 9:00am <input type="checkbox" ng-model="cancha.domingo2"></label></li>
-							<li><label>9:00am a 10:00am <input type="checkbox" ng-model="cancha.domingo3"></label></li>
-							<li><label>10:00am a 11:00am <input type="checkbox" ng-model="cancha.domingo4"></label></li>
-							<li><label>11:00am a 12:00pm <input type="checkbox" ng-model="cancha.domingo5"></label></li>
-							<li><label>12:00pm a 1:00pm <input type="checkbox" ng-model="cancha.domingo6"></label></li>
-							<li><label>1:00pm a 2:00pm <input type="checkbox" ng-model="cancha.domingo7"></label></li>
-							<li><label>2:00pm a 3:00pm <input type="checkbox" ng-model="cancha.domingo8"></label></li>
-							<li><label>3:00pm a 4:00pm <input type="checkbox" ng-model="cancha.domingo9"></label></li>
-						</ul>
-						<ul>
-							<li><label>4:00pm a 5:00pm <input type="checkbox" ng-model="cancha.domingo10"></label></li>
-							<li><label>5:00pm a 6:00pm <input type="checkbox" ng-model="cancha.domingo11"></label></li>
-							<li><label>6:00pm a 7:00pm <input type="checkbox" ng-model="cancha.domingo12"></label></li>
-							<li><label>7:00pm a 8:00pm <input type="checkbox" ng-model="cancha.domingo13"></label></li>
-							<li><label>8:00pm a 9:00pm <input type="checkbox" ng-model="cancha.domingo14"></label></li>
-							<li><label>9:00pm a 10:00pm <input type="checkbox" ng-model="cancha.domingo15"></label></li>
-							<li><label>10:00pm a 11:00pm <input type="checkbox" ng-model="cancha.domingo16"></label></li>
-							<li><label>11:00pm a 12:00am <input type="checkbox" ng-model="cancha.domingo17"></label></li>
-							<li><label>12:00am a 1:00am <input type="checkbox" ng-model="cancha.domingo18"></label></li>
-						</ul>
-
-					</div>
-					-->
+					<div class="container_horarios" id="horarios_de_cancha" style="margin-bottom: 15em;">
+						<div id="select" ng-model="cancha.HORARIOS" ></div>
+					</div>-->
 
 					<div class="container-login100-form-btn p-t-25">
 						<button class="login100-form-btn">
@@ -300,7 +79,54 @@
 						</button>
 					</div>
 		</form>
-	</div>
+				<form id="editar" ng-show="titulo_formulario==='Editar cancha'" ng-submit="editar_esta_cancha(cancha_editar)" class="login100-form validate-form" class="md-form" id="crear_cancha">
+
+					<div class="selects">
+						<!-- TIPO_CANCHA -->
+						<label>Tipo de cancha</label>
+						<select class='selectpicker' name='grupo' ng-model='cancha_editar.TIPO_CANCHA' ng-init="cancha_editar.TIPO_CANCHA='Futbol'">
+							<option ng-repeat="tipo in tipo_cancha track by $index "  value='{{ tipo.TITULO }}'>{{ tipo.TITULO }}</option>
+						</select>
+					</div>
+					<div class="selects">
+						<!-- BARRIO -->
+						<label>Barrio</label>
+						<select class='select' name='grupo' ng-model='cancha_editar.BARRIO' ng-init="cancha_editar.BARRIO='Belgrano'" style="padding-left: 2em;">
+							<option ng-repeat="barrio in barrios track by $index "  value='{{ barrio.TITULO }}'>{{ barrio.TITULO }}</option>
+						</select>
+					</div>
+
+					<!-- DIRECCION -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
+						<input class="input100"  type="text" class="form-control validate" name="direccion"  placeholder="direccion" required ng-model="cancha_editar.DIRECCION">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+						</span>
+					</div>
+
+					<!-- NOMBRE_CANCHA -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
+						<input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate" name="nombre"  placeholder="nombre" required ng-model="cancha_editar.NOMBRE">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+						</span>
+					</div>
+
+					<!-- PRECIO -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid number is required">
+						<input class="input100"  type="number" id="defaultForm-precio" class="form-control validate" name="precio" placeholder="Precio" required ng-model="cancha_editar.PRECIO">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn p-t-25">
+						<button class="login100-form-btn">
+							{{ titulo_formulario }}
+						</button>
+					</div>
+				</form>
+			</div>
 			
 				<div class="section-header">
 					<h1>Mis canchas</h1>
@@ -309,12 +135,10 @@
 					<ul ng-repeat="x in mis_canchas" class="table" ng-show="x.BORRADO=='No'">
 					
 						<li>
-							<img ng-src=" {{ x.FOTO }} " alt="foto cancha"/> 
-
+							<img ng-src=" {{ x.FOTO }} " alt="foto cancha"/>
 						 </li>
 						 <li>
 						<table  class="table">
-
 						<tr>
 							<td scope="col">Nombre:</td><td>{{ x.NOMBRE_CANCHA }}</td>
 						 </tr>
@@ -328,16 +152,7 @@
 						 <tr>
 							<td scope="col">Dirección:</td><td>{{ x.DIRECCION }}</td>
 							 </tr>
-						 <tr>
-							<td scope="col">Tarjeta:</td><td>{{ x.TARJETA }}</td>
-							 </tr>
-						 <tr>
-							<td scope="col">Tarjeta clave:</td><td>{{ x.CLAVE_TARJETA }}</td>
-							 </tr>
-						 <tr>
-							<td scope="col">Fecha vencimiento tarjeta:</td><td>{{ x.FECHA_VENCIMIENTO_TARJETA }}</td>
-							 </tr>
-						 <tr>
+
 							<td scope="col">Puntaje:</td><td>{{ x.PUNTAJE }}</td>
 							 </tr>
 						 <tr>
@@ -348,7 +163,7 @@
 						</li>
 						<li>
 							<div class="container-login100-form-btn p-t-25">
-								<button class="login100-form-btn" ng-click="horarios( x )">
+								<button class="login100-form-btn" ng-click="listar_horarios( x.ID_CANCHA )">
 									Horarios
 								</button>
 								
@@ -361,12 +176,9 @@
 								</button>
 							</div>
 						</li>
-					
-					</ul> 
-
+					</ul>
 				</div>
 	</div>
-
-		</section>
+</section>
 		
 		

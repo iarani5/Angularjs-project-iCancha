@@ -12,9 +12,6 @@ CREATE TABLE Cancha(
 	BARRIO VARCHAR(45) NOT NULL,
 	DIRECCION VARCHAR(45) NOT NULL,
 	BORRADO ENUM('Si','No') NOT NULL DEFAULT 'No',
-	TARJETA INT(16) NOT NULL,
-	CLAVE_TARJETA INT(4) NOT NULL,
-	FECHA_VENCIMIENTO_TARJETA DATE NOT NULL,
 	PUNTAJE INT(4) NOT NULL,
 	PRECIO INT(4) UNSIGNED NOT NULL
 );
@@ -28,15 +25,12 @@ CREATE TABLE Cancha(
 	private $barrio;
 	private $direccion;
 	private $borrado;
-	private $tarjeta;
-	private $clave_tarjeta;
-	private $fecha_vencimiento_tarjeta;
 	private $puntaje;
 	private $precio;
 	
 	//nombre_cancha de la tabla y columnas de la tabla.
 	public static $tabla = "cancha";
-	private static $fila = ['NOMBRE_CANCHA', 'FOTO','TIPO_CANCHA','CLAVE','BARRIO', 'DIRECCION','BORRADO','TARJETA','CLAVE_TARJETA','FECHA_VENCIMIENTO_TARJETA','PUNTAJE','PRECIO'];
+	private static $fila = ['NOMBRE_CANCHA', 'FOTO','TIPO_CANCHA','CLAVE','BARRIO', 'DIRECCION','BORRADO','PUNTAJE','PRECIO'];
 
 	/* G E T T E R S  &&  S E T T E R S */
 	public function setIdCancha($a){
@@ -80,24 +74,6 @@ CREATE TABLE Cancha(
 	}
 	public function getBorrado(){
 		return $this->borrado;
-	}
-	public function setTarjeta($a){
-		$this->tarjeta = $a;
-	}
-	public function getTarjeta(){
-		return $this->tarjeta;
-	}
-	public function setClaveTarjeta($a){
-		$this->clave_tarjeta = $a;
-	}
-	public function getClaveTarjeta(){
-		return $this->clave_tarjeta;
-	}
-	public function setFechaVencimientoTarjeta($a){
-		$this->fecha_vencimiento_tarjeta = $a;
-	}
-	public function getFechaVencimientoTarjeta(){
-		return $this->fecha_vencimiento_tarjeta;
 	}
 	public function setPuntaje($a){
 		$this->puntaje = $a;
@@ -147,15 +123,6 @@ CREATE TABLE Cancha(
 					case "borrado":
 						$this->setBorrado($valor);
 					break;
-					case "tarjeta":
-						$this->setTarjeta($valor);
-					break;
-					case "clave_tarjeta":
-						$this->setClaveTarjeta($valor);
-					break;
-					case "fecha_vencimiento_tarjeta":
-						$this->setFechaVencimientoTarjeta($valor);
-					break;
 					case "puntaje":
 						$this->setPuntaje($valor);
 					break;
@@ -169,10 +136,10 @@ CREATE TABLE Cancha(
 	}
 	
 	public function crear_cancha($array){  //REGISTRO DE CANCHA	
-		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,TIPO_CANCHA,BARRIO,DIRECCION,TARJETA,CLAVE_TARJETA,FECHA_VENCIMIENTO_TARJETA,PUNTAJE,PRECIO)
-				VALUES (?, ?, ?, ?, ?, ?,  ?, ?, ?)";
+		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,TIPO_CANCHA,BARRIO,DIRECCION,PUNTAJE,PRECIO)
+				VALUES (?, ?, ?, ?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["TIPO_CANCHA"],$array["BARRIO"],$array["DIRECCION"],$array["TARJETA"],$array["CLAVE_TARJETA"],$array["FECHA_VENCIMIENTO_TARJETA"],$array["PUNTAJE"],$array["PRECIO"]]);
+		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["TIPO_CANCHA"],$array["BARRIO"],$array["DIRECCION"],$array["PUNTAJE"],$array["PRECIO"]]);
 	}
 	
 	public function foto($array){ //FOTO
@@ -182,6 +149,13 @@ CREATE TABLE Cancha(
 	}
 	public function eliminar_cancha($id){ //BORRADO
 		$query = "UPDATE " . static::$tabla . " SET BORRADO='Si' WHERE ID_CANCHA=$id";
+		$stmt = DBcnx::getStatement($query);
+		return $stmt->execute();
+	}
+
+	public function editar_cancha($array){ //EDITAR
+		$query = "UPDATE " . static::$tabla . " SET NOMBRE_CANCHA='".$array['NOMBRE']."', BARRIO='".$array["BARRIO"]."', DIRECCION='".$array["DIRECCION"]."', TIPO_CANCHA='".$array["TIPO_CANCHA"]."', PRECIO='".$array["PRECIO"]."' WHERE ID_CANCHA=".$array["ID_CANCHA"]."";
+
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute();
 	}
@@ -214,9 +188,7 @@ CREATE TABLE Cancha(
 				$cancha->barrio = $fila['BARRIO'];
 				$cancha->direccion = $fila['DIRECCION'];
 				$cancha->borrado = $fila['BORRADO'];
-				$cancha->tarjeta = $fila['TARJETA'];
-				$cancha->clave_tarjeta = $fila['CLAVE_TARJETA'];
-				$cancha->fecha_vencimiento_tarjeta = $fila['FECHA_VENCIMIENTO_TARJETA'];
+
 				$cancha->puntaje = $fila['PUNTAJE'];
 				$cancha->precio = $fila['PRECIO'];
 				$cancha->cargarDatos($fila);
@@ -241,9 +213,7 @@ CREATE TABLE Cancha(
 				$cancha->barrio = $fila['BARRIO'];
 				$cancha->direccion = $fila['DIRECCION'];
 				$cancha->borrado = $fila['BORRADO'];
-				$cancha->tarjeta = $fila['TARJETA'];
-				$cancha->clave_tarjeta = $fila['CLAVE_TARJETA'];
-				$cancha->fecha_vencimiento_tarjeta = $fila['FECHA_VENCIMIENTO_TARJETA'];
+
 				$cancha->puntaje = $fila['PUNTAJE'];
 				$cancha->precio = $fila['PRECIO'];
 				$cancha->cargarDatos($fila);

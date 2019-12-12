@@ -11,8 +11,7 @@
 	require_once('../clases/Horario.php');
 	
 	if(isset($_SESSION["s_id"])){
-
-	$cancha = new Cancha();
+	    $cancha = new Cancha();
 	
 	/****** Creo cancha ******/
 	
@@ -76,13 +75,18 @@
 				
 				// cargo horarios de la cancha
 				$horario = new Horario();
-				
-				for($i=0;$i<sizeof($_POST["HORARIOS"]);$i++){
-					$array_horarios=[];
-					$array_horarios["FK_ID_CANCHA"]=$array["FK_ID_CANCHA"];
-					$array_horarios["HORARIO"]=$_POST["HORARIOS"][$i];
-					$fin=json_decode($horario->crear_horario($array_horarios),true);
-				}
+
+				$array_horario["FK_ID_CANCHA"] = $array["FK_ID_CANCHA"];
+
+                foreach($_POST["HORARIOS"] as $key => $valor) {
+
+                    $array_horario["DIA"]=$key+1;
+                    foreach($valor as $un_horario){
+                        $array_horario["HORA"]=$un_horario;
+                        $horario->crear_horario($array_horario);
+                    }
+                }
+
 			}
 			
 			
@@ -93,4 +97,4 @@ else{
 	echo "usuario no registrado";
 }
 	
-?>
+

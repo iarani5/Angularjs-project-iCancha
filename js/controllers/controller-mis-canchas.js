@@ -1,33 +1,50 @@
 /**************************************** CONTROLLER MIS CANCHAS ***************************************/
- iCancha.controller("misCanchasCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window', function  ($scope, $http, $location, Upload, $timeout, $window) { 
- 
-	//********************* LISTAR CANCHAS
+ iCancha.controller("misCanchasCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window', function  ($scope, $http, $location, Upload, $timeout, $window) {
+
+	 var lista_horarios_seleccionados;
+
+	 //********************* LISTAR CANCHAS
 	
 	$http({
 		method: 'POST',
 		url: "php/abm/listar.canchas.php",
 		headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
 	})
-	.then(function (response){//EXITO se establecio la conexion
-		/*	console.log(response.data);
-
+	.then(function (response){ //EXITO se establecio la conexion
 		if(response.data.length){
 			for(var i in response.data){
 				var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
 				response.data[i].FOTO=foto;
 			}
 			
-			$scope.mis_canchas=angular.fromJson(response.data);
+			$scope.mis_canchas=angular.fromJson(response.data).reverse();
 		}
 		else{
 			$scope.mensaje="Aún no tenes canchas cargadas";
-		}*/
-		
+		}
+
 	},function (error){ //ERROR no se pudo establecer la conexion
 
 	});
-	
-	//ELIMINAR CANCHA
+
+	 //************ LISTAR HORARIOS CANCHA
+	 $scope.listar_horarios=function (id) {
+
+		 $http({
+			 method: 'POST',
+			 url: "php/abm/listar.horarios.cancha.php",
+			 data: "FK_ID_CANCHA="+id,
+			 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		 })
+			 .then(function (response){//EXITO se establecio la conexion
+					modal_horarios(angular.fromJson(response.data));
+			 },function (error){ //ERROR no se pudo establecer la conexion
+
+			 });
+
+	 };
+
+	//************* ELIMINAR CANCHA
 	$scope.eliminar_cancha=function(id){
 		$http({
 			method: 'POST',
@@ -36,63 +53,145 @@
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 		.then(function (response){
-			if(response.data=="1"){
+			if(response.data==="1"){
 				alert("cancha eliminada con éxito");
 				$window.location.reload();
 			}
 		},function (error){ //ERROR no se pudo establecer la conexion
 
 		});
-	}
+	};
 	
 	$scope.titulo_formulario="Crear cancha";
-	//EDITAR CANCHA
+
+	//************************ EDITAR CANCHA
 	$scope.editar_cancha=function(cancha){
+
 		$scope.titulo_formulario="Editar cancha";
 		window.scrollTo(300, 0);
-		
+
 		//la guardo en variable global para acceder a su posicion con google maps
 		localStorage.setItem("esta_cancha",angular.toJson(cancha));
-		
-		//parsear fecha
-		var parts = cancha.FECHA_VENCIMIENTO_TARJETA.split('-');
-		var mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
 
-		//direccion
-		id("pac-input").value=cancha.DIRECCION;
-				
-		$scope.cancha={
-			NOMBRE: cancha.NOMBRE_CANCHA,
-			//FOTO: cancha.FOTO,
-			TIPO_CANCHA: cancha.TIPO_CANCHA,
-			//LONGITUD: cancha.LONGITUD,
-			//LATITUD: cancha.LATITUD,
-			//DIRECCION: cancha.DIRECCION,
-			TARJETA: parseInt(cancha.TARJETA, 10),
-			CLAVE: parseInt(cancha.CLAVE_TARJETA, 10),
-			FECHA_VENCIMIENTO_TARJETA: mydate,
-			PRECIO: parseInt(cancha.PRECIO, 10)
-		}
-		
-			
-		/*$http({
+		// LISTA HORARIOS
+
+		$http({
 			method: 'POST',
-			url: "php/abm/editar.cancha.php",
-			//data: "ID_CANCHA="+id,			 
+			url: "php/abm/listar.horarios.cancha.php",
+			data: "FK_ID_CANCHA="+cancha.ID_CANCHA,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
-		.then(function (response){
-			if(response.data=="1"){
-				alert("cancha eliminada con éxito");
-				$window.location.reload();
-			}
-		},function (error){ //ERROR no se pudo establecer la conexion
+			.then(function (response){ //EXITO se establecio la conexion
 
-		});*/
-	}
+				$scope.cancha_editar={
+					ID_CANCHA: cancha.ID_CANCHA,
+					NOMBRE: cancha.NOMBRE_CANCHA,
+					TIPO_CANCHA: cancha.TIPO_CANCHA,
+					BARRIO: cancha.BARRIO,
+					DIRECCION: cancha.DIRECCION,
+					PRECIO: parseInt(cancha.PRECIO, 10),
+				};
+
+				var lis = tn(tn(id("horarios_de_cancha"),"ul",0),"li");
+				for(var i=0; i < lis.length; i++){
+					for (const val in response.data) {
+						if(response.data[val]["DIA"]+""+response.data[val]["HORA"]==tn(lis[i],"input",0).id) tn(lis[i],"input",0).checked = true;
+					}
+				}
+
+			},function (error){ //ERROR no se pudo establecer la conexion
+
+			});
 
 
-	//*********************** HORARIOS
+	};
+
+	 $scope.editar_esta_cancha=function(cancha_editar){
+
+		 //validar inputs en el submit
+		 var datos_registro=tn(id('editar'),'input');
+
+		 var ban=0;
+
+		 for(var i=0;i<datos_registro.length;i++){
+
+			 datos_registro[i].style.borderBottom='none';
+			 var p=datos_registro[i].nextSibling;
+
+			 if(p.className==="mensaje-validacion"){
+				 rc(p.parentNode,p);
+			 }
+			 validar_form(datos_registro[i]);
+			 var p=datos_registro[i].nextSibling;
+			 if(p.className==="mensaje-validacion"){
+				 ban=1;
+			 }
+		 }
+
+		 if(!ban) {
+			 var lunes=[], martes=[],miercoles=[],jueves=[],viernes=[],sabado=[],domingo=[];
+
+			 var lis = tn(tn(id("horarios_de_cancha"),"ul",0),"li");
+
+			 for(var i=0; i < lis.length; i++){
+					 if(tn(lis[i],"input",0).checked === true){
+						 var hora =tn(lis[i],"input",0).id.substring(1, tn(lis[i],"input",0).id.length);
+						 switch (tn(lis[i],"input",0).id[0]) {
+							 case "1":
+								 lunes.push(hora);
+								 break;
+							 case "2":
+								 martes.push(hora);
+								 break;
+							 case "3":
+								 miercoles.push(hora);
+								 break;
+							 case "4":
+								 jueves.push(hora);
+								 break;
+							 case "5":
+								 viernes.push(hora);
+								 break;
+							 case "6":
+								 sabado.push(hora);
+								 break;
+							 case "7":
+								 domingo.push(hora);
+								 break;
+						 }
+					 }
+			 }
+
+			 var horas_dias = [lunes,martes,miercoles,jueves,viernes,sabado,domingo];
+
+			 //cancha
+
+			 //guardo los datos del usuario en formato especifico para pasarlo por el metodo POST a php
+			 var item = [];
+			 for(var i in cancha_editar){
+				 item.push( i+'='+cancha_editar[i] );
+			 }
+			 var datos_cancha = item.join('&');
+
+			 $http({
+				 method: 'POST',
+				 url: "php/abm/editar.cancha.php",
+				 data: datos_cancha,
+				 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			 })
+				 .then(function (response) {
+					 if (response.data == "1") {
+						 alert("cancha editada con éxito");
+						 $window.location.reload();
+					 }
+				 }, function (error) { //ERROR no se pudo establecer la conexion
+
+				 });
+		 }
+	 };
+
+
+	 //*********************** HORARIOS
 
 	 $(document).ready(function () {
 		 "use strict";
@@ -115,7 +214,6 @@
 		 }
 		 Plugin.prototype = {
 			 init: function () {
-				 console.log("options: ", this.options);
 				 var that = this;
 				 var self = $(that.element);
 				 that.options.src = that.element.getAttribute('data-src');
@@ -133,7 +231,7 @@
 				 overlay.className = 'overlay';
 				 var shadow = document.createElement('span');
 				 shadow.className = 'shadow';
-				 var placeholder = document.createTextNode('Options');
+				 var placeholder = document.createTextNode('Dias y horas');
 				 search.className = 'search';
 				 search.appendChild(shadow);
 				 search.appendChild(overlay);
@@ -146,9 +244,7 @@
 				 box.className = 'menu';
 				 box.appendChild(menu);
 				 popup.appendChild(box);
-				 console.log("optgroup", options.optgroups);
 				 options.optgroups.forEach(function(optgroup, index) {
-
 
 					 var menuItem = document.createElement('li');
 					 //menuItem.className('header');
@@ -177,16 +273,16 @@
 							 var $el = $(event.srcElement);
 							 if (checkbox.checked) {
 								 that.options.checkedItems.push(event.srcElement);
-								 placeholder.nodeValue = "Cantidad: " + that.options.checkedItems.length + " de " + $(that.selector).find('input[type="checkbox"]').length;
+								// placeholder.nodeValue = "Cantidad: " + that.options.checkedItems.length + " de " + $(that.selector).find('input[type="checkbox"]').length;
 
 							 } else {
 								 that.options.checkedItems.pop();
 								 that.options.checkedItems = that.options.checkedItems.filter(function(items, index){
 									 return items.value != $el.data().value;
 								 });
-								 placeholder.nodeValue = "Cantidad: " + that.options.checkedItems.length + " de " + $(that.selector).find('input[type="checkbox"]').length;
+								 //placeholder.nodeValue = "Cantidad: " + that.options.checkedItems.length + " de " + $(that.selector).find('input[type="checkbox"]').length;
 							 }
-							 console.log("data: ", that.options.checkedItems);
+							 lista_horarios_seleccionados=that.options.checkedItems;
 						 });
 						 checkbox.id = option.ID;
 						 var caption = document.createTextNode(option.HORA);
@@ -231,7 +327,6 @@
 			 });
 		 };
 	 });
-//Attach plugin to all matching element
 	 $(document).ready(function () {
 		 $('#select').selectionator({
 			 data: {
@@ -401,7 +496,6 @@
 		 }, 1250);
 	 });
 
-
 	 $scope.listado_horarios=[
 		 { ID: 1, HORA: "7:00am a 8:00am"},
 		 { ID: 2, HORA: "8:00am a 9:00am"},
@@ -423,23 +517,7 @@
 		 { ID: 18, HORA: "12:00am a 1:00am"},
 	 ];
 
-
 	 //*************************** CREAR CANCHA
-
-		/*var search =id("pac-input");
-		var map =id("map");
-
-		if(map!=null&&search!=null){
-			var map_aux=map;
-			var search_aux=search;
-			//map.style.visibility="hidden";
-			//search.style.visibility="hidden";
-			//rc(map.parentNode,map);
-			//rc(id("pac-input").parentNode,id("pac-input"));
-		
-			ac(id("direccion"),search_aux);
-			ac(id("direccion"),map_aux);
-		}*/
 
 	 $scope.barrios=[
 		 { TITULO: "Agronomía" },
@@ -537,59 +615,103 @@
 	
 	/******** CREAR CANCHA Y HORARIO ********/
 	$scope.crear_cancha=function(cancha){
-				console.log(cancha);
-		//location
-		var posicion=angular.fromJson(localStorage.getItem("posicion_cancha"));
-		var direccion=localStorage.getItem("direccion_cancha");
-			
-		//horario
 
-		
-		//cancha
-		if(posicion!=null&&posicion!=undefined&&direccion!=undefined&&direccion!=null&&
-			cancha.TIPO_CANCHA!=undefined&&
-			cancha.NOMBRE!=undefined&&
-			cancha.TARJETA!=undefined&&
-			cancha.CLAVE!=undefined&&
-			cancha.PRECIO!=undefined&&
-			cancha.FOTO!=undefined&&
-			cancha.FECHA_VENCIMIENTO_TARJETA!=undefined&&
-			horarios.length>0
-		){
-			
-			var datos_cancha={
-				NOMBRE_CANCHA: cancha.NOMBRE,
-				FOTO: cancha.FOTO,
-				TIPO_CANCHA: cancha.TIPO_CANCHA,
-				LONGITUD: posicion.LONGITUD,
-				LATITUD: posicion.LATITUD,
-				DIRECCION: direccion,
-				TARJETA: cancha.TARJETA,
-				CLAVE_TARJETA: cancha.CLAVE,
-				FECHA_VENCIMIENTO_TARJETA: cancha.FECHA_VENCIMIENTO_TARJETA,
-				PRECIO: cancha.PRECIO,
-				PUNTAJE: "0",
-				HORARIOS: horarios
-			};
-			
-			if(cancha.FOTO!=undefined){
-				cancha.FOTO.upload = Upload.upload({
-					method: 'POST',
-					url:"php/abm/crear.cancha.php",
-					data: datos_cancha,
-				})
-				.then(function(response){
-					console.log(response);
-				}
-				,function(response){
-					//modal error
-					console.log(response);
-					
-				});
-			}				
+		//validar inputs en el submit
+		var datos_registro=tn(id('crear'),'input');
+
+		var ban=0;
+		for(var i=0;i<datos_registro.length;i++){
+
+			datos_registro[i].style.borderBottom='none';
+			var p=datos_registro[i].nextSibling;
+
+			if(p.className==="mensaje-validacion"){
+				rc(p.parentNode,p);
+			}
+			validar_form(datos_registro[i]);
+			var p=datos_registro[i].nextSibling;
+			if(p.className==="mensaje-validacion"){
+				ban=1;
+			}
 		}
-		else{
-			alert("Formulario incompleto, todos los datos son requeridos");
-		} 
+
+		if(!ban) {
+
+			var lunes=[], martes=[],miercoles=[],jueves=[],viernes=[],sabado=[],domingo=[];
+
+			if(lista_horarios_seleccionados===undefined){
+				alert("Completa el horario de disponiblidad de la cancha");
+			}
+			else {
+				for (var i = 0; i < lista_horarios_seleccionados.length; i++) {
+
+					var hora = lista_horarios_seleccionados[i].id.substring(1, lista_horarios_seleccionados[i].id.length);
+					switch (lista_horarios_seleccionados[i].id[0]) {
+						case "1":
+							lunes.push(hora);
+							break;
+						case "2":
+							martes.push(hora);
+							break;
+						case "3":
+							miercoles.push(hora);
+							break;
+						case "4":
+							jueves.push(hora);
+							break;
+						case "5":
+							viernes.push(hora);
+							break;
+						case "6":
+							sabado.push(hora);
+							break;
+						case "7":
+							domingo.push(hora);
+							break;
+					}
+				}
+
+				var horas_dias = [lunes, martes, miercoles, jueves, viernes, sabado, domingo];
+
+				//cancha
+				var datos_cancha = {
+					NOMBRE_CANCHA: cancha.NOMBRE,
+					FOTO: cancha.FOTO,
+					TIPO_CANCHA: cancha.TIPO_CANCHA,
+					DIRECCION: cancha.DIRECCION,
+					BARRIO: cancha.BARRIO,
+					PRECIO: cancha.PRECIO,
+					PUNTAJE: "0",
+					HORARIOS: horas_dias
+				};
+
+				console.log(datos_cancha);
+				var url;
+
+				if ($scope.titulo_formulario === "Editar cancha") {
+					url = "php/abm/editar.cancha.php";
+				} else {
+					url = "php/abm/crear.cancha.php";
+				}
+				console.log(url);
+				if (cancha.FOTO !== undefined) {
+					cancha.FOTO.upload = Upload.upload({
+						method: 'POST',
+						url: url,
+						data: datos_cancha,
+					})
+						.then(function (response) {
+								if (response.data === "1") {
+									modal_msj("Cancha creada con éxito!");
+									window.location.reload();
+								}
+							}
+							, function (response) {
+								//modal error
+							});
+				}
+			}
+		}
 	}
+
 }]);
