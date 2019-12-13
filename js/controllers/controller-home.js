@@ -5,7 +5,6 @@ iCancha.controller("homeCtrl", function ($location,$http,$scope) {
 
     if(localStorage.getItem("dts_user")!==null){ //si ya existen sus datos almacenados en la web. esta logueado.
         $scope.no_user = false;
-
     }
     else{
         //no hay usuario logueado
@@ -13,19 +12,134 @@ iCancha.controller("homeCtrl", function ($location,$http,$scope) {
 
     $scope.buscar_cancha=function(cancha){
 
+        for (let i in  $scope.listado_horarios) {
+            if($scope.listado_horarios[i].HORA===cancha.HORA){
+                cancha.HORARIO=$scope.listado_horarios[i].ID;
+            }
+        }
+        for (let i in  $scope.dias) {
+            if($scope.dias[i].NOMBRE===cancha.NOMBRE){
+                cancha.DIA = $scope.dias[i].ID;
+        }
+        }
+
+        var item = [];
+        for (const [key, value] of Object.entries(cancha)) {
+            item.push( key+'='+value );
+        }
+        var union = item.join('&');	//me une el array con un &
+
+        console.log(union);
+        /****** LISTAR CANCHAS *****/
+
+        $scope.mostrar=false;
+
+        $http({
+            method: 'POST',
+            url: "php/abm/buscar.canchas.php",
+            data: union,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+            .then(function (response){ //EXITO se establecio la conexion
+                console.log(response);
+
+              /*  for(var i in response.data){
+                    var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
+                    response.data[i].FOTO=foto;
+
+                }
+
+                /*              if(response.data.length){
+                                  $scope.cantidad_futbol=0;
+                                  $scope.cantidad_basket=0;
+                                  $scope.cantidad_hockey=0;
+                                  $scope.cantidad_tenis=0;
+                                  $scope.cantidad_rugby=0;
+
+                                  for(var i in response.data){
+                                      var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
+                                      response.data[i].FOTO=foto;
+                                      if(response.data[i].BORRADO==="No"){
+
+                                          switch(response.data[i].TIPO_CANCHA){
+                                              case "Futbol":
+                                                  $scope.cantidad_futbol++;
+                                                  break;
+                                              case "Basket":
+                                                  $scope.cantidad_basket++;
+                                                  break;
+                                              case "Hockey":
+                                                  $scope.cantidad_hockey++;
+                                                  break;
+                                              case "Tenis":
+                                                  $scope.cantidad_tenis++;
+                                                  break;
+                                              case "Rugby":
+                                                  $scope.cantidad_rugby++;
+                                                  break;
+                                          }
+                                      }
+                                  }
+
+                                  $scope.listar_canchas=function(cancha){
+                                      $scope.mostrar=true;
+                                      $scope.titulo = cancha;
+                                      var canchas=[];
+                                      for(var i in response.data){
+                                          if(response.data[i].TIPO_CANCHA==cancha){
+                                              canchas.push(response.data[i]);
+                                          }
+                                      }
+                                      $scope.canchas = canchas;
+                                  }
+
+                                  $scope.mostrar_horarios=function(id){
+                                      $http({
+                                          method: 'POST',
+                                          url: "php/abm/listar.horarios.php",
+                                          data: "FK_ID_CANCHA="+id,
+                                          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                      })
+                                          .then(function (response){ //EXITO se establecio la conexion
+                                              modal_horarios(response.data);
+
+                                          },function (error){ //ERROR no se pudo establecer la conexion
+
+                                          });
+                                  }
+                              }*/
+
+            },function (error){ //ERROR no se pudo establecer la conexion
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
     };
 
     $scope.dias=[
-        {   ID: 1, DIA: "Lunes"},
-        {   ID: 2, DIA: "Martes"},
-        {   ID: 3, DIA: "Miercoles" },
-        {   ID: 4, DIA: "Jueves"},
-        {   ID: 5, DIA: "Viernes"},
-        {   ID: 6, DIA: "Sabado"},
-        {   ID: 7,DIA: "Domingo"}
+        {   ID: 0, NOMBRE: "Todos"},
+        {   ID: 1, NOMBRE: "Lunes"},
+        {   ID: 2, NOMBRE: "Martes"},
+        {   ID: 3, NOMBRE: "Miercoles" },
+        {   ID: 4, NOMBRE: "Jueves"},
+        {   ID: 5, NOMBRE: "Viernes"},
+        {   ID: 6, NOMBRE: "Sabado"},
+        {   ID: 7,NOMBRE: "Domingo"}
     ];
 
     $scope.listado_horarios=[
+        {   ID: 0, HORA: "Todos"},
         { ID: 1, HORA: "7:00am a 8:00am"},
         { ID: 2, HORA: "8:00am a 9:00am"},
         { ID: 3, HORA: "9:00am a 10:00am"},

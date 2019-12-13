@@ -129,48 +129,73 @@
 		 }
 
 		 if(!ban) {
-			 var lunes=[], martes=[],miercoles=[],jueves=[],viernes=[],sabado=[],domingo=[];
+			 var lunes = [], martes = [], miercoles = [], jueves = [], viernes = [], sabado = [], domingo = [];
 
-			 var lis = tn(tn(id("horarios_de_cancha"),"ul",0),"li");
+			 var lis = tn(tn(id("horarios_de_cancha"), "ul", 0), "li");
 
-			 for(var i=0; i < lis.length; i++){
-					 if(tn(lis[i],"input",0).checked === true){
-						 var hora =tn(lis[i],"input",0).id.substring(1, tn(lis[i],"input",0).id.length);
-						 switch (tn(lis[i],"input",0).id[0]) {
-							 case "1":
-								 lunes.push(hora);
-								 break;
-							 case "2":
-								 martes.push(hora);
-								 break;
-							 case "3":
-								 miercoles.push(hora);
-								 break;
-							 case "4":
-								 jueves.push(hora);
-								 break;
-							 case "5":
-								 viernes.push(hora);
-								 break;
-							 case "6":
-								 sabado.push(hora);
-								 break;
-							 case "7":
-								 domingo.push(hora);
-								 break;
-						 }
+			 for (var i = 0; i < lis.length; i++) {
+				 if (tn(lis[i], "input", 0).checked === true) {
+					 var hora = tn(lis[i], "input", 0).id.substring(1, tn(lis[i], "input", 0).id.length);
+					 switch (tn(lis[i], "input", 0).id[0]) {
+						 case "1":
+							 lunes.push(hora);
+							 break;
+						 case "2":
+							 martes.push(hora);
+							 break;
+						 case "3":
+							 miercoles.push(hora);
+							 break;
+						 case "4":
+							 jueves.push(hora);
+							 break;
+						 case "5":
+							 viernes.push(hora);
+							 break;
+						 case "6":
+							 sabado.push(hora);
+							 break;
+						 case "7":
+							 domingo.push(hora);
+							 break;
 					 }
+				 }
 			 }
 
-			 var horas_dias = [lunes,martes,miercoles,jueves,viernes,sabado,domingo];
+		/*	 var item1 = [];
+			 for (var i in lunes) {
+				 item1.push(i + '=' + lunes[i]);
+			 }
+			 var item2 = [];
+			 for (var i in martes) {
+				 item2.push(i + '=' + martes[i]);
+			 }
+			 var item3 = [];
+			 for (var i in miercoles) {
+				 item3.push(i + '=' + miercoles[i]);
+			 }
+*/
+
+			// var horas_dias = [lunes, martes, miercoles, jueves, viernes, sabado, domingo];
+
 
 			 //cancha
 
 			 //guardo los datos del usuario en formato especifico para pasarlo por el metodo POST a php
 			 var item = [];
-			 for(var i in cancha_editar){
-				 item.push( i+'='+cancha_editar[i] );
+			 for (var i in cancha_editar) {
+				 item.push(i + '=' + cancha_editar[i]);
 			 }
+
+			 var horas_dias=[];
+			 item.push("1" + '=' + lunes);
+			 item.push("2" + '=' + martes);
+			 item.push("3" + '=' + miercoles);
+			 item.push("4" + '=' + jueves);
+			 item.push("5" + '=' + viernes);
+			 item.push("6" + '=' + sabado);
+			 item.push("7" + '=' + domingo);
+
 			 var datos_cancha = item.join('&');
 
 			 $http({

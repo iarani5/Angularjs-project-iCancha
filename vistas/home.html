@@ -41,18 +41,18 @@
 						</div>
 						<div class="single-welcome-hero-form">
 							<h3>Día</h3>
-							<select class='selectpicker' name='grupo' ng-model='cancha.DIA' ng-init="cancha.DIA='Lunes'" style="padding-left: 2em;">
-								<option ng-repeat="dia in dias track by $index "  value='{{ dia.DIA }}'>{{ dia.DIA }}</option>
+							<select class='selectpicker' name='grupo' ng-model='cancha.NOMBRE' ng-init="cancha.NOMBRE='Todos'" style="padding-left: 2em;">
+								<option ng-repeat="dia in dias track by $index "  value='{{ dia.NOMBRE }}'>{{ dia.NOMBRE }}</option>
 							</select>
 							<h3>Horario</h3>
-							<select class='selectpicker' name='grupo' ng-model='cancha.HORARIO' ng-init="cancha.HORARIO='2:00pm a 3:00pm'" style="padding-left: 2em;">
-								<option ng-repeat="un_horario in listado_horarios track by $index "  value='{{ un_horario.hora }}'>{{ un_horario.hora }}</option>
+							<select class='selectpicker' name='grupo' ng-model='cancha.HORA' ng-init="cancha.HORA='Todos'" style="padding-left: 2em;">
+								<option ng-repeat="un_horario in listado_horarios track by $index "  value='{{ un_horario.HORA }}'>{{ un_horario.HORA }}</option>
 							</select>
 						</div>
 					</div>
 					<div class="welcome-hero-serch">
 						<button class="welcome-hero-btn" ng-click="buscar_cancha(cancha)">
-							search  <i data-feather="search"></i>
+							Buscar  <i data-feather="search"></i>
 						</button>
 					</div>
 				</div>

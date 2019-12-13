@@ -222,4 +222,32 @@ CREATE TABLE Cancha(
 		}
 		return $salida;
 	}
+
+	//FILTRAR POR TIPO , BARRIO, HORARIO Y DIA
+    public static function buscar_cancha($array){
+        $salida = [];
+        $query = "SELECT * FROM " . static::$tabla ." WHERE TIPO_CANCHA = ? AND BARRIO = ? AND BORRADO='No'";
+        $stmt = DBcnx::getStatement($query);
+        if($stmt->execute([$array["TIPO_CANCHA"],$array["BARRIO"]])) {
+            while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $cancha = new Cancha;
+                $cancha->id_cancha = $fila['ID_CANCHA'];
+                $cancha->nombre_cancha = $fila['NOMBRE_CANCHA'];
+                $cancha->foto = $fila['FOTO'];
+                $cancha->tipo_cancha = $fila['TIPO_CANCHA'];
+                $cancha->barrio = $fila['BARRIO'];
+                $cancha->direccion = $fila['DIRECCION'];
+                $cancha->borrado = $fila['BORRADO'];
+
+                $cancha->puntaje = $fila['PUNTAJE'];
+                $cancha->precio = $fila['PRECIO'];
+                $cancha->cargarDatos($fila);
+                $salida[] = $cancha;
+            }
+        }
+        return $salida;
+    }
+
+
+
 }

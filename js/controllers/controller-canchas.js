@@ -71,16 +71,6 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 				},function (error){ //ERROR no se pudo establecer la conexion
 
 				});
-	
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				
 				modal_horarios("horarios","reservar");
 			}
