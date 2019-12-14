@@ -2,6 +2,29 @@
 
 iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window','$routeParams', function  ($scope, $http, $location, Upload, $timeout, $window, $routeParams) {
 
+    //********************* LISTAR COMENTARIOS
+    $scope.cuenta_puntaje=0;
+
+    $http({
+        method: 'POST',
+        url: "php/abm/listar.puntuacion.cancha.php",
+        data: "FK_ID_CANCHA="+$routeParams["id"],
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+        .then(function (response){
+            if(response.data.length){
+                $scope.calificaciones = response.data.reverse();
+                var sum=0;
+                for( let i in $scope.calificaciones){
+                    sum+=parseInt($scope.calificaciones[i].PUNTUACION, 10);
+                }
+                $scope.cuenta_puntaje = sum/$scope.calificaciones.length +" de 5";
+            }
+        },function (error){
+
+        });
+
+
     $scope.nivel="otro";
     if(localStorage.getItem("dts_user")!==undefined&&localStorage.getItem("dts_user")!==null){
         var usuario=angular.fromJson(localStorage.getItem("dts_user"));
@@ -372,21 +395,5 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
             modal_msj("Completar con puntaje y comentario");
         }
     }
-
-    //********************* LISTAR COMENTARIOS
-
-   $http({
-        method: 'POST',
-        url: "php/abm/listar.puntuacion.cancha.php",
-        data: "FK_ID_CANCHA="+$routeParams["id"],
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    })
-        .then(function (response){
-            if(response.data.length){
-                $scope.calificaciones = response.data.reverse();
-            }
-        },function (error){
-
-        });
 
 }]);

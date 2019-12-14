@@ -7,11 +7,11 @@
             </div><!--/.section-header-->
             <div class="col-md-8 col-sm-12 ng-scope" style="width: 50vw;">
                 <img ng-src="{{una_cancha.FOTO}}" alt="explore image"  style="max-height: 400px;">
-                <div class="single-explore-txt bg-theme-1">
+                <div class="single-explore-txt bg-theme-1" style="padding: 0;">
                     <p class="explore-rating-price">
                         <span class="explore-price-box" style="font-size: 16px"><b>Barrio: </b>{{ una_cancha.BARRIO }}</span>
                         <span class="explore-price-box" style="font-size: 16px"><b>Dirección: </b>{{ una_cancha.DIRECCION }}</span>
-                        <span class="explore-price-box" style="font-size: 16px"><b>Puntaje: </b>{{ una_cancha.PUNTAJE }}</span>
+                        <span class="explore-price-box" style="font-size: 16px"><b>Puntaje: </b>{{ cuenta_puntaje }}</span>
                         <span class="explore-price-box" style="font-size: 16px"><b>Precio: </b> ${{ una_cancha.PRECIO }}</span>
 
                     </p>
@@ -87,8 +87,8 @@
             <h2>Reseñas</h2>
         </div>
 
-        <div class="testimonial-carousel">
-            <div class="single-testimonial-box" style="margin: 4em;" ng-repeat="una_calificacion in calificaciones">
+        <div class="testimonial-carousel" style="margin: 4em auto;">
+            <div class="single-testimonial-box" style="margin-left: 4em; display: inline-block;" ng-repeat="una_calificacion in calificaciones">
                 <div class="testimonial-description">
                     <div class="testimonial-info">
                         <div class="testimonial-person">
