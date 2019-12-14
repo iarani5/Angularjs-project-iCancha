@@ -2,6 +2,68 @@
 
 iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window','$routeParams', function  ($scope, $http, $location, Upload, $timeout, $window, $routeParams) {
 
+    $scope.nivel="otro";
+    if(localStorage.getItem("dts_user")!==undefined&&localStorage.getItem("dts_user")!==null){
+        var usuario=angular.fromJson(localStorage.getItem("dts_user"));
+        $scope.nivel=usuario.TIPO_USUARIO;
+    }
+
+    $scope.puntaje;
+
+    $(document).ready(function(){
+
+        /* 1. Visualizing things on Hover - See next part for action on click */
+        $('#stars li').on('mouseover', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+            // Now highlight all the stars that's not after the current hovered star
+            $(this).parent().children('li.star').each(function(e){
+                if (e < onStar) {
+                    $(this).addClass('hover');
+                }
+                else {
+                    $(this).removeClass('hover');
+                }
+            });
+
+        }).on('mouseout', function(){
+            $(this).parent().children('li.star').each(function(e){
+                $(this).removeClass('hover');
+            });
+        });
+
+
+        /* 2. Action to perform on click */
+        $('#stars li').on('click', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+            var stars = $(this).parent().children('li.star');
+
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+
+            for (i = 0; i < onStar; i++) {
+                $(stars[i]).addClass('selected');
+            }
+
+            // JUST RESPONSE (Not needed)
+            var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+            var msg = "";
+            if (ratingValue > 0) {
+                $scope.puntaje=ratingValue;
+                msg = "Gracias por tu calificación de  " + ratingValue + " estrellas.";
+            }
+            responseMessage(msg);
+
+        });
+
+
+    });
+
+    function responseMessage(msg) {
+        $('.success-box').fadeIn(200);
+        $('.success-box div.text-message').html("<span>" + msg + "</span>");
+    }
 
     //********************* LISTAR CANCHAS
 
@@ -265,7 +327,6 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
                 } else {
                     url = "php/abm/crear.cancha.php";
                 }
-                console.log(url);
                 if (cancha.FOTO !== undefined) {
                     cancha.FOTO.upload = Upload.upload({
                         method: 'POST',
@@ -285,5 +346,96 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
             }
         }
     }
+
+
+    /******** CREAR PUNTAJE Y COMENTARIO ********/
+    $scope.calificar_cancha=function(calificacion){
+        if($scope.puntaje!==undefined&&calificacion!==undefined){
+            $http({
+                method: 'POST',
+                url: "php/abm/calificar.cancha.php",
+                data: "FK_ID_CANCHA="+$routeParams["id"]+"&COMENTARIO="+calificacion.COMENTARIO+"&PUNTUACION="+$scope.puntaje,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+                .then(function (response){//EXITO se establecio la conexion
+                    if(response.data.search("1")!==-1) {
+                        modal_msj("Calificación realizada con éxito");
+                    }
+                    else{
+                        modal_msj("Ups! ocurrio un error, vuelva a intentarlo más tarde");
+                    }
+                },function (error){ //ERROR no se pudo establecer la conexion
+
+                });
+        }
+        else{
+            modal_msj("Completar con puntaje y comentario");
+        }
+    }
+
+    //********************* LISTAR COMENTARIOS
+
+   /* $http({
+        method: 'POST',
+        url: "php/abm/una.cancha.php",
+        data: "ID_CANCHA="+$routeParams["id"],
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+        .then(function (response){ //EXITO se establecio la conexion
+            if(response.data.length){
+                for(var i in response.data){
+                    var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
+                    response.data[i].FOTO=foto;
+                }
+
+                $scope.una_cancha=response.data[0];
+
+                $http({
+                    method: 'POST',
+                    url: "php/abm/listar.horarios.cancha.php",
+                    data: "FK_ID_CANCHA="+response.data[0]["ID_CANCHA"],
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                    .then(function (response){//EXITO se establecio la conexion
+                        $scope.horarios = response.data;
+
+                        $scope.reservar_cancha=function(){
+
+                            var lis= tn(id("lista_con_horarios"),"li");
+                            for(var i = 0; i < lis.length;i++){
+                                if(tn(lis[i],"input",0).checked){
+                                    $http({
+                                        method: 'POST',
+                                        url: "php/abm/reservar.cancha.php",
+                                        data: "FK_ID_HORARIO="+tn(lis[i],"input",0).id+"&FK_ID_CANCHA="+$scope.una_cancha.ID_CANCHA,
+                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                    })
+                                        .then(function (response){
+                                            if(response.data.search("1")!==-1){
+                                                alert("Reserva realizada con éxito!");
+                                                $window.location.reload();
+                                            }
+                                            else{
+                                                alert("Ups! Hubo un error vuelva a intentarlo más tarde.");
+                                            }
+
+                                        },function (error){
+
+                                        });
+
+                                }
+                            }
+                        }
+
+                    },function (error){ //ERROR no se pudo establecer la conexion
+
+                    });
+
+
+            }
+
+        },function (error){ //ERROR no se pudo establecer la conexion
+
+        });*/
 
 }]);

@@ -23,7 +23,7 @@
 
                 <tbody>
                 <tr ng-repeat="una_reserva in reservas track by $index">
-                    <td id="{{ una_reserva.ID }}"><b>{{ una_reserva.ID_RESERVA }}</b></td>
+                    <td id="{{ una_reserva.ID }}"><b>N° {{ una_reserva.ID_RESERVA }}</b></td>
                     <td>{{ una_reserva.UNA_CANCHA.TIPO_CANCHA }}</td>
                     <td>{{ una_reserva.UNA_CANCHA.NOMBRE_CANCHA }}</td>
                     <td>{{ una_reserva.UNA_CANCHA.BARRIO }}</td>
@@ -31,7 +31,8 @@
                     <td>{{ una_reserva.UNA_CANCHA.PRECIO }}</td>
                     <td>{{ una_reserva.UNA_CANCHA.PUNTAJE }}</td>
                     <td>{{ una_reserva.UN_HORARIO.DIA_VALOR }} {{ una_reserva.UN_HORARIO.HORA_VALOR }}</td>
-                    <td scope="row"><button type="button" ng-click="cancelar_reserva(una_reserva)" class="btn btn-danger">Cancelar</button></td>
+                    <td ng-show="una_reserva.CANCELADO=='No'" ><button type="button" ng-click="cancelar_reserva(una_reserva)" class="btn btn-danger">Cancelar</button></td>
+                    <td ng-show="una_reserva.CANCELADO=='Si'" style="color: #ff545a;">Cancelado</td>
                 </tr>
                 </tbody>
             </table>
