@@ -375,67 +375,18 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
 
     //********************* LISTAR COMENTARIOS
 
-   /* $http({
+   $http({
         method: 'POST',
-        url: "php/abm/una.cancha.php",
-        data: "ID_CANCHA="+$routeParams["id"],
+        url: "php/abm/listar.puntuacion.cancha.php",
+        data: "FK_ID_CANCHA="+$routeParams["id"],
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
-        .then(function (response){ //EXITO se establecio la conexion
+        .then(function (response){
             if(response.data.length){
-                for(var i in response.data){
-                    var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
-                    response.data[i].FOTO=foto;
-                }
-
-                $scope.una_cancha=response.data[0];
-
-                $http({
-                    method: 'POST',
-                    url: "php/abm/listar.horarios.cancha.php",
-                    data: "FK_ID_CANCHA="+response.data[0]["ID_CANCHA"],
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                })
-                    .then(function (response){//EXITO se establecio la conexion
-                        $scope.horarios = response.data;
-
-                        $scope.reservar_cancha=function(){
-
-                            var lis= tn(id("lista_con_horarios"),"li");
-                            for(var i = 0; i < lis.length;i++){
-                                if(tn(lis[i],"input",0).checked){
-                                    $http({
-                                        method: 'POST',
-                                        url: "php/abm/reservar.cancha.php",
-                                        data: "FK_ID_HORARIO="+tn(lis[i],"input",0).id+"&FK_ID_CANCHA="+$scope.una_cancha.ID_CANCHA,
-                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                                    })
-                                        .then(function (response){
-                                            if(response.data.search("1")!==-1){
-                                                alert("Reserva realizada con éxito!");
-                                                $window.location.reload();
-                                            }
-                                            else{
-                                                alert("Ups! Hubo un error vuelva a intentarlo más tarde.");
-                                            }
-
-                                        },function (error){
-
-                                        });
-
-                                }
-                            }
-                        }
-
-                    },function (error){ //ERROR no se pudo establecer la conexion
-
-                    });
-
-
+                $scope.calificaciones = response.data.reverse();
             }
+        },function (error){
 
-        },function (error){ //ERROR no se pudo establecer la conexion
-
-        });*/
+        });
 
 }]);
