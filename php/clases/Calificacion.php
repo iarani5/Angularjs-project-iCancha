@@ -125,6 +125,16 @@ class Calificacion{
         return $stmt->execute([$array["FK_ID_CANCHA"], $array["FK_ID_USUARIO"], $array["PUNTUACION"], $array["COMENTARIO"]]);
     }
 
+    public static function checkear_no_puntuada($id, $id2){
+        $salida = [];
+        $query = "SELECT * FROM calificacion WHERE FK_ID_CANCHA = $id AND FK_ID_USUARIO=$id2";
+        $stmt = DBcnx::getStatement($query);
+        if ($stmt->execute([$id,$id2])) {
+            return $stmt->fetch(PDO::FETCH_ASSOC)["ID_CALIFICACION"];
+        }
+        return 0;
+    }
+
     public static function traer_calificacion_cancha($id){
         $salida = [];
         $query = "SELECT * FROM calificacion WHERE FK_ID_CANCHA = $id";

@@ -12,14 +12,13 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
         .then(function (response){
-            if(response.data.length){
                 $scope.calificaciones = response.data.reverse();
                 var sum=0;
                 for( let i in $scope.calificaciones){
                     sum+=parseInt($scope.calificaciones[i].PUNTUACION, 10);
                 }
-                $scope.cuenta_puntaje = sum/$scope.calificaciones.length +" de 5";
-            }
+                if($scope.calificaciones.length) $scope.cuenta_puntaje = (sum/$scope.calificaciones.length).toFixed(2) +" de 5";
+
         },function (error){
 
         });
@@ -104,6 +103,8 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
                 }
 
                 $scope.una_cancha=response.data[0];
+
+                //********************* LISTAR HORARIOS
 
                 $http({
                     method: 'POST',
@@ -383,6 +384,10 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
                 .then(function (response){//EXITO se establecio la conexion
                     if(response.data.search("1")!==-1) {
                         modal_msj("Calificación realizada con éxito");
+                        $window.location.reload();
+                    }
+                    else if(response.data.search("0")!==-1){
+                        modal_msj("Ya calificaste esta cancha.");
                     }
                     else{
                         modal_msj("Ups! ocurrio un error, vuelva a intentarlo más tarde");

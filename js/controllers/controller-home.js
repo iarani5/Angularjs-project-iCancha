@@ -40,7 +40,6 @@ iCancha.controller("homeCtrl", function ($location,$http,$scope,$window) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
             .then(function (response){ //EXITO se establecio la conexion
-                console.log(response);
                 for(var i in response.data) {
                     response.data[i].FOTO = response.data[i].FOTO.substring(24, response.data[i].FOTO.length);
                 }

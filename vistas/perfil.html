@@ -2,7 +2,7 @@
 
  	<style> @import url("css/perfil.css"); </style> 
 
-		<section id="works" class="works">
+		<section ng-show="!es_admin" id="works" class="works">
 			<div class="container">
 				<div class="section-header">
 				<h2> {{ nombre }}  {{ apellido }}</h2>
@@ -41,3 +41,160 @@
 			</div>
 		
 </section>
+
+
+<!-- PANEL ADMINISTRACION -->
+
+<section class="works" ng-show="es_admin">
+	<div class="section-header">
+		<h2 style="padding-top:2em;"> {{ nombre }}  {{ apellido }}</h2>
+		<h1 style="padding-bottom:2em;">Panel de administración</h1>
+	</div>
+
+	<!-- statistics strat -->
+	<section style="padding: 3em;" class="statistics">
+		<div class="container">
+			<div class="statistics-counter">
+				<div class="col-md-3 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter"> {{ client }} </div>
+						</div><!--/.statistics-content-->
+						<h3>Clientes</h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+				<div class="col-md-3 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter">{{ prop }} </div>
+						</div><!--/.statistics-content-->
+						<h3>Propietarios</h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+				<div class="col-md-3 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter">{{ admin }}</div>
+						</div><!--/.statistics-content-->
+						<h3>Admins </h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+				<div class="col-md-3 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter">{{usuario_stats.length}}</div>
+						</div><!--/.statistics-content-->
+						<h3>Usuarios total</h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+			</div><!--/.statistics-counter-->
+		</div><!--/.container-->
+
+	</section><!--/.counter-->
+	<!-- statistics end -->
+	<!-- statistics strat -->
+	<section style="padding: 3em;"  class="statistics">
+		<div class="container">
+			<div class="statistics-counter">
+				<div class="col-md-2 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter">{{cantidad_futbol}} </div>
+						</div><!--/.statistics-content-->
+						<h3>Futbol</h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+				<div class="col-md-2 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter">{{cantidad_basket}} </div>
+						</div><!--/.statistics-content-->
+						<h3>Basket</h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+				<div class="col-md-2 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter">{{cantidad_hockey}}</div>
+						</div><!--/.statistics-content-->
+						<h3>Hockey</h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+				<div class="col-md-2 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter">{{cantidad_tenis}}</div>
+						</div><!--/.statistics-content-->
+						<h3>Tenis</h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+				<div class="col-md-2 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter">{{cantidad_rugby}}</div>
+						</div><!--/.statistics-content-->
+						<h3>Rugby</h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+				<div class="col-md-2 col-sm-6">
+					<div class="single-ststistics-box">
+						<div class="statistics-content">
+							<div class="counter">{{cancha_stats.length}}</div>
+						</div><!--/.statistics-content-->
+						<h3>Canchas Total</h3>
+					</div><!--/.single-ststistics-box-->
+				</div><!--/.col-->
+			</div><!--/.statistics-counter-->
+		</div><!--/.container-->
+
+	</section><!--/.counter-->
+	<!-- statistics end -->
+
+
+
+	<div class="container">
+
+		<div class="works-content">
+
+			<!--subscription strat -->
+			<section id="contact"   class="subscription">
+				<div class="container" class="col-md-4 col-sm-4">
+					<div class="subscribe-title text-center">
+						<h2>
+							do you want to add your business listing with us?
+						</h2>
+						<p>
+							Listrace offer you to list your business with us and we very much able to promote your Business.
+						</p>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="subscription-input-group">
+								<form action="#">
+									<input type="email" class="subscription-input-form" placeholder="Enter your email here">
+									<button class="appsLand-btn subscribe-btn" onclick="window.location.href='#'">
+										creat account
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</section><!--/subscription-->
+			<!--subscription end -->
+
+			<button style="margin: 2em 10em;font-size: 16px; " ng-click="eliminar_cuenta();">Eliminar cuenta</button>
+
+			<button style="margin: 2em 10em;"> <a href="#!/registro/editar" style="font-size: 16px; font-weight: unset;"> Editar mis perfil </a></button>
+
+
+		</div>
+	</div>
+
+
+
+</section>
+
+
+

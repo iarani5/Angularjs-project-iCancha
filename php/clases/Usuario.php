@@ -200,7 +200,6 @@ class Usuario{
                 $usuario->apellido = $fila['APELLIDO'];
                 $usuario->clave = $fila['CLAVE'];
                 $usuario->tipo_usuario = $fila['TIPO_USUARIO'];
-                $usuario->foto_perfil = $fila['FOTO_PERFIL'];
                 $usuario->borrado = $fila['BORRADO'];
                 $usuario->banneado = $fila['BANNEADO'];
                 $usuario->cargarDatos($fila);

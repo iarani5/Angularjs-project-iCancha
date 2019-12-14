@@ -13,19 +13,20 @@
                         <span class="explore-price-box" style="font-size: 16px"><b>Dirección: </b>{{ una_cancha.DIRECCION }}</span>
                         <span class="explore-price-box" style="font-size: 16px"><b>Puntaje: </b>{{ cuenta_puntaje }}</span>
                         <span class="explore-price-box" style="font-size: 16px"><b>Precio: </b> ${{ una_cancha.PRECIO }}</span>
-
                     </p>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 ng-scope" style="width: 40vw;">
                 <h2 style="margin-bottom: 1em;text-align: center;">Horario semanal</h2>
+                <p ng-show="horarios.length == 0" style="text-align: center;padding: 2em;">Aún no hay horarios asignados</p>
+
                 <ul class="list-group" id="lista_con_horarios">
                     <li ng-repeat="un_horario in horarios" class="list-group-item"> {{ un_horario.DIA_VALOR }} {{ un_horario.HORA_VALOR }}
                         <span ng-show="un_horario.ESTADO=='Ocupado'" style="width: auto;float: right;color:#ff545a;">Reservado</span>
                         <input type="radio" style="width: auto;float: right;" ng-show="un_horario.ESTADO=='Desocupado'" class="custom-control-input" id="{{ un_horario.ID_HORARIO}}" name="defaultExampleRadios">
                     </li>
                 </ul>
-                <div class="welcome-hero-serch" style="text-align: center;">
+                <div class="welcome-hero-serch" style="text-align: center;" ng-show="horarios.length != 0" >
                     <button class="welcome-hero-btn" ng-click="reservar_cancha(cancha)" style="display: initial;">
                         Reservar  <i data-feather="search"></i>
                     </button>
@@ -85,6 +86,7 @@
     <div class="reviews-content">
         <div class="section-header">
             <h2>Reseñas</h2>
+            <p ng-show="calificaciones.length == 0" style="padding-bottom: 5em;">Aún no hay calificaciónes</p>
         </div>
 
         <div class="testimonial-carousel" style="margin: 4em auto;">

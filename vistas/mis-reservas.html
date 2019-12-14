@@ -15,7 +15,6 @@
                     <th scope="col"><b>BARRIO</b></th>
                     <th scope="col"><b>DIRECCION</b></th>
                     <th scope="col"><b>PRECIO</b></th>
-                    <th scope="col"><b>PUNTAJE</b></th>
                     <th scope="col"><b>HORARIO</b></th>
                     <th scope="col"><b>CANCELAR</b></th>
                 </tr>
@@ -25,11 +24,10 @@
                 <tr ng-repeat="una_reserva in reservas track by $index">
                     <td id="{{ una_reserva.ID }}"><b>N° {{ una_reserva.ID_RESERVA }}</b></td>
                     <td>{{ una_reserva.UNA_CANCHA.TIPO_CANCHA }}</td>
-                    <td>{{ una_reserva.UNA_CANCHA.NOMBRE_CANCHA }}</td>
+                    <td><a href="#!/verCancha/{{ una_reserva.UNA_CANCHA.ID_CANCHA }}" style="color: #0074d4;font-size: 14px;text-decoration: underline;">{{ una_reserva.UNA_CANCHA.NOMBRE_CANCHA }}</a></td>
                     <td>{{ una_reserva.UNA_CANCHA.BARRIO }}</td>
                     <td>{{ una_reserva.UNA_CANCHA.DIRECCION }}</td>
                     <td>{{ una_reserva.UNA_CANCHA.PRECIO }}</td>
-                    <td>{{ una_reserva.UNA_CANCHA.PUNTAJE }}</td>
                     <td>{{ una_reserva.UN_HORARIO.DIA_VALOR }} {{ una_reserva.UN_HORARIO.HORA_VALOR }}</td>
                     <td ng-show="una_reserva.CANCELADO=='No'" ><button type="button" ng-click="cancelar_reserva(una_reserva)" class="btn btn-danger">Cancelar</button></td>
                     <td ng-show="una_reserva.CANCELADO=='Si'" style="color: #ff545a;">Cancelado</td>
