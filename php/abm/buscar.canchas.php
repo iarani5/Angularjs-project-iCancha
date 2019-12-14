@@ -34,42 +34,57 @@ $array=[];
         $arrayFinal[]=$array;
     }
 
-    var_dump($arrayFinal);
-
     //FILTRAR POR DIA Y HORA
     $horario=new Horario();
     $arrayFinalDia=[];
-    $arrayDia=[];
+    $arrayFinalDiaHora=[];
+    $arrayFinalHora=[];
 
     // hay dia y hora
     if($_POST["HORARIO"]!=0&&$_POST["DIA"]!=0){
-        /*for($i=0;$i<sizeof($arrayFinal);$i++){
-            $rta = $horario->filtrar_por_dia($arrayFinal[$i]["ID_CANCHA"]);
-        }*/
-
+        for($i=0;$i<sizeof($arrayFinal);$i++){
+            $rta = $horario->filtrar_por_hora_dia($arrayFinal[$i]["ID_CANCHA"],$_POST["HORARIO"],$_POST["DIA"]);
+            if(sizeof($rta)>0) {
+                foreach ($rta as $unHorario) {
+                    $arrayFinal[$i]["ID_HORARIO"] = $unHorario->getIdHorario();
+                    $arrayFinalDiaHora[]=$arrayFinal[$i];
+                }
+            }
+        }
+        echo json_encode($arrayFinalDiaHora);
     }
 
     // hay hora solo
     else if($_POST["HORARIO"]!=0&&$_POST["DIA"]==0){
-        /*for($arrayFinal)
-            "ID_CANCHA"=>$horario->getIdCancha(),*/
-
+        for($i=0;$i<sizeof($arrayFinal);$i++){
+            $rta = $horario->filtrar_por_hora($arrayFinal[$i]["ID_CANCHA"],$_POST["HORARIO"]);
+            if(sizeof($rta)>0) {
+                foreach ($rta as $unHorario) {
+                    $arrayFinal[$i]["ID_HORARIO"] = $unHorario->getIdHorario();
+                    $arrayFinalHora[]=$arrayFinal[$i];
+                }
+            }
+        }
+        echo json_encode($arrayFinalHora);
     }
 
     // hay dia solo
     else if($_POST["HORARIO"]==0 && $_POST["DIA"]!=0){
         for($i=0;$i<sizeof($arrayFinal);$i++){
            $rta = $horario->filtrar_por_dia($arrayFinal[$i]["ID_CANCHA"],$_POST["DIA"]);
-         
            if(sizeof($rta)>0) {
                foreach ($rta as $unHorario) {
                    $arrayFinal[$i]["ID_HORARIO"] = $unHorario->getIdHorario();
+                   $arrayFinalDia[]=$arrayFinal[$i];
                }
            }
-
         }
-        var_dump($arrayFinal);
+        echo json_encode($arrayFinalDia);
+    }
+    
+    else{
+        echo json_encode($arrayFinal);
     }
 
-//echo json_encode($arrayFinal);
+
 

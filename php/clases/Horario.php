@@ -285,4 +285,33 @@ CREATE TABLE Horario(
         }
         return $salida;
     }
+    public static function filtrar_por_hora($id,$hora){
+        $salida = [];
+        $query = "SELECT * FROM " . static::$tabla . " WHERE FK_ID_CANCHA=$id AND HORARIO=$hora AND BORRADO='No' AND ESTADO='Desocupado'";
+        $stmt = DBcnx::getStatement($query);
+        if($stmt->execute()) {
+            while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $horario = new Horario;
+                $horario->id_horario = $fila['ID_HORARIO'];
+                $horario->cargarDatos($fila);
+                $salida[] = $horario;
+            }
+        }
+        return $salida;
+    }
+    public static function filtrar_por_hora_dia($id,$hora,$dia){
+        $salida = [];
+        $query = "SELECT * FROM " . static::$tabla . " WHERE FK_ID_CANCHA=$id AND HORARIO=$hora AND DIA=$dia AND BORRADO='No' AND ESTADO='Desocupado'";
+        $stmt = DBcnx::getStatement($query);
+        if($stmt->execute()) {
+            while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $horario = new Horario;
+                $horario->id_horario = $fila['ID_HORARIO'];
+                $horario->cargarDatos($fila);
+                $salida[] = $horario;
+            }
+        }
+        return $salida;
+    }
+
 }
