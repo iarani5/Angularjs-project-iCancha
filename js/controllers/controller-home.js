@@ -1,6 +1,6 @@
 /**************************************** CONTROLLER HOME ***************************************/
 
-iCancha.controller("homeCtrl", function ($location,$http,$scope) {
+iCancha.controller("homeCtrl", function ($location,$http,$scope,$window) {
     $scope.no_user = true;
 
     if(localStorage.getItem("dts_user")!==null){ //si ya existen sus datos almacenados en la web. esta logueado.
@@ -29,7 +29,6 @@ iCancha.controller("homeCtrl", function ($location,$http,$scope) {
         }
         var union = item.join('&');	//me une el array con un &
 
-        console.log(union);
         /****** LISTAR CANCHAS *****/
 
         $scope.mostrar=false;
@@ -42,72 +41,10 @@ iCancha.controller("homeCtrl", function ($location,$http,$scope) {
         })
             .then(function (response){ //EXITO se establecio la conexion
                 console.log(response);
-
-              /*  for(var i in response.data){
-                    var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
-                    response.data[i].FOTO=foto;
-
+                for(var i in response.data) {
+                    response.data[i].FOTO = response.data[i].FOTO.substring(24, response.data[i].FOTO.length);
                 }
-
-                /*              if(response.data.length){
-                                  $scope.cantidad_futbol=0;
-                                  $scope.cantidad_basket=0;
-                                  $scope.cantidad_hockey=0;
-                                  $scope.cantidad_tenis=0;
-                                  $scope.cantidad_rugby=0;
-
-                                  for(var i in response.data){
-                                      var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
-                                      response.data[i].FOTO=foto;
-                                      if(response.data[i].BORRADO==="No"){
-
-                                          switch(response.data[i].TIPO_CANCHA){
-                                              case "Futbol":
-                                                  $scope.cantidad_futbol++;
-                                                  break;
-                                              case "Basket":
-                                                  $scope.cantidad_basket++;
-                                                  break;
-                                              case "Hockey":
-                                                  $scope.cantidad_hockey++;
-                                                  break;
-                                              case "Tenis":
-                                                  $scope.cantidad_tenis++;
-                                                  break;
-                                              case "Rugby":
-                                                  $scope.cantidad_rugby++;
-                                                  break;
-                                          }
-                                      }
-                                  }
-
-                                  $scope.listar_canchas=function(cancha){
-                                      $scope.mostrar=true;
-                                      $scope.titulo = cancha;
-                                      var canchas=[];
-                                      for(var i in response.data){
-                                          if(response.data[i].TIPO_CANCHA==cancha){
-                                              canchas.push(response.data[i]);
-                                          }
-                                      }
-                                      $scope.canchas = canchas;
-                                  }
-
-                                  $scope.mostrar_horarios=function(id){
-                                      $http({
-                                          method: 'POST',
-                                          url: "php/abm/listar.horarios.php",
-                                          data: "FK_ID_CANCHA="+id,
-                                          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                                      })
-                                          .then(function (response){ //EXITO se establecio la conexion
-                                              modal_horarios(response.data);
-
-                                          },function (error){ //ERROR no se pudo establecer la conexion
-
-                                          });
-                                  }
-                              }*/
+                $scope.canchas_filtradas=response.data;
 
             },function (error){ //ERROR no se pudo establecer la conexion
 

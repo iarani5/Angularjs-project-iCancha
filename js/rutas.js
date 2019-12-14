@@ -38,7 +38,7 @@ iCancha.config(function($routeProvider) {
 			controller : 'misCanchasCtrl'
 		})
 		.when('/verCancha/:id', { //VER UNA CANCHA
-			templateUrl : 'vistas/cancha-ver.html',
+			templateUrl : 'vistas/una-cancha.html',
 			controller : 'canchaVerCtrl'
 		})
 		.when('/modal', { //MODAL PARA MENSAJES DE INTERACCION CON LA WEB

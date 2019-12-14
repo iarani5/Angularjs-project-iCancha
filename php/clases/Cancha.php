@@ -201,7 +201,7 @@ CREATE TABLE Cancha(
 	public static function mis_canchas($id){ //LISTAR TODO EL LISTADO DE LA TABLA CANCHA POR DUENIO		
 		$salida = [];
 		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE ID_CANCHA = $id";
+					WHERE ID_CANCHA = $id AND BORRADO='No'";
 		$stmt = DBcnx::getStatement($query);
 		if($stmt->execute([$id])) {
 			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {

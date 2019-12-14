@@ -1,9 +1,9 @@
 <?php
 
 class Horario{
-	
-	
-/* 
+
+
+/*
 CREATE TABLE Horario(
 	ID_HORARIO INT(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	FK_ID_CANCHA INT(8) UNSIGNED,
@@ -152,7 +152,7 @@ CREATE TABLE Horario(
 	public function estado($array){ //ESTADO disponible/ocupado
 		$query = "UPDATE " . static::$tabla . " SET ESTADO=? WHERE ID_HORARIO=?";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["ESTADO"],$array["ID_HORARIO"]]);
+		return $stmt->execute([$array["ESTADO"],$array["FK_ID_HORARIO"]]);
 	}
 	
 	public function eliminar_horario($id){ //BORRADO

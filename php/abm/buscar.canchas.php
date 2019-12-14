@@ -81,7 +81,7 @@ $array=[];
         }
         echo json_encode($arrayFinalDia);
     }
-    
+
     else{
         echo json_encode($arrayFinal);
     }

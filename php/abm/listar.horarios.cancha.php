@@ -21,6 +21,7 @@ $array=[];
             "HORA"=>$unHorario->getHora(),
             "DIA_VALOR"=>$unHorario->getDiaValor(),
             "HORA_VALOR"=>$unHorario->getHoraValor(),
+            "ESTADO"=>$unHorario->getEstado(),
         ];
 
         $arrayFinal[]=$array;

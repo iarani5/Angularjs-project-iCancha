@@ -1,0 +1,251 @@
+<!--explore start -->
+<section>
+
+        <div class="explore-content" style="margin-left:3em;">
+            <div class="section-header">
+                <h2>{{ una_cancha.NOMBRE_CANCHA }}</h2>
+            </div><!--/.section-header-->
+            <div class="col-md-8 col-sm-12 ng-scope" style="width: 50vw;">
+                <img ng-src="{{una_cancha.FOTO}}" alt="explore image"  style="max-height: 400px;">
+                <div class="single-explore-txt bg-theme-1">
+                    <p class="explore-rating-price">
+                        <span class="explore-price-box" style="font-size: 16px"><b>Barrio: </b>{{ una_cancha.BARRIO }}</span>
+                        <span class="explore-price-box" style="font-size: 16px"><b>Dirección: </b>{{ una_cancha.DIRECCION }}</span>
+                        <span class="explore-price-box" style="font-size: 16px"><b>Puntaje: </b>{{ una_cancha.PUNTAJE }}</span>
+                        <span class="explore-price-box" style="font-size: 16px"><b>Precio: </b> ${{ una_cancha.PRECIO }}</span>
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 ng-scope" style="width: 40vw;">
+                <h2 style="margin-bottom: 1em;text-align: center;">Horarios</h2>
+                <ul class="list-group" id="lista_con_horarios">
+                    <li ng-repeat="un_horario in horarios" class="list-group-item"> {{ un_horario.DIA_VALOR }} {{ un_horario.HORA_VALOR }}
+                        <span ng-show="un_horario.ESTADO=='Ocupado'" style="width: auto;float: right;color:#ff545a;">Reservado</span>
+                        <input type="radio" style="width: auto;float: right;" ng-show="un_horario.ESTADO=='Desocupado'" class="custom-control-input" id="{{ un_horario.ID_HORARIO}}" name="defaultExampleRadios">
+                    </li>
+                </ul>
+                <div class="welcome-hero-serch" style="text-align: center;">
+                    <button class="welcome-hero-btn" ng-click="reservar_cancha(cancha)" style="display: initial;">
+                        Reservar  <i data-feather="search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+</section>
+
+
+
+<!--reviews start
+<section id="reviews" class="reviews">
+    <div class="section-header">
+        <h2>Reseñas</h2>
+        <p>What our client say about us</p>
+    </div>
+    <div class="reviews-content">
+        <div class="testimonial-carousel">
+            <div class="single-testimonial-box">
+                <div class="testimonial-description">
+                    <div class="testimonial-info">
+                        <div class="testimonial-img">
+                            <img src="assets/images/clients/c1.png" alt="clients">
+                        </div>
+                        <div class="testimonial-person">
+                            <h2>Tom Leakar</h2>
+                            <h4>london, UK</h4>
+                            <div class="testimonial-person-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-comment">
+                        <p>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis eaque.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-testimonial-box">
+                <div class="testimonial-description">
+                    <div class="testimonial-info">
+                        <div class="testimonial-img">
+                            <img src="assets/images/clients/c2.png" alt="clients">
+                        </div>
+                        <div class="testimonial-person">
+                            <h2>monirul islam</h2>
+                            <h4>london, UK</h4>
+                            <div class="testimonial-person-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-comment">
+                        <p>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis eaque.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-testimonial-box">
+                <div class="testimonial-description">
+                    <div class="testimonial-info">
+                        <div class="testimonial-img">
+                            <img src="assets/images/clients/c3.png" alt="clients">
+                        </div>
+                        <div class="testimonial-person">
+                            <h2>Shohrab Hossain</h2>
+                            <h4>london, UK</h4>
+                            <div class="testimonial-person-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-comment">
+                        <p>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis eaque.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-testimonial-box">
+                <div class="testimonial-description">
+                    <div class="testimonial-info">
+                        <div class="testimonial-img">
+                            <img src="assets/images/clients/c4.png" alt="clients">
+                        </div>
+                        <div class="testimonial-person">
+                            <h2>Tom Leakar</h2>
+                            <h4>london, UK</h4>
+                            <div class="testimonial-person-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-comment">
+                        <p>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis eaque.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-testimonial-box">
+                <div class="testimonial-description">
+                    <div class="testimonial-info">
+                        <div class="testimonial-img">
+                            <img src="assets/images/clients/c1.png" alt="clients">
+                        </div>
+                        <div class="testimonial-person">
+                            <h2>Tom Leakar</h2>
+                            <h4>london, UK</h4>
+                            <div class="testimonial-person-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-comment">
+                        <p>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis eaque.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-testimonial-box">
+                <div class="testimonial-description">
+                    <div class="testimonial-info">
+                        <div class="testimonial-img">
+                            <img src="assets/images/clients/c2.png" alt="clients">
+                        </div>
+                        <div class="testimonial-person">
+                            <h2>monirul islam</h2>
+                            <h4>london, UK</h4>
+                            <div class="testimonial-person-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-comment">
+                        <p>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis eaque.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-testimonial-box">
+                <div class="testimonial-description">
+                    <div class="testimonial-info">
+                        <div class="testimonial-img">
+                            <img src="assets/images/clients/c3.png" alt="clients">
+                        </div>
+                        <div class="testimonial-person">
+                            <h2>Shohrab Hossain</h2>
+                            <h4>london, UK</h4>
+                            <div class="testimonial-person-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-comment">
+                        <p>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis eaque.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-testimonial-box">
+                <div class="testimonial-description">
+                    <div class="testimonial-info">
+                        <div class="testimonial-img">
+                            <img src="assets/images/clients/c4.png" alt="clients">
+                        </div>
+                        <div class="testimonial-person">
+                            <h2>Tom Leakar</h2>
+                            <h4>london, UK</h4>
+                            <div class="testimonial-person-star">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-comment">
+                        <p>
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis eaque.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->

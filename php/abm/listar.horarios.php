@@ -27,4 +27,4 @@
 		}
 		echo json_encode($arrayFinal);
 	}
-?> 
+
