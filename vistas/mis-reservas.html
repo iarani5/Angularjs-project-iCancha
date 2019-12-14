@@ -1,0 +1,40 @@
+
+<section>
+    <div class="explore-content">
+        <div class="section-header">
+            <h2>Mis reservas</h2>
+        </div><!--/.section-header-->
+
+        <div>
+            <table class="table" ng-show="reservas.length>0" style="margin: 2em; background: white;">
+                <thead>
+                <tr>
+                    <th scope="col"><b>NUMERO DE RESERVA</b></th>
+                    <th scope="col"><b>TIPO DE CANCHA</b></th>
+                    <th scope="col"><b>NOMBRE CANCHA</b></th>
+                    <th scope="col"><b>BARRIO</b></th>
+                    <th scope="col"><b>DIRECCION</b></th>
+                    <th scope="col"><b>PRECIO</b></th>
+                    <th scope="col"><b>PUNTAJE</b></th>
+                    <th scope="col"><b>HORARIO</b></th>
+                    <th scope="col"><b>CANCELAR</b></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="una_reserva in reservas track by $index">
+                    <td id="{{ una_reserva.ID }}"><b>{{ una_reserva.ID_RESERVA }}</b></td>
+                    <td>{{ una_reserva.UNA_CANCHA.TIPO_CANCHA }}</td>
+                    <td>{{ una_reserva.UNA_CANCHA.NOMBRE_CANCHA }}</td>
+                    <td>{{ una_reserva.UNA_CANCHA.BARRIO }}</td>
+                    <td>{{ una_reserva.UNA_CANCHA.DIRECCION }}</td>
+                    <td>{{ una_reserva.UNA_CANCHA.PRECIO }}</td>
+                    <td>{{ una_reserva.UNA_CANCHA.PUNTAJE }}</td>
+                    <td>{{ una_reserva.UN_HORARIO.DIA_VALOR }} {{ una_reserva.UN_HORARIO.HORA_VALOR }}</td>
+                    <td scope="row"><button type="button" ng-click="cancelar_reserva(una_reserva)" class="btn btn-danger">Cancelar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

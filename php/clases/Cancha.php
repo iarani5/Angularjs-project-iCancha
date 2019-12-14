@@ -223,6 +223,7 @@ CREATE TABLE Cancha(
 		return $salida;
 	}
 
+
 	//FILTRAR POR TIPO , BARRIO, HORARIO Y DIA
     public static function buscar_cancha($array){
         $salida = [];

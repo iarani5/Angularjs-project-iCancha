@@ -145,4 +145,24 @@ class Reserva{
         return $stmt->execute([$id]);
     }
 
+    public static function mis_reservas($id){
+        $salida = [];
+        $query = "SELECT * FROM " . static::$tabla . "
+					WHERE FK_ID_USUARIO = $id";
+        $stmt = DBcnx::getStatement($query);
+        if ($stmt->execute([$id])) {
+            while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $reserva = new Reserva;
+                $reserva->id_reserva = $fila['ID_RESERVA'];
+                $reserva->fk_id_cancha = $fila['FK_ID_CANCHA'];
+                $reserva->fk_id_horario = $fila['FK_ID_HORARIO'];
+                $reserva->cancelado = $fila['CANCELADO'];
+
+                $reserva->cargarDatos($fila);
+                $salida[] = $reserva;
+            }
+        }
+        return $salida;
+    }
+
 }

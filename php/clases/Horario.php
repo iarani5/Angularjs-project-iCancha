@@ -248,7 +248,7 @@ CREATE TABLE Horario(
         return 0;
     }
 
-    public static function all($id){ //LISTAR TODO
+    public static function all($id){
         $salida = [];
         $query = "SELECT * FROM " . static::$tabla . " WHERE FK_ID_CANCHA=$id AND BORRADO='No'";
         $stmt = DBcnx::getStatement($query);
@@ -269,6 +269,30 @@ CREATE TABLE Horario(
         }
         return $salida;
     }
+
+    public static function traer_este_hoario($id){
+        $salida = [];
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ID_HORARIO=$id";
+        $stmt = DBcnx::getStatement($query);
+        if($stmt->execute()) {
+            while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $horario = new Horario;
+                $horario->id_horario = $fila['ID_HORARIO'];
+                $horario->fk_id_cancha = $fila['FK_ID_CANCHA'];
+                $horario->dia= $fila["DIA"];
+                $horario->hora = $fila["HORARIO"];
+                $horario->dia_valor = self::ese_dia($fila["DIA"]);
+                $horario->hora_valor = self::esa_hora($fila["HORARIO"]);
+                $horario->estado = $fila['ESTADO'];
+                $horario->borrado = $fila['BORRADO'];
+                $horario->cargarDatos($fila);
+                $salida[] = $horario;
+            }
+        }
+        return $salida;
+    }
+
+
 
 
     public static function filtrar_por_dia($id,$dia){

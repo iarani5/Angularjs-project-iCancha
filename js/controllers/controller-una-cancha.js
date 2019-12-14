@@ -41,13 +41,13 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
                                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                     })
                                     .then(function (response){
-                                        if(response.data==="1"){
+                                        if(response.data.search("1")!==-1){
                                             alert("Reserva realizada con éxito!");
+                                            $window.location.reload();
                                         }
                                         else{
                                             alert("Ups! Hubo un error vuelva a intentarlo más tarde.");
                                         }
-                                        console.log(response);
 
                                     },function (error){
 
