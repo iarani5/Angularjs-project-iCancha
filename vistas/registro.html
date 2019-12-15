@@ -11,7 +11,7 @@
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 				<form ng-submit="submit(usuario)" class="login100-form validate-form" class="md-form">
 					<span class="login100-form-title p-b-55">
-						Registro
+						{{ titulo }}
 					</span>
 
 					<!-- NOMBRE -->
@@ -42,13 +42,18 @@
 					</div>
 
 					<!-- CLAVE -->
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required"  ng-show="titulo=='Registro'">
 						<input class="input100" type="password" name="pass" id="defaultForm-clave" placeholder="Clave" required ng-model="usuario.CLAVE">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-lock"></span>
 						</span>
 					</div>
+
+					<div class="form-group" ng-show="titulo!='Registro'">
+						<input type="button" class="login100-form-btn" value="Cambiar clave" ng-click="mostrar_formulario()">
+					</div>
+
 					
 					<div>
 						<!-- TIPO USUARIO -->
@@ -57,15 +62,10 @@
 							<option ng-repeat="tipo in tipo_usuario track by $index "  value='{{ tipo.TITULO }}'>{{ tipo.TITULO }}</option>
 						</select>
 					</div>
-					
-					<!-- FOTO -->
-					<!-- <div class="wrap-input100 validate-input m-b-16">
-						<input type="file" class='upload-file usuario-file ' ngf-select ng-model="usuario.FOTO_PERFIL" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-accept="'image/*'" id="foto">
-					</div> -->
-					
+
 					<div class="container-login100-form-btn p-t-25">
 						<button class="login100-form-btn">
-							Registrarme
+							{{ titulo }}
 						</button>
 					</div>
 
@@ -80,5 +80,28 @@
 					</div>
 				</form>
 			</div>
+
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30" ng-show="mostrar_form" style="margin-left: 5em;">
+				<div class="form-request">
+					<span class="login100-form-title p-b-55">
+						Cambiar clave
+					</span>
+					<form ng-submit="cambiar_clave(claves)" class="registro" class="login100-form validate-form" class="md-form">
+						<div class="form-group" class="wrap-input100 validate-input m-b-16">
+							<input class="input100" type="password" class="form-control" ng-model="claves.CLAVE_ACTUAL" name="clave"  placeholder="Clave actual" required>
+						</div>
+						<div class="form-group" class="wrap-input100 validate-input m-b-16">
+							<input class="input100" type="password" class="form-control" ng-model="claves.CLAVE_NUEVA" name="clave_nueva"  id="clave_futura" placeholder="Nueva Clave" required>
+						</div>
+						<div class="container-login100-form-btn p-t-25">
+							<button class="login100-form-btn">
+								Cambiar clave
+							</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+
 		</div>
 	</div>

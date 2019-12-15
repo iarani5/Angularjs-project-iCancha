@@ -8,10 +8,8 @@ require_once('../funciones.php');
 require_once('../clases/DBcnx.php');
 require_once('../clases/Usuario.php');
 
-if(isset($_SESSION["s_id"])){
-
-    $usuario = new Usuario();
-    $fin2=json_decode($usuario->eliminar_usuario($_SESSION["s_id"]),true);
-
-    echo $fin2;
+if(isset($_POST)&&isset($_SESSION["s_id"])) {
+    $user = new Usuario();
+    $_POST["ID_USUARIO"]=$_SESSION["s_id"];
+    echo  $user->editar_clave($_POST);
 }

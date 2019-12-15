@@ -3,6 +3,7 @@
 
  iCancha.controller("registroCtrl", function ($location,$http,$scope,$window,$routeParams) {
  
+$scope.titulo="Registro";
 
 // ****** DISEÑO FORM ****//
 var fileInputTextDiv = document.getElementById('file_input_text_div');
@@ -40,7 +41,6 @@ function changeState() {
 		{TITULO: "Cliente"},
 		{TITULO: "Propietario"},
 	];
-				
 
 //***** ENVIO DE FORM *****//
 
@@ -60,6 +60,7 @@ function changeState() {
 		else{
 			var enlace = "php/abm/crear.usuario.php";
 		}
+
 		//ABM USUARIO
 		$http({
 			method: 'POST',
@@ -74,9 +75,7 @@ function changeState() {
 			else{				
 					if(enlace == "php/abm/editar.usuario.php"){
 						localStorage.setItem("dts_user",angular.toJson(response.data));
-						/* function mensaje() {
-							modal_msj("Datos editados con éxito"); 
-						} setTimeout(mensaje,3000); */
+
 						if(tn(tn(document,"form",0),"input",3).value!=""){
 							function mensaje() {
 								modal_msj("Datos editados con éxito"); 
@@ -97,9 +96,12 @@ function changeState() {
 		},function (error){ //ERROR no se pudo establecer la conexion
 
 		});
-	}	
+	}
 		
 	if($location.path().search("editar")!="-1"){
+
+		$scope.titulo="Editar datos";
+
 		var usuario_local=angular.fromJson(localStorage.getItem("dts_user")); 
 		
 		$scope.usuario = { 
@@ -127,27 +129,56 @@ function changeState() {
 		var divs=tn(tn(document,"form",0),"div");
 		rc(divs[divs.length-1].parentNode,divs[divs.length-1]);	
 	}
-	
-	/* //EDITAR CLAVE
-	$scope.clave=function(){
-		if(tn(tn(document,"form",0),"button",0).innerHTML=="X"){
-			id("defaultForm-clave").style.display="inline-block";
-			rc(id("clave_nueva").parentNode,id("clave_nueva"));
-			tn(tn(document,"form",0),"button",0).innerHTML="Cambiar clave";
-			id("achicar").style.width="40%";
-		}
-		else{
-			var nueva=ce("input");
-			nueva.id="clave_nueva";
-			nueva.placeholder="Clave nueva";
-			nueva.className="input100";
-			nueva.type="password";
-			ac(id("achicar"),nueva);
-			id("achicar").style.width="100%";
-			id("defaultForm-clave").style.display="none";
-			tn(tn(document,"form",0),"button",0).innerHTML="X";
-		}
-	} */
+
+
+	/***** EDIA CLAVE *****/
+	 $scope.mostrar_formulario = function() {
+		 $scope.mostrar_form = true;
+	 };
+
+	 $scope.cambiar_clave = function(claves) {
+		 // ver si coincide la clave actual
+		 var usuario_local=angular.fromJson(localStorage.getItem("dts_user"));
+
+
+		 if(usuario_local.CLAVE==claves.CLAVE_ACTUAL){
+			 var ban=0;
+			 id("clave_futura").style.borderBottom='none';
+			 var p=id("clave_futura").nextSibling;
+			 if(p.className==="mensaje-validacion"){
+				 rc(p.parentNode,p);
+			 }
+			 validar_form(id("clave_futura"));
+			 var p=id("clave_futura").nextSibling;
+			 if(p.className==="mensaje-validacion"){
+				 ban=1;
+			 }
+			 if(!ban) {
+				 $http({
+					 method: 'POST',
+					 url: "php/abm/editar.clave.php",
+					 data: "CLAVE="+id("clave_futura").value,
+					 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				 })
+					 .then(function (response) {
+					 	console.log(response.data);
+						 if(response.data === "1"){
+							 var user_actual = angular.fromJson(localStorage.getItem("dts_user"));
+							 user_actual.CLAVE = id("clave_futura").value;
+							 localStorage.setItem("dts_user", angular.toJson(user_actual));
+							 $scope.mostrar_form = false;
+							 modal_msj("Clave actualizada con exito");
+						 }
+
+					 }, function (error) { //ERROR no se pudo establecer la conexion
+
+					 });
+			 }
+		 }
+		 else{
+			 modal_msj("La clave actual no coincide");
+		 }
+	 };
 });
 
 

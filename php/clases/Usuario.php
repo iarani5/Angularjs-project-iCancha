@@ -150,7 +150,7 @@ class Usuario{
 
     public function crear_usuario($array){  //REGISTRO DE USUARIO
         $query = "INSERT INTO " . static::$tabla . " (EMAIL, CLAVE, NOMBRE, APELLIDO, TIPO_USUARIO)
-				VALUES (?, sha2(?, 224), ?, ?, ?)";
+				VALUES (?, ?, ?, ?, ?)";
         $stmt = DBcnx::getStatement($query);
         return $stmt->execute([$array["EMAIL"],$array["CLAVE"],$array["NOMBRE"],$array["APELLIDO"],$array["TIPO_USUARIO"]]);
     }
@@ -167,14 +167,14 @@ class Usuario{
         return $stmt->execute([$array["VALOR"],$array["ID_USUARIO"]]);
     }
 
-    public function editar_clave($contrasenia,$id){ //EDICION DE CLAVE
-        $query = "UPDATE " . static::$tabla . " SET CLAVE=sha2(?, 224) WHERE ID_USUARIO=?";
+    public function editar_clave($array){ //EDICION DE CLAVE
+        $query = "UPDATE " . static::$tabla . " SET CLAVE=? WHERE ID_USUARIO=?";
         $stmt = DBcnx::getStatement($query);
-        return $stmt->execute([$contrasenia,$id]);
+        return $stmt->execute([$array["CLAVE"],$array["ID_USUARIO"]]);
     }
 
     public function verificar_usuario($mail, $contrasenia){ //LOGIN DE USUARIO
-        $query = "SELECT * FROM " . static::$tabla . " WHERE EMAIL=? AND CLAVE=sha2(?, 224)";
+        $query = "SELECT * FROM " . static::$tabla . " WHERE EMAIL=? AND CLAVE=?";
         $stmt = DBcnx::getStatement($query);
         $array=[];
         if($stmt->execute([$mail,$contrasenia])){

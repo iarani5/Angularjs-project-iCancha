@@ -47,7 +47,6 @@ iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$t
 			})
 				.then(function (response){
 					$scope.lista_denuncias = response.data;
-					console.log($scope.lista_denuncias);
 				},function (error){ //ERROR no se pudo establecer la conexion
 
 				});
@@ -61,7 +60,6 @@ iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$t
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 				})
 					.then(function (response){
-						console.log(response);
 						if(response.data==="1"){
 							modal_msj("Usuario bloqueado con éxito!");
 							$window.location.reload();

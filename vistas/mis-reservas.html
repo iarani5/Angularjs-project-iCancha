@@ -3,6 +3,7 @@
     <div class="explore-content">
         <div class="section-header">
             <h2>Mis reservas</h2>
+            <p ng-show="reservas.length==0">Aún no tenes reservas</p>
         </div><!--/.section-header-->
 
         <div>
@@ -43,8 +44,8 @@
     <div class="explore-content">
         <div class="section-header">
             <h2>Canchas reservadas</h2>
+            <p ng-show="reservas.length==0">Aún no tenes reservas</p>
         </div><!--/.section-header-->
-
         <div>
             <table class="table" ng-show="reservas.length>0" style="background: white;">
                 <thead>
