@@ -158,29 +158,54 @@
 
 			<!--subscription strat -->
 			<section id="contact"   class="subscription">
-				<div class="container" class="col-md-4 col-sm-4">
+				<div class="container" style="padding-bottom: 5em;" class="col-md-4 col-sm-4">
 					<div class="subscribe-title text-center">
 						<h2>
-							do you want to add your business listing with us?
+							Crear cupon
 						</h2>
-						<p>
-							Listrace offer you to list your business with us and we very much able to promote your Business.
-						</p>
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="subscription-input-group">
-								<form action="#">
-									<input type="email" class="subscription-input-form" placeholder="Enter your email here">
-									<button class="appsLand-btn subscribe-btn" onclick="window.location.href='#'">
-										creat account
+								<form ng-submit="crear_cupon(cupon)">
+									<input style="margin-bottom:1em" type="name" class="subscription-input-form" ng-model="cupon.NOMBRE_CUPON" placeholder="Nombre">
+									<input style="margin-bottom:1em" type="number" class="subscription-input-form" ng-model="cupon.CODIGO" placeholder="Codigo">
+									<input style="margin-bottom:1em" type="number" class="subscription-input-form" ng-model="cupon.PORCENTAJE" placeholder="Porcentaje">
+
+									<button class="appsLand-btn subscribe-btn" type="submit">
+										Crear
 									</button>
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div>
+					<div>
+						<table class="table" ng-show="lista_cupones.length>0" >
+							<thead>
+							<tr>
+								<th scope="col" style="text-align: center;"><b>ID</b></th>
+								<th scope="col" style="text-align: center;"><b>NUMERO DE CUPON</b></th>
+								<th scope="col" style="text-align: center;"><b>CODIGO</b></th>
+								<th scope="col" style="text-align: center;"><b>PORCENTAJE</b></th>
+								<th scope="col" style="text-align: center;"><b>ELIMINAR</b></th>
+							</tr>
+							</thead>
 
+							<tbody>
+							<tr ng-repeat="un_cupon in lista_cupones track by $index">
+								<td id="{{ un_cupon.ID_CUPON }}"><b>N° {{ un_cupon.ID_CUPON }}</b></td>
+								<td>{{ un_cupon.NOMBRE_CUPON }}</td>
+								<td>#{{ un_cupon.CODIGO }}</td>
+								<td>{{ un_cupon.PORCENTAJE }}%</td>
+
+								<td><button type="button" ng-click="eliminar_cupon(un_cupon.ID_CUPON )" class="btn btn-danger">Eliminar</button></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</section><!--/subscription-->
 			<!--subscription end -->
 
@@ -191,7 +216,6 @@
 
 		</div>
 	</div>
-
 
 
 </section>

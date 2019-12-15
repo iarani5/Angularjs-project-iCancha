@@ -1,6 +1,6 @@
 /**************************************** CONTROLLER REGISTRO ***************************************/
 
-iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout', function  ($scope, $http, $location, Upload, $timeout) {
+iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window', function  ($scope, $http, $location, Upload, $timeout, $window) {
 
 	$scope.eliminar_cuenta=function(){
 		$http({
@@ -34,6 +34,69 @@ iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$t
 
 		if(usuario.TIPO_USUARIO==="Administrador"){
 			$scope.es_admin=true;
+
+
+			//************** CUPON
+
+			//LISTAR CUPONES
+			$http({
+				method: 'POST',
+				url: "php/abm/listar.cupones.php",
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			})
+				.then(function (response){
+					$scope.lista_cupones = response.data;
+					console.log($scope.lista_cupones);
+				},function (error){ //ERROR no se pudo establecer la conexion
+
+				});
+
+			//ELIMINAR CUPON
+			$scope.eliminar_cupon=function(id) {
+				$http({
+					method: 'POST',
+					url: "php/abm/eliminar.cupon.php",
+					data: "ID_CUPON="+id,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				})
+					.then(function (response){
+						if(response.data==="1"){
+							modal_msj("Cupon eliminado con éxito!");
+							$window.location.reload();
+						}
+						else{
+							modal_msj("Ups! Hubo un error vuelva a intentarlo más tarde.");
+						}
+
+					},function (error){ //ERROR no se pudo establecer la conexion
+
+					});
+			};
+
+			//CREAR CUPON
+			$scope.crear_cupon=function(cupon){
+
+				console.log(cupon);
+
+				$http({
+					method: 'POST',
+					url: "php/abm/crear.cupon.php",
+					data: "NOMBRE_CUPON="+cupon.NOMBRE_CUPON+"&CODIGO="+cupon.CODIGO+"&PORCENTAJE="+cupon.PORCENTAJE,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				})
+				.then(function (response){
+					if(response.data==="1"){
+						modal_msj("Cupon creado con éxito!");
+						$window.location.reload();
+					}
+					else{
+						modal_msj("Ups! Hubo un error vuelva a intentarlo más tarde.");
+					}
+
+				},function (error){ //ERROR no se pudo establecer la conexion
+
+				});
+			};
 
 			//************** ESTADISTICAS
 
@@ -69,7 +132,6 @@ iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$t
 					$scope.cantidad_hockey=0;
 					$scope.cantidad_tenis=0;
 					$scope.cantidad_rugby=0;
-
 
 					for(let i in $scope.cancha_stats) {
 						switch ($scope.cancha_stats[i].TIPO_CANCHA) {
