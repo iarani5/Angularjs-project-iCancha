@@ -100,9 +100,9 @@ class Reserva{
 
     /*************** METODOS **************/
 
-    public function getByPk($id){
+    public function getByPkCancha($id){
         $query = "SELECT * FROM " . static::$tabla . "
-					WHERE ID = $id";
+					WHERE FK_ID_CANCHA = $id";
         $stmt = DBcnx::getStatement($query);
         $stmt->execute([$id]);
         return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
@@ -164,5 +164,29 @@ class Reserva{
         }
         return $salida;
     }
+
+    public static function reservas_usuarios($id){
+        $salida = [];
+        $query = "SELECT * FROM " . static::$tabla . "
+					WHERE FK_ID_CANCHA = $id";
+        $stmt = DBcnx::getStatement($query);
+        if ($stmt->execute([$id])) {
+            while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $reserva = new Reserva;
+                $reserva->id_reserva = $fila['ID_RESERVA'];
+                $reserva->fk_id_cancha = $fila['FK_ID_CANCHA'];
+                $reserva->fk_id_usuario = $fila['FK_ID_USUARIO'];
+                $reserva->fk_id_horario = $fila['FK_ID_HORARIO'];
+                $reserva->cancelado = $fila['CANCELADO'];
+
+                $reserva->cargarDatos($fila);
+                $salida[] = $reserva;
+            }
+        }
+        return $salida;
+    }
+
+
+
 
 }

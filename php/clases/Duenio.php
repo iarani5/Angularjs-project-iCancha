@@ -22,17 +22,17 @@ class Duenio{
 	public function getFkIdUsuario(){
 		return $this->fk_id_usuario;
 	}
-	
-	/* M E T O D O S   D E   L A   C L A S E */
-	
-	public function getByDuenio($id){ 
-		$query = "SELECT * FROM " . static::$tabla . "
+    /* M E T O D O S   D E   L A   C L A S E */
+
+    public function getByDuenio($id){
+        $query = "SELECT * FROM " . static::$tabla . "
 					WHERE FK_ID_USUARIO = $id";
-		$stmt = DBcnx::getStatement($query);
-		$stmt->execute([$id]);
-		return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
-	}
-	
+        $stmt = DBcnx::getStatement($query);
+        $stmt->execute([$id]);
+        return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
+    }
+
+
 	public function cargarDatos($fila){
 		foreach($fila as $prop => $valor) {
 			if(in_array($prop, static::$fila)) {

@@ -162,22 +162,6 @@
 				 }
 			 }
 
-		/*	 var item1 = [];
-			 for (var i in lunes) {
-				 item1.push(i + '=' + lunes[i]);
-			 }
-			 var item2 = [];
-			 for (var i in martes) {
-				 item2.push(i + '=' + martes[i]);
-			 }
-			 var item3 = [];
-			 for (var i in miercoles) {
-				 item3.push(i + '=' + miercoles[i]);
-			 }
-*/
-
-			// var horas_dias = [lunes, martes, miercoles, jueves, viernes, sabado, domingo];
-
 
 			 //cancha
 

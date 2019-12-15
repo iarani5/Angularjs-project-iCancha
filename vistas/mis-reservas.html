@@ -1,5 +1,5 @@
 
-<section>
+<section ng-show="usuario.TIPO_USUARIO=='Cliente'">
     <div class="explore-content">
         <div class="section-header">
             <h2>Mis reservas</h2>
@@ -27,10 +27,55 @@
                     <td><a href="#!/verCancha/{{ una_reserva.UNA_CANCHA.ID_CANCHA }}" style="color: #0074d4;font-size: 14px;text-decoration: underline;">{{ una_reserva.UNA_CANCHA.NOMBRE_CANCHA }}</a></td>
                     <td>{{ una_reserva.UNA_CANCHA.BARRIO }}</td>
                     <td>{{ una_reserva.UNA_CANCHA.DIRECCION }}</td>
-                    <td>{{ una_reserva.UNA_CANCHA.PRECIO }}</td>
+                    <td>${{ una_reserva.UNA_CANCHA.PRECIO }}</td>
                     <td>{{ una_reserva.UN_HORARIO.DIA_VALOR }} {{ una_reserva.UN_HORARIO.HORA_VALOR }}</td>
                     <td ng-show="una_reserva.CANCELADO=='No'" ><button type="button" ng-click="cancelar_reserva(una_reserva)" class="btn btn-danger">Cancelar</button></td>
                     <td ng-show="una_reserva.CANCELADO=='Si'" style="color: #ff545a;">Cancelado</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<section ng-show="usuario.TIPO_USUARIO=='Propietario'">
+    <div class="explore-content">
+        <div class="section-header">
+            <h2>Canchas reservadas</h2>
+        </div><!--/.section-header-->
+
+        <div>
+            <table class="table" ng-show="reservas.length>0" style="background: white;">
+                <thead>
+                <tr>
+                    <th scope="col"><b>N°</b></th>
+                    <th scope="col"><b>TIPO DE CANCHA</b></th>
+                    <th scope="col"><b>NOMBRE CANCHA</b></th>
+                    <th scope="col"><b>BARRIO</b></th>
+                    <th scope="col"><b>DIRECCION</b></th>
+                    <th scope="col"><b>PRECIO</b></th>
+                    <th scope="col"><b>HORARIO</b></th>
+                    <th scope="col"><b>USUARIO</b></th>
+                    <th scope="col"><b>CANCELADA</b></th>
+                    <th scope="col"><b>DENUNCIAR</b></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="una_reserva in reservas track by $index">
+                    <td id="{{ una_reserva.ID }}"><b>{{ una_reserva.ID_RESERVA }}</b></td>
+                    <td>{{ una_reserva.UNA_CANCHA.TIPO_CANCHA }}</td>
+                    <td><a href="#!/verCancha/{{ una_reserva.UNA_CANCHA.ID_CANCHA }}" style="color: #0074d4;font-size: 14px;text-decoration: underline;">{{ una_reserva.UNA_CANCHA.NOMBRE_CANCHA }}</a></td>
+                    <td>{{ una_reserva.UNA_CANCHA.BARRIO }}</td>
+                    <td>{{ una_reserva.UNA_CANCHA.DIRECCION }}</td>
+                    <td>${{ una_reserva.UNA_CANCHA.PRECIO }}</td>
+                    <td>{{ una_reserva.UN_HORARIO.DIA_VALOR }} {{ una_reserva.UN_HORARIO.HORA_VALOR }}</td>
+                    <td>{{ una_reserva.EL_USUARIO.EMAIL }}</td>
+                    <td>{{ una_reserva.CANCELADO }}</td>
+                    <td ng-show="una_reserva.EL_USUARIO.BANNEADO=='No'&&una_reserva.EL_USUARIO.DENUNCIADO=='No'" ><button type="button" ng-click="denunciar_usuario( una_reserva.EL_USUARIO.ID_USUARIO)" class="btn btn-danger">Denunciar</button></td>
+                    <td ng-show="una_reserva.EL_USUARIO.BANNEADO=='Si'" >Eliminado</td>
+                    <td ng-show="una_reserva.EL_USUARIO.DENUNCIADO=='Si'" >Denunciado</td>
                 </tr>
                 </tbody>
             </table>
