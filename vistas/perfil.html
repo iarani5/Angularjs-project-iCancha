@@ -157,7 +157,7 @@
 		<div class="works-content">
 
 			<!--subscription strat -->
-			<section id="contact"   class="subscription">
+			<section id="contact"  class="subscription">
 				<div class="container" style="padding-bottom: 5em;" class="col-md-4 col-sm-4">
 					<div class="subscribe-title text-center">
 						<h2>
@@ -208,6 +208,43 @@
 				</div>
 			</section><!--/subscription-->
 			<!--subscription end -->
+
+			<!--subscription strat -->
+			<section  class="subscription" style="padding-top: 0;" >
+				<div class="container" style="padding-bottom: 5em;" class="col-md-4 col-sm-4">
+					<div class="subscribe-title text-center">
+						<h2>
+							Denuncias de usuarios
+						</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<table class="table" ng-show="lista_denuncias.length>0" >
+							<thead>
+							<tr>
+								<th scope="col" style="text-align: center;"><b>ID</b></th>
+								<th scope="col" style="text-align: center;"><b>EMAIL USUARIO</b></th>
+								<th scope="col" style="text-align: center;"><b>EMAIL PROPIETARIO</b></th>
+								<th scope="col" style="text-align: center;"><b>BLOQUEO</b></th>
+							</tr>
+							</thead>
+
+							<tbody>
+							<tr ng-repeat="una_denuncia in lista_denuncias track by $index">
+								<td id="{{ una_denuncia.ID_DENUNCIA }}"><b>N° {{ una_denuncia.ID_DENUNCIA }}</b></td>
+								<td>{{ una_denuncia.USUARIO_EMAIL }}</td>
+								<td>{{ una_denuncia.PROPIETARIO_EMAIL }}</td>
+
+								<td ng-show="una_denuncia.BANNEADO == 'No'"><button type="button" ng-click="bloquear_usuario(una_denuncia.FK_ID_USUARIO )" class="btn btn-danger">Bloquear</button></td>
+								<td ng-show="una_denuncia.BANNEADO == 'Si'">Bloqueado</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section><!--/subscription-->
+
 
 			<button style="margin: 2em 10em;font-size: 16px; " ng-click="eliminar_cuenta();">Eliminar cuenta</button>
 

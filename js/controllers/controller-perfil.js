@@ -36,6 +36,45 @@ iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$t
 			$scope.es_admin=true;
 
 
+			//************* DENUNCIAS - BLOQUEO DE USUARIOS
+
+
+			//LISTAR DENUNCIAS
+			$http({
+				method: 'POST',
+				url: "php/abm/listar.denuncias.php",
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			})
+				.then(function (response){
+					$scope.lista_denuncias = response.data;
+					console.log($scope.lista_denuncias);
+				},function (error){ //ERROR no se pudo establecer la conexion
+
+				});
+
+			//BLOQUEAR USUARIO
+			$scope.bloquear_usuario=function(id) {
+				$http({
+					method: 'POST',
+					url: "php/abm/bloquear.usuario.php",
+					data: "ID_USUARIO="+id,
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				})
+					.then(function (response){
+						console.log(response);
+						if(response.data==="1"){
+							modal_msj("Usuario bloqueado con éxito!");
+							$window.location.reload();
+						}
+						else{
+							modal_msj("Ups! Hubo un error vuelva a intentarlo más tarde.");
+						}
+
+					},function (error){ //ERROR no se pudo establecer la conexion
+
+					});
+			};
+
 			//************** CUPON
 
 			//LISTAR CUPONES

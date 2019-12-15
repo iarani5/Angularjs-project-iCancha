@@ -13,4 +13,11 @@ class Administrador{
         return $canchas->all();
     }
 
+    public function bloquear_usuario($id){
+        $query = "UPDATE usuario SET BANNEADO='Si' WHERE ID_USUARIO=$id";
+        $stmt = DBcnx::getStatement($query);
+        return $stmt->execute([$id]);
+    }
+
+
 }
