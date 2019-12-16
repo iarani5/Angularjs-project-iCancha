@@ -13,7 +13,7 @@ iCancha.controller("misReservasCtrl", function ($location,$http,$scope,$window,$
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
         .then(function (response){ //EXITO se establecio la conexion
-                $scope.reservas=response.data.reverse();
+            $scope.reservas=response.data.reverse();
 
         },function (error){ //ERROR no se pudo establecer la conexion
 

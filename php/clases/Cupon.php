@@ -103,6 +103,14 @@ class Cupon{
         return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
     }
 
+    public function getById($id){
+        $query = "SELECT * FROM " . static::$tabla . "
+					WHERE ID_CUPON = $id";
+        $stmt = DBcnx::getStatement($query);
+        $stmt->execute([$id]);
+        return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
+    }
+
     public function cargarDatos($fila){ //RECIBE LA FILA DE LA BDD Y CARGA LOS DATOS EN LA CLASE CUPON PHP (USA LOS SETTERS DE LA CLASE)
         foreach($fila as $prop => $valor) {
             if(in_array($prop, static::$fila)) {

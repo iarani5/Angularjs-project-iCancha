@@ -16,6 +16,7 @@
                     <th scope="col"><b>BARRIO</b></th>
                     <th scope="col"><b>DIRECCION</b></th>
                     <th scope="col"><b>PRECIO</b></th>
+                    <th scope="col"><b>DESCUENTO</b></th>
                     <th scope="col"><b>HORARIO</b></th>
                     <th scope="col"><b>CANCELAR</b></th>
                 </tr>
@@ -29,6 +30,7 @@
                     <td>{{ una_reserva.UNA_CANCHA.BARRIO }}</td>
                     <td>{{ una_reserva.UNA_CANCHA.DIRECCION }}</td>
                     <td>${{ una_reserva.UNA_CANCHA.PRECIO }}</td>
+                    <td>{{ una_reserva.DESCUENTO }}% = ${{  una_reserva.UNA_CANCHA.PRECIO -  una_reserva.UNA_CANCHA.PRECIO*una_reserva.DESCUENTO/100 }}</td>
                     <td>{{ una_reserva.UN_HORARIO.DIA_VALOR }} {{ una_reserva.UN_HORARIO.HORA_VALOR }}</td>
                     <td ng-show="una_reserva.CANCELADO=='No'" ><button type="button" ng-click="cancelar_reserva(una_reserva)" class="btn btn-danger">Cancelar</button></td>
                     <td ng-show="una_reserva.CANCELADO=='Si'" style="color: #ff545a;">Cancelado</td>
@@ -56,6 +58,7 @@
                     <th scope="col"><b>BARRIO</b></th>
                     <th scope="col"><b>DIRECCION</b></th>
                     <th scope="col"><b>PRECIO</b></th>
+                    <th scope="col"><b>DESCUENTO</b></th>
                     <th scope="col"><b>HORARIO</b></th>
                     <th scope="col"><b>USUARIO</b></th>
                     <th scope="col"><b>CANCELADA</b></th>
@@ -71,6 +74,7 @@
                     <td>{{ una_reserva.UNA_CANCHA.BARRIO }}</td>
                     <td>{{ una_reserva.UNA_CANCHA.DIRECCION }}</td>
                     <td>${{ una_reserva.UNA_CANCHA.PRECIO }}</td>
+                    <td>${{ una_reserva.DESCUENTO }}</td>
                     <td>{{ una_reserva.UN_HORARIO.DIA_VALOR }} {{ una_reserva.UN_HORARIO.HORA_VALOR }}</td>
                     <td>{{ una_reserva.EL_USUARIO.EMAIL }}</td>
                     <td>{{ una_reserva.CANCELADO }}</td>

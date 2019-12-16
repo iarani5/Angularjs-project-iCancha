@@ -12,10 +12,12 @@ require_once('../clases/Cancha.php');
 require_once('../clases/Duenio.php');
 require_once('../clases/Usuario.php');
 require_once('../clases/Denuncia.php');
+require_once('../clases/Cupon.php');
 
 if(isset($_SESSION["s_id"])){
 
     $reserva = new Reserva();
+    $cupon = new Cupon();
     $arrayFinal=[];
     $array=[];
     $rta=[];
@@ -27,13 +29,22 @@ if(isset($_SESSION["s_id"])){
         $duenio = new Duenio();
         $rta1=$duenio->all($_SESSION["s_id"]);
 
-        foreach($rta1 as $misCanchas) {
+
+            foreach($rta1 as $misCanchas) {
             $rta2 = $reserva->reservas_usuarios($misCanchas->getFkIdCancha());
             if(sizeof($rta2)>0){
+
+                $hay_cupon=0;
+
                 foreach($rta2 as $unaReserva) {
                     $horario = new Horario();
                     $rta2=$horario->traer_este_hoario($unaReserva->getFkIdHorario());
                     $lista_horario=[];
+
+                    $hay_cupon= $cupon->getById($unaReserva->getFkIdCupon());
+                    if($hay_cupon){
+                        $hay_cupon=$hay_cupon["PORCENTAJE"];
+                    }
 
                     foreach($rta2 as $unHorario) {
                         $lista_horario = [
@@ -77,14 +88,19 @@ if(isset($_SESSION["s_id"])){
                         ];
                     }
 
+                    if(!$hay_cupon) $hay_cupon=0;
+
                     $array = [
                         "ID_RESERVA" => $unaReserva->getIdReserva(),
                         "FK_ID_HORARIO" => $unaReserva->getFkIdHorario(),
                         "FK_ID_CANCHA" => $unaReserva->getFkIdCancha(),
+                        "FK_ID_CUPON" => $unaReserva->getFkIdCupon(),
                         "CANCELADO" => $unaReserva->getCancelado(),
                         "UN_HORARIO" => $lista_horario,
                         "UNA_CANCHA" => $lista_cancha,
                         "EL_USUARIO" => $lista_usuario,
+                        "DESCUENTO" => $hay_cupon,
+
                     ];
 
                     $arrayFinal[]=$array;
@@ -97,8 +113,17 @@ if(isset($_SESSION["s_id"])){
     }
     else{
         /****** traigo reservas cliente******/
+        $hay_cupon=0;
+
         $rta=$reserva->mis_reservas($_SESSION["s_id"]);
         foreach($rta as $unaReserva) {
+
+            $hay_cupon= $cupon->getById($unaReserva->getFkIdCupon());
+            if($hay_cupon){
+                $hay_cupon=$hay_cupon["PORCENTAJE"];
+            }
+
+
             $horario = new Horario();
             $rta2=$horario->traer_este_hoario($unaReserva->getFkIdHorario());
             $lista_horario=[];
@@ -132,14 +157,16 @@ if(isset($_SESSION["s_id"])){
                 ];
             }
 
-
+            if(!$hay_cupon) $hay_cupon=0;
             $array = [
                 "ID_RESERVA" => $unaReserva->getIdReserva(),
                 "FK_ID_HORARIO" => $unaReserva->getFkIdHorario(),
                 "FK_ID_CANCHA" => $unaReserva->getFkIdCancha(),
+                "FK_ID_CUPON" => $unaReserva->getFkIdCupon(),
                 "CANCELADO" => $unaReserva->getCancelado(),
                 "UN_HORARIO" => $lista_horario,
                 "UNA_CANCHA" => $lista_cancha,
+                "DESCUENTO" => $hay_cupon,
             ];
 
             $arrayFinal[]=$array;
