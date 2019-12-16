@@ -2,6 +2,11 @@
 
 iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window','$routeParams', function  ($scope, $http, $location, Upload, $timeout, $window, $routeParams) {
 
+    if(localStorage.getItem("dts_user")!==undefined&&localStorage.getItem("dts_user")!==null){
+        var usuario=angular.fromJson(localStorage.getItem("dts_user"));
+        $scope.usuario=usuario;
+    }
+
     //********************* LISTAR COMENTARIOS
     $scope.cuenta_puntaje=0;
 
@@ -350,7 +355,6 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
                     HORARIOS: horas_dias
                 };
 
-                console.log(datos_cancha);
                 var url;
 
                 if ($scope.titulo_formulario === "Editar cancha") {

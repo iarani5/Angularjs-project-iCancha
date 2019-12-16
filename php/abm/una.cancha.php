@@ -8,8 +8,6 @@ require_once('../funciones.php');
 require_once('../clases/DBcnx.php');
 require_once('../clases/Cancha.php');
 require_once('../clases/Duenio.php');
-//require_once('../clases/Cancha_Like.php');
-//require_once('../clases/Cancha_Comentario.php');
 
 $cancha=new Cancha();
 $duenio=new Duenio();

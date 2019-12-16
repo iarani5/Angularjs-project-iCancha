@@ -1,7 +1,4 @@
 <!-- BUSCAR POR TIPO DE CANCHA -->
-		<style> 
-			@import "css/sin-mapa.css";
-		</style>
 		
 		<section id="list-topics" class="list-topics">
 			<div class="container">
@@ -65,42 +62,49 @@
 				</div>
 				<div class="explore-content">
 					<div class="row">
-						<div class=" col-md-4 col-sm-6"  ng-repeat="x in canchas">
+						<div class=" col-md-4 col-sm-6" ng-repeat="una_cancha in canchas">
 							<div class="single-explore-item">
-								<div class="single-explore-img">
-									<img ng-src="{{ x.FOTO }}" alt="explore image">
-									<div class="single-explore-img-info">
-										<button ng-click="mostrar_horarios(x.ID_CANCHA)">Ver horarios</button>
+								<a href="#!/verCancha/{{ una_cancha.ID_CANCHA }}">
+									<div class="single-explore-img">
+										<img ng-src="{{una_cancha.FOTO}}" alt="explore image"  style="max-height: 200px;">
+										<div class="single-explore-img-info">
+											<button>Ver</button>
+										</div>
 									</div>
-								</div>
+								</a>
 								<div class="single-explore-txt bg-theme-1">
-									<h2><a>{{ x.NOMBRE_CANCHA }}</a></h2>
+									<h2><a>{{ una_cancha.NOMBRE_CANCHA }}</a></h2>
 									<p class="explore-rating-price">
-										<span class="explore-rating">5.0</span>
+
+										<span class="explore-rating">{{ una_cancha.PUNTAJE }}</span>Puntaje
 										<span class="explore-price-box">
-											Precio por hora
-											<span class="explore-price">${{ x.PRECIO }}</span>
-										</span>
-										 <a>{{ x.DIRECCION }}</a>
+																Precio
+																<span class="explore-price">${{ una_cancha.PRECIO }}</span>
+															</span>
+										<a>{{ una_cancha.DIRECCION }}</a>
 									</p>
-					
 									<div class="explore-open-close-part">
 										<div class="row">
 											<div class="col-sm-5">
-												<button class="close-btn open-btn" onclick="window.location.href='#'">Reservar cancha</button>
+												<a style="font-weight: unset;font-size: 12px;color:#f63138;" href="#!/verCancha/{{ una_cancha.ID_CANCHA }}">
+													Reservar</a>
 											</div>
 											<div class="col-sm-7">
 												<div class="explore-map-icon">
 													<a href="#"><i data-feather="map-pin"></i></a>
+													<a href="#"><i data-feather="upload"></i></a>
+													<a href="#"><i data-feather="heart"></i></a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+
 						</div>
+
 					</div>
 				</div>
-			</div><!--/.container-->
+			</div>
 
 		</section><!--/.explore-->

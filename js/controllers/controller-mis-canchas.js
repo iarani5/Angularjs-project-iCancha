@@ -13,6 +13,17 @@
 	.then(function (response){ //EXITO se establecio la conexion
 		if(response.data.length){
 			for(var i in response.data){
+
+				//puntaje
+				var sum=0;
+
+				for(var j in response.data[i].PUNTAJE){
+					sum+=parseInt(response.data[i].PUNTAJE[j].PUNTUACION, 10);
+				}
+				if(sum) response.data[i].PUNTAJE = (sum/response.data[i].PUNTAJE.length).toFixed(2);
+				else response.data[i].PUNTAJE=0;
+
+				//foto
 				var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
 				response.data[i].FOTO=foto;
 			}
