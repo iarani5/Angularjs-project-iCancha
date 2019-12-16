@@ -22,12 +22,13 @@
 	
 	/****** Creo el usuario ******/
 	$fin=json_decode($usuario->crear_usuario($_POST),true);
-	if($fin){
-			/****** Logeo al usuario ******/
+	echo $fin;
+	/*if($fin){
+			/****** Logeo al usuario ******
 			$fin2=json_decode($usuario->verificar_usuario($_POST["EMAIL"], $_POST["CLAVE"]),true);
 			if(count($fin2)){
 				foreach ($fin2 as $k => $v) {
-					/***** Guardado de datos en SESSION ****/
+					/***** Guardado de datos en SESSION ****
 					switch($k){
 						case "ID_USUARIO":
 							$_SESSION['s_id'] = $v;
@@ -39,8 +40,4 @@
 				}
 				echo json_encode($fin2);
 			}
-		}
-		
-	/*}*/
-
-?>
+		}*/

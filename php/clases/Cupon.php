@@ -95,9 +95,9 @@ class Cupon{
 
     /* M E T O D O S   D E   L A   C L A S E */
 
-    public function getByPk($id){
+    public function getByCodigo($id){
         $query = "SELECT * FROM " . static::$tabla . "
-					WHERE ID_CUPON = $id";
+					WHERE CODIGO = $id";
         $stmt = DBcnx::getStatement($query);
         $stmt->execute([$id]);
         return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;

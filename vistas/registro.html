@@ -16,7 +16,7 @@
 
 					<!-- NOMBRE -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid name is required">
-					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate"  placeholder="Nombre" required ng-model="usuario.NOMBRE">
+					 <input class="input100"  type="text" id="defaultForm-nombre" class="form-control validate"  name="nombre" placeholder="Nombre" required ng-model="usuario.NOMBRE">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-envelope"></span>
@@ -25,7 +25,7 @@
 
 					<!-- APELLIDO -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid lastname is required">
-					 <input class="input100"  type="text" id="defaultForm-apellido" class="form-control validate"  placeholder="Apellido" required ng-model="usuario.APELLIDO">
+					 <input class="input100"  type="text" id="defaultForm-apellido" class="form-control validate" name="apellido"  placeholder="Apellido" required ng-model="usuario.APELLIDO">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-envelope"></span>
@@ -34,7 +34,7 @@
 					
 					<!-- EMAIL -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100"  type="email" id="defaultForm-email" class="form-control validate"  placeholder="Email" required ng-model="usuario.EMAIL">
+						<input class="input100"  type="email" id="defaultForm-email" class="form-control validate"  name="email" placeholder="Email" required ng-model="usuario.EMAIL">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-envelope"></span>
@@ -43,7 +43,7 @@
 
 					<!-- CLAVE -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required"  ng-show="titulo=='Registro'">
-						<input class="input100" type="password" name="pass" id="defaultForm-clave" placeholder="Clave" required ng-model="usuario.CLAVE">
+						<input class="input100" type="password" name="clave" id="defaultForm-clave" placeholder="Clave" required ng-model="usuario.CLAVE">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-lock"></span>

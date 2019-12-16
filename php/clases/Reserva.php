@@ -10,7 +10,24 @@ class Reserva{
     private $fk_id_usuario;
     private $fk_id_horario;
     private $fk_id_cancha;
+    private $fk_id_cupon;
     private $cancelado;
+
+    /**
+     * @return mixed
+     */
+    public function getFkIdCupon()
+    {
+        return $this->fk_id_cupon;
+    }
+
+    /**
+     * @param mixed $fk_id_cupon
+     */
+    public function setFkIdCupon($fk_id_cupon)
+    {
+        $this->fk_id_cupon = $fk_id_cupon;
+    }
 
     /**
      * @return mixed
@@ -95,7 +112,7 @@ class Reserva{
 
     //nombre_cancha de la tabla y columnas de la tabla.
     public static $tabla = "reserva";
-    private static $fila = ['FK_ID_USUARIO', 'FK_ID_HORARIO','FK_ID_CANCHA','CANCELADO'];
+    private static $fila = ['FK_ID_USUARIO', 'FK_ID_HORARIO','FK_ID_CANCHA','FK_ID_CUPON','CANCELADO'];
 
 
     /*************** METODOS **************/
@@ -124,6 +141,9 @@ class Reserva{
                     case "fk_id_usuario":
                         $this->setFkIdUsuario($valor);
                         break;
+                    case "fk_id_cupon":
+                        $this->setFkIdCupon($valor);
+                        break;
                     case "cancelado":
                         $this->setCancelado($valor);
                         break;
@@ -133,10 +153,10 @@ class Reserva{
     }
 
     public function crear_reserva($array){
-        $query = "INSERT INTO " . static::$tabla . " (FK_ID_CANCHA,FK_ID_USUARIO,FK_ID_HORARIO)
-				VALUES (?, ?, ?)";
+        $query = "INSERT INTO " . static::$tabla . " (FK_ID_CANCHA,FK_ID_USUARIO,FK_ID_HORARIO,FK_ID_CUPON)
+				VALUES (?, ?, ?,?)";
         $stmt = DBcnx::getStatement($query);
-        return $stmt->execute([$array["FK_ID_CANCHA"],$array["FK_ID_USUARIO"],$array["FK_ID_HORARIO"]]);
+        return $stmt->execute([$array["FK_ID_CANCHA"],$array["FK_ID_USUARIO"],$array["FK_ID_HORARIO"],$array["FK_ID_CUPON"]]);
     }
 
     public function cancelar_reserva($id){
@@ -156,6 +176,7 @@ class Reserva{
                 $reserva->id_reserva = $fila['ID_RESERVA'];
                 $reserva->fk_id_cancha = $fila['FK_ID_CANCHA'];
                 $reserva->fk_id_horario = $fila['FK_ID_HORARIO'];
+                $reserva->fk_id_cupon = $fila['FK_ID_CUPON'];
                 $reserva->cancelado = $fila['CANCELADO'];
 
                 $reserva->cargarDatos($fila);
@@ -177,6 +198,7 @@ class Reserva{
                 $reserva->fk_id_cancha = $fila['FK_ID_CANCHA'];
                 $reserva->fk_id_usuario = $fila['FK_ID_USUARIO'];
                 $reserva->fk_id_horario = $fila['FK_ID_HORARIO'];
+                $reserva->fk_id_cupon = $fila['FK_ID_CUPON'];
                 $reserva->cancelado = $fila['CANCELADO'];
 
                 $reserva->cargarDatos($fila);

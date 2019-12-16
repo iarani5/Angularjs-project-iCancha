@@ -26,6 +26,12 @@
                         <input type="radio" style="width: auto;float: right;" ng-show="un_horario.ESTADO=='Desocupado'" class="custom-control-input" id="{{ un_horario.ID_HORARIO}}" name="defaultExampleRadios">
                     </li>
                 </ul>
+
+                <div class="welcome-hero-serch" style="text-align: center;" ng-show="horarios.length != 0" >
+                    <p style="padding: 2em;">¿Tenes un cupón de descuento?<input type="number" style="width: auto;float: right;" class="form-control" ng-model="cancha.CUPON" placeholder="N° cupon" name="cupon">
+                    </p>
+                </div>
+
                 <div class="welcome-hero-serch" style="text-align: center;" ng-show="horarios.length != 0" >
                     <button class="welcome-hero-btn" ng-click="reservar_cancha(cancha)" style="display: initial;">
                         Reservar  <i data-feather="search"></i>

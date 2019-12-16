@@ -10,11 +10,11 @@ iCancha.controller("perfilCtrl",  ['$scope', '$http', '$location', 'Upload', '$t
 		})
 		.then(function (response){
 			if(response.data==="1"){
-				alert("cuenta eliminada con éxito!");
+				modal_msj("cuenta eliminada con éxito!");
 				$scope.logout();
 			}
 			else{
-				alert("Ups! Hubo un error, vuela a intentarlo más tarde");
+				modal_msj("Ups! Hubo un error, vuela a intentarlo más tarde");
 			}
 
 		},function (error){

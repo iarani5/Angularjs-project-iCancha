@@ -115,24 +115,31 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
                     .then(function (response){//EXITO se establecio la conexion
                         $scope.horarios = response.data;
 
-                        $scope.reservar_cancha=function(){
-
+                        //**************** RESERVAR
+                        $scope.reservar_cancha=function(cancha){
+                            var hay_cupon="";
+                            if(cancha!==undefined){
+                                hay_cupon="&CUPON="+cancha.CUPON;
+                            }
                             var lis= tn(id("lista_con_horarios"),"li");
                             for(var i = 0; i < lis.length;i++){
                                 if(tn(lis[i],"input",0).checked){
                                     $http({
                                         method: 'POST',
                                         url: "php/abm/reservar.cancha.php",
-                                        data: "FK_ID_HORARIO="+tn(lis[i],"input",0).id+"&FK_ID_CANCHA="+$scope.una_cancha.ID_CANCHA,
+                                        data: "FK_ID_HORARIO="+tn(lis[i],"input",0).id+"&FK_ID_CANCHA="+$scope.una_cancha.ID_CANCHA+hay_cupon,
                                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                     })
                                     .then(function (response){
                                         if(response.data.search("1")!==-1){
-                                            alert("Reserva realizada con éxito!");
+                                            modal_msj("Reserva realizada con éxito!");
                                             $window.location.reload();
                                         }
+                                        else if(response.data.search("0")!==-1){
+                                            modal_msj("El número de cupón no corresponde a ninguno disponible en nuestra web.");
+                                        }
                                         else{
-                                            alert("Ups! Hubo un error vuelva a intentarlo más tarde.");
+                                            modal_msj("Ups! Hubo un error vuelva a intentarlo más tarde.");
                                         }
 
                                     },function (error){

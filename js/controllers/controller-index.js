@@ -86,10 +86,8 @@ iCancha.controller("indexCtrl", function ($location,$http,$scope,$window,$routeP
 					var usuario=angular.fromJson(localStorage.getItem("dts_user"));
 					$scope.nombre_usuario=usuario.NOMBRE;
 					$scope.no_user=false;
+
 					$window.location.href="#!/perfil";
-				}
-				else{ //error no se guardo en la bdd
-					alert("Ups! Ocurrio un error, vuelva a intentarlo más tarde!");
 				}
 
 			},function (error){ //ERROR no se pudo establecer la conexion

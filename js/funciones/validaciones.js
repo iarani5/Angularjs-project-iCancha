@@ -1,6 +1,6 @@
 
 	function validar_nombre(val){
-		var exp=/^[a-záéíóú\s]+$/i;
+		var exp=/^[a-záéíóúñ\s]{3,15}$/i;
 		return exp.test( val);
 	}
 	function validar_direccion(val){
@@ -28,10 +28,9 @@
 		return exp.test( val);
 	}
 
-
 	function validar_form(e){
 		switch(e.name){
-			case 'nombre':
+			case 'nombre': case 'apellido':
 				if(!validar_nombre(e.value)){
 					if(e.value!==''){
 						var tx=txt('Solo letras y espacios. Minimo 3, maximo 15.');

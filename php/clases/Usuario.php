@@ -174,7 +174,7 @@ class Usuario{
     }
 
     public function verificar_usuario($mail, $contrasenia){ //LOGIN DE USUARIO
-        $query = "SELECT * FROM " . static::$tabla . " WHERE EMAIL=? AND CLAVE=?";
+        $query = "SELECT * FROM " . static::$tabla . " WHERE EMAIL=? AND CLAVE=? AND BORRADO='No' AND BANNEADO='No'";
         $stmt = DBcnx::getStatement($query);
         $array=[];
         if($stmt->execute([$mail,$contrasenia])){
