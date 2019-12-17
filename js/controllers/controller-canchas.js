@@ -20,8 +20,7 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 			$scope.cantidad_rugby=0;
 			
 			for(var i in response.data){
-				var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
-				response.data[i].FOTO=foto;
+
 				if(response.data[i].BORRADO==="No"){
 					
 					switch(response.data[i].TIPO_CANCHA){

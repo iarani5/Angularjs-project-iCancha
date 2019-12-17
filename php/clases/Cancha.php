@@ -136,10 +136,10 @@ CREATE TABLE Cancha(
 	}
 	
 	public function crear_cancha($array){  //REGISTRO DE CANCHA	
-		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,TIPO_CANCHA,BARRIO,DIRECCION,PUNTAJE,PRECIO)
-				VALUES (?, ?, ?, ?, ?, ?)";
+		$query = "INSERT INTO " . static::$tabla . " (NOMBRE_CANCHA,TIPO_CANCHA,BARRIO,FOTO,DIRECCION,PUNTAJE,PRECIO)
+				VALUES (?, ?, ?, ?, ?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["TIPO_CANCHA"],$array["BARRIO"],$array["DIRECCION"],$array["PUNTAJE"],$array["PRECIO"]]);
+		return $stmt->execute([$array["NOMBRE_CANCHA"],$array["TIPO_CANCHA"],$array["BARRIO"],$array["FOTO"],$array["DIRECCION"],$array["PUNTAJE"],$array["PRECIO"]]);
 	}
 	
 	public function foto($array){ //FOTO

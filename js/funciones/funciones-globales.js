@@ -59,6 +59,7 @@ function modal_msj(mensaje,boton1){
 
 	/**cargo mensaje**/
 		var p=ce("p");
+		p.style.padding= "1em";
 		p.innerHTML=mensaje;
 	//
 	
@@ -120,16 +121,7 @@ function modal_horarios(horarios){
 		li.style.borderBottom="solid 1px #eee";
 		li.style.padding=".5em";
 		li.innerHTML=horarios[i]["DIA_VALOR"]+" "+horarios[i]["HORA_VALOR"];
-		if(horarios[i].ESTADO==="Desocupado"){
-			li.className="libre";
-			var radio=ce("input");
-			radio.type="radio";			
-			radio.name="este_horario";
-			ac(li,radio);
-		}
-		else{
-			li.className="Ocupado";
-		}
+		
 		ac(ul,li);
 	}
 

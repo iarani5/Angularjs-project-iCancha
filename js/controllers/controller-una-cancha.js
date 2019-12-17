@@ -102,10 +102,10 @@ iCancha.controller("canchaVerCtrl",  ['$scope', '$http', '$location', 'Upload', 
     })
         .then(function (response){ //EXITO se establecio la conexion
             if(response.data.length){
-                for(var i in response.data){
+              /*  for(var i in response.data){
                     var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
                     response.data[i].FOTO=foto;
-                }
+                }*/
 
                 $scope.una_cancha=response.data[0];
 

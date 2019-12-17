@@ -1,22 +1,22 @@
 <!--explore start -->
 <section>
     <div style="min-height: 80vh;">
-        <div class="explore-content" style="margin-left:3em;">
+        <div class="explore-content" style="margin-left:3em;padding-bottom: 3em;">
             <div class="section-header">
                 <h2>{{ una_cancha.NOMBRE_CANCHA }}</h2>
             </div><!--/.section-header-->
-            <div class="col-md-8 col-sm-12 ng-scope" style="width: 50vw;text-align: center;">
+            <div class="col-md-8 col-sm-12 ng-scope" style="width: 50vw;text-align: center;display: inline-block;">
                 <img ng-src="{{una_cancha.FOTO}}" alt="explore image"  style="max-height: 400px;">
                 <div class="single-explore-txt bg-theme-1" style="padding: 0;">
                     <p class="explore-rating-price">
-                        <span class="explore-price-box" style="font-size: 16px"><b>Barrio: </b>{{ una_cancha.BARRIO }}</span>
-                        <span class="explore-price-box" style="font-size: 16px"><b>Dirección: </b>{{ una_cancha.DIRECCION }}</span>
-                        <span class="explore-price-box" style="font-size: 16px"><b>Puntaje: </b>{{ cuenta_puntaje }}</span>
-                        <span class="explore-price-box" style="font-size: 16px"><b>Precio: </b> ${{ una_cancha.PRECIO }}</span>
+                        <span class="explore-price-box" style="font-size: 12px"><b>Barrio: </b>{{ una_cancha.BARRIO }}</span>
+                        <span class="explore-price-box" style="font-size: 12px"><b>Dirección: </b>{{ una_cancha.DIRECCION }}</span>
+                        <span class="explore-price-box" style="font-size: 12px"><b>Puntaje: </b>{{ cuenta_puntaje }}</span>
+                        <span class="explore-price-box" style="font-size: 12px"><b>Precio: </b> ${{ una_cancha.PRECIO }}</span>
                     </p>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 ng-scope" style="width: 40vw;">
+            <div class="col-md-4 col-sm-6 ng-scope" style="width: 40vw;display: inline-block;    float: unset;">
                 <h2 style="margin-bottom: 1em;text-align: center;">Horario semanal</h2>
                 <p ng-show="horarios.length == 0" style="text-align: center;padding: 2em;">Aún no hay horarios asignados</p>
 
@@ -28,7 +28,7 @@
                 </ul>
 
                 <div class="welcome-hero-serch" style="text-align: center;" ng-show="horarios.length != 0" >
-                    <p style="padding: 2em;">¿Tenes un cupón de descuento?<input type="number" style="width: auto;float: right;" class="form-control" ng-model="cancha.CUPON" placeholder="N° cupon" name="cupon">
+                    <p style="padding: 2em;">¿Tenes un cupón de descuento?<input type="number"  class="form-control" ng-model="cancha.CUPON" placeholder="N° cupon" name="cupon">
                     </p>
 
                     <p ng-show="usuario==undefined" style="color:red;">Necesitas estar logueado para reservar una cancha.</p>
