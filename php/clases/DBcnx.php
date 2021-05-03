@@ -5,15 +5,11 @@ class DBcnx{
 	
 	private function __construct() {}
 	
-	private static function connect()
-    {
-        $host = "localhost";
-        $user = "u857521991_icancha";
-		$pass = "icancha";
-		$name = "u857521991_icancha";
-        /*$user = "root";
+	private static function connect(){
+		$host = "localhost";
+		$user = "root";
 		$pass = "";
-		$name = "icancha";*/
+		$name = "iCancha";
 		$dsn = "mysql:host=" . $host . ";dbname=" . $name . ";charset=utf8";
 		try {
 			self::$db = new PDO($dsn, $user, $pass);

@@ -24,8 +24,8 @@
 				else response.data[i].PUNTAJE=0;
 
 				//foto
-			/*	var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
-				response.data[i].FOTO=foto;*/
+				var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
+				response.data[i].FOTO=foto;
 			}
 			
 			$scope.mis_canchas=angular.fromJson(response.data).reverse();
@@ -705,6 +705,7 @@
 					HORARIOS: horas_dias
 				};
 
+				console.log(datos_cancha);
 				var url;
 
 				if ($scope.titulo_formulario === "Editar cancha") {
@@ -712,6 +713,7 @@
 				} else {
 					url = "php/abm/crear.cancha.php";
 				}
+				console.log(url);
 				if (cancha.FOTO !== undefined) {
 					cancha.FOTO.upload = Upload.upload({
 						method: 'POST',
@@ -719,7 +721,7 @@
 						data: datos_cancha,
 					})
 						.then(function (response) {
-							if (response.data === "1") {
+								if (response.data === "1") {
 									modal_msj("Cancha creada con éxito!");
 									window.location.reload();
 								}

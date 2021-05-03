@@ -40,45 +40,21 @@ iCancha.controller("homeCtrl", function ($location,$http,$scope,$window) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
             .then(function (response){ //EXITO se establecio la conexion
-                if(response.data.length==0) {
-                    $scope.canchas_filtradas=[];
-                    modal_msj("No se encontraron resultados.");
-                }
-                else {
-                    var ban = 0;
-                    var cancha_ya_cargada = [];
-                    for (var i in response.data) {
-                        if (!ban) {
-                            cancha_ya_cargada.push(response.data[i]);
-                            ban = 1;
-                        }
+                for(var i in response.data) {
 
-                        var ya_existe = false;
-                        for (var j in cancha_ya_cargada) {
-                            if (cancha_ya_cargada[j].ID_CANCHA == response.data[i].ID_CANCHA) {
-                                ya_existe = true;
-                            }
-                        }
+                    var sum=0;
 
-                        var sum = 0;
-
-                        for (var j in response.data[i].PUNTAJE) {
-                            sum += parseInt(response.data[i].PUNTAJE[j].PUNTUACION, 10);
-                        }
-                        if (sum) response.data[i].PUNTAJE = (sum / response.data[i].PUNTAJE.length).toFixed(2);
-                        else response.data[i].PUNTAJE = 0;
-
-                        //foto
-
-                       // response.data[i].FOTO = response.data[i].FOTO.substring(24, response.data[i].FOTO.length);
+                    for(var j in response.data[i].PUNTAJE){
+                        sum+=parseInt(response.data[i].PUNTAJE[j].PUNTUACION, 10);
                     }
+                    if(sum) response.data[i].PUNTAJE = (sum/response.data[i].PUNTAJE.length).toFixed(2);
+                    else response.data[i].PUNTAJE=0;
 
-                    if (!ya_existe) {
-                        cancha_ya_cargada.push(response.data[i]);
-                    }
+                    //foto
 
-                    $scope.canchas_filtradas = cancha_ya_cargada;
+                    response.data[i].FOTO = response.data[i].FOTO.substring(24, response.data[i].FOTO.length);
                 }
+                $scope.canchas_filtradas=response.data;
 
             },function (error){ //ERROR no se pudo establecer la conexion
 

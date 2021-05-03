@@ -97,7 +97,7 @@ class Cupon{
 
     public function getByCodigo($id){
         $query = "SELECT * FROM " . static::$tabla . "
-					WHERE CODIGO = $id AND BORRADO='No'";
+					WHERE CODIGO = $id";
         $stmt = DBcnx::getStatement($query);
         $stmt->execute([$id]);
         return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;

@@ -17,20 +17,14 @@ if(isset($_SESSION["s_nivel"])=="Administrador"){
 
         foreach($rta2 as $unUsuario){
 
-            if($unUsuario->getBorrado()=="No"){
-                $array=[
-                    "ID_USUARIO"=>$unUsuario->getCodigoUsuario(),
-                    "TIPO_USUARIO"=>$unUsuario->getTipoUsuario(),
-                    "BANNEADO"=>$unUsuario->getBanneado(),
-                    "BORRADO"=>$unUsuario->getBorrado()
-                ];
+            $array=[
+                "ID_USUARIO"=>$unUsuario->getCodigoUsuario(),
+                "TIPO_USUARIO"=>$unUsuario->getTipoUsuario(),
+                "BANNEADO"=>$unUsuario->getBanneado(),
+                "BORRADO"=>$unUsuario->getBorrado()
+            ];
 
-                $arrayFinal[]=$array;
-
-
-            }
-
-
+            $arrayFinal[]=$array;
     }
 
     $arrayFinal2=[];
@@ -38,22 +32,19 @@ if(isset($_SESSION["s_nivel"])=="Administrador"){
 
     foreach($rta2 as $unaCancha){
 
-            if($unaCancha->getBorrado()=="No") {
+            $array=[
+                "ID_CANCHA"=>$unaCancha->getIdCancha(),
+                "NOMBRE_CANCHA"=>$unaCancha->getNombre_cancha(),
+                "FOTO"=>$unaCancha->getFoto(),
+                "TIPO_CANCHA"=>$unaCancha->getTipoCancha(),
+                "BARRIO"=>$unaCancha->getBarrio(),
+                "DIRECCION"=>$unaCancha->getDireccion(),
+                "BORRADO"=>$unaCancha->getBorrado(),
+                "PUNTAJE"=>$unaCancha->getPuntaje(),
+                "PRECIO"=>$unaCancha->getPrecio()
+            ];
 
-                $array = [
-                    "ID_CANCHA" => $unaCancha->getIdCancha(),
-                    "NOMBRE_CANCHA" => $unaCancha->getNombre_cancha(),
-                    "FOTO" => $unaCancha->getFoto(),
-                    "TIPO_CANCHA" => $unaCancha->getTipoCancha(),
-                    "BARRIO" => $unaCancha->getBarrio(),
-                    "DIRECCION" => $unaCancha->getDireccion(),
-                    "BORRADO" => $unaCancha->getBorrado(),
-                    "PUNTAJE" => $unaCancha->getPuntaje(),
-                    "PRECIO" => $unaCancha->getPrecio()
-                ];
-
-                $arrayFinal2[] = $array;
-            }
+            $arrayFinal2[]=$array;
         }
 
     $respuesta[]=$arrayFinal;

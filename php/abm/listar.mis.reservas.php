@@ -76,37 +76,34 @@ if(isset($_SESSION["s_id"])){
                     $lista_cancha=[];
 
                     foreach($rta2 as $unaCancha) {
-                        if ($unaCancha->getBorrado() == "No") {
-
-                            $lista_cancha = [
-                                "ID_CANCHA" => $unaCancha->getIdCancha(),
-                                "NOMBRE_CANCHA" => $unaCancha->getNombre_cancha(),
-                                "FOTO" => $unaCancha->getFoto(),
-                                "BARRIO" => $unaCancha->getBarrio(),
-                                "TIPO_CANCHA" => $unaCancha->getTipoCancha(),
-                                "DIRECCION" => $unaCancha->getDireccion(),
-                                "PUNTAJE" => $unaCancha->getPuntaje(),
-                                "PRECIO" => $unaCancha->getPrecio(),
-                            ];
-
-                        if (!$hay_cupon) $hay_cupon = 0;
-
-                        $array = [
-                            "ID_RESERVA" => $unaReserva->getIdReserva(),
-                            "FK_ID_HORARIO" => $unaReserva->getFkIdHorario(),
-                            "FK_ID_CANCHA" => $unaReserva->getFkIdCancha(),
-                            "FK_ID_CUPON" => $unaReserva->getFkIdCupon(),
-                            "CANCELADO" => $unaReserva->getCancelado(),
-                            "UN_HORARIO" => $lista_horario,
-                            "UNA_CANCHA" => $lista_cancha,
-                            "EL_USUARIO" => $lista_usuario,
-                            "DESCUENTO" => $hay_cupon,
-
+                        $lista_cancha = [
+                            "ID_CANCHA"=>$unaCancha->getIdCancha(),
+                            "NOMBRE_CANCHA"=>$unaCancha->getNombre_cancha(),
+                            "FOTO"=>$unaCancha->getFoto(),
+                            "BARRIO"=>$unaCancha->getBarrio(),
+                            "TIPO_CANCHA"=>$unaCancha->getTipoCancha(),
+                            "DIRECCION"=>$unaCancha->getDireccion(),
+                            "PUNTAJE"=>$unaCancha->getPuntaje(),
+                            "PRECIO"=>$unaCancha->getPrecio(),
                         ];
-                        $arrayFinal[]=$array;
-                        }
                     }
 
+                    if(!$hay_cupon) $hay_cupon=0;
+
+                    $array = [
+                        "ID_RESERVA" => $unaReserva->getIdReserva(),
+                        "FK_ID_HORARIO" => $unaReserva->getFkIdHorario(),
+                        "FK_ID_CANCHA" => $unaReserva->getFkIdCancha(),
+                        "FK_ID_CUPON" => $unaReserva->getFkIdCupon(),
+                        "CANCELADO" => $unaReserva->getCancelado(),
+                        "UN_HORARIO" => $lista_horario,
+                        "UNA_CANCHA" => $lista_cancha,
+                        "EL_USUARIO" => $lista_usuario,
+                        "DESCUENTO" => $hay_cupon,
+
+                    ];
+
+                    $arrayFinal[]=$array;
                 }
 
             }
@@ -147,35 +144,32 @@ if(isset($_SESSION["s_id"])){
             $rta2=$cancha->mis_canchas($unaReserva->getFkIdCancha());
             $lista_cancha=[];
 
-               foreach($rta2 as $unaCancha) {
-                   if($unaCancha->getBorrado()=="No") {
+            foreach($rta2 as $unaCancha) {
+                $lista_cancha = [
+                    "ID_CANCHA"=>$unaCancha->getIdCancha(),
+                    "NOMBRE_CANCHA"=>$unaCancha->getNombre_cancha(),
+                    "FOTO"=>$unaCancha->getFoto(),
+                    "BARRIO"=>$unaCancha->getBarrio(),
+                    "TIPO_CANCHA"=>$unaCancha->getTipoCancha(),
+                    "DIRECCION"=>$unaCancha->getDireccion(),
+                    "PUNTAJE"=>$unaCancha->getPuntaje(),
+                    "PRECIO"=>$unaCancha->getPrecio(),
+                ];
+            }
 
-                       $lista_cancha = [
-                           "ID_CANCHA" => $unaCancha->getIdCancha(),
-                           "NOMBRE_CANCHA" => $unaCancha->getNombre_cancha(),
-                           "FOTO" => $unaCancha->getFoto(),
-                           "BARRIO" => $unaCancha->getBarrio(),
-                           "TIPO_CANCHA" => $unaCancha->getTipoCancha(),
-                           "DIRECCION" => $unaCancha->getDireccion(),
-                           "PUNTAJE" => $unaCancha->getPuntaje(),
-                           "PRECIO" => $unaCancha->getPrecio(),
-                       ];
+            if(!$hay_cupon) $hay_cupon=0;
+            $array = [
+                "ID_RESERVA" => $unaReserva->getIdReserva(),
+                "FK_ID_HORARIO" => $unaReserva->getFkIdHorario(),
+                "FK_ID_CANCHA" => $unaReserva->getFkIdCancha(),
+                "FK_ID_CUPON" => $unaReserva->getFkIdCupon(),
+                "CANCELADO" => $unaReserva->getCancelado(),
+                "UN_HORARIO" => $lista_horario,
+                "UNA_CANCHA" => $lista_cancha,
+                "DESCUENTO" => $hay_cupon,
+            ];
 
-                       if (!$hay_cupon) $hay_cupon = 0;
-                       $array = [
-                           "ID_RESERVA" => $unaReserva->getIdReserva(),
-                           "FK_ID_HORARIO" => $unaReserva->getFkIdHorario(),
-                           "FK_ID_CANCHA" => $unaReserva->getFkIdCancha(),
-                           "FK_ID_CUPON" => $unaReserva->getFkIdCupon(),
-                           "CANCELADO" => $unaReserva->getCancelado(),
-                           "UN_HORARIO" => $lista_horario,
-                           "UNA_CANCHA" => $lista_cancha,
-                           "DESCUENTO" => $hay_cupon,
-                       ];
-
-                       $arrayFinal[] = $array;
-                   }
-                }
+            $arrayFinal[]=$array;
         }
 
         echo json_encode($arrayFinal);
