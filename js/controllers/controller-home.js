@@ -41,17 +41,6 @@ iCancha.controller("homeCtrl", function ($location,$http,$scope,$window) {
         })
             .then(function (response){ //EXITO se establecio la conexion
                 for(var i in response.data) {
-
-                    var sum=0;
-
-                    for(var j in response.data[i].PUNTAJE){
-                        sum+=parseInt(response.data[i].PUNTAJE[j].PUNTUACION, 10);
-                    }
-                    if(sum) response.data[i].PUNTAJE = (sum/response.data[i].PUNTAJE.length).toFixed(2);
-                    else response.data[i].PUNTAJE=0;
-
-                    //foto
-
                     response.data[i].FOTO = response.data[i].FOTO.substring(24, response.data[i].FOTO.length);
                 }
                 $scope.canchas_filtradas=response.data;

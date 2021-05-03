@@ -5,7 +5,7 @@
             <div class="section-header">
                 <h2>{{ una_cancha.NOMBRE_CANCHA }}</h2>
             </div><!--/.section-header-->
-            <div class="col-md-8 col-sm-12 ng-scope" style="width: 50vw;text-align: center;">
+            <div class="col-md-8 col-sm-12 ng-scope" style="width: 50vw;">
                 <img ng-src="{{una_cancha.FOTO}}" alt="explore image"  style="max-height: 400px;">
                 <div class="single-explore-txt bg-theme-1" style="padding: 0;">
                     <p class="explore-rating-price">
@@ -30,12 +30,9 @@
                 <div class="welcome-hero-serch" style="text-align: center;" ng-show="horarios.length != 0" >
                     <p style="padding: 2em;">¿Tenes un cupón de descuento?<input type="number" style="width: auto;float: right;" class="form-control" ng-model="cancha.CUPON" placeholder="N° cupon" name="cupon">
                     </p>
-
-                    <p ng-show="usuario==undefined" style="color:red;">Necesitas estar logueado para reservar una cancha.</p>
-                    <p ng-show="usuario.TIPO_USUARIO=='Propietario'" style="color:red;">Tenes que ser CLIENTE para reservar una cancha.</p>
                 </div>
 
-                <div class="welcome-hero-serch" style="text-align: center;" ng-show="horarios.length != 0&&usuario.TIPO_USUARIO=='Cliente'" >
+                <div class="welcome-hero-serch" style="text-align: center;" ng-show="horarios.length != 0" >
                     <button class="welcome-hero-btn" ng-click="reservar_cancha(cancha)" style="display: initial;">
                         Reservar  <i data-feather="search"></i>
                     </button>

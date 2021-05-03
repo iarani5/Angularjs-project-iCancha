@@ -49,25 +49,13 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 				$scope.mostrar=true;
 				$scope.titulo = cancha;
 				var canchas=[];
-
 				for(var i in response.data){
-
-					//puntuar
-					//$scope.calificaciones = response.data.reverse();
-					var sum=0;
-
-					for(var j in response.data[i].PUNTAJE){
-						sum+=parseInt(response.data[i].PUNTAJE[j].PUNTUACION, 10);
-					}
-					if(sum) response.data[i].PUNTAJE = (sum/response.data[i].PUNTAJE.length).toFixed(2);
-					else response.data[i].PUNTAJE=0;
-
-					if(response.data[i].TIPO_CANCHA==cancha&&response.data[i].BORRADO=="No"){
+					if(response.data[i].TIPO_CANCHA==cancha){
 						canchas.push(response.data[i]);
 					}
 				}
-				$scope.canchas = canchas.reverse();
-			};
+				$scope.canchas = canchas;
+			}
 
 			/******** MOSTRAR HORARIO DE ESA CANCHA *********/
 			$scope.mostrar_horarios=function(id){
@@ -84,7 +72,7 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 
 				});
 				
-				//modal_horarios("horarios","reservar");
+				modal_horarios("horarios","reservar");
 			}
 		}
 		
