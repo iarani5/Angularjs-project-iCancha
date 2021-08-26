@@ -5,6 +5,7 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 	/****** LISTAR CANCHAS *****/
 	
 	$scope.mostrar=false;
+	$scope.back_status=false;
 	
 	$http({
 		method: 'POST',
@@ -20,6 +21,7 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 			$scope.cantidad_rugby=0;
 			
 			for(var i in response.data){
+				//console.log(response.data);
 				var foto=response.data[i].FOTO.substring(24,response.data[i].FOTO.length);
 				response.data[i].FOTO=foto;
 				if(response.data[i].BORRADO==="No"){
@@ -47,6 +49,8 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 			/*********** LISTAR POR TIPO DE CANCHA **********/
 			$scope.listar_canchas=function(cancha){
 				$scope.mostrar=true;
+				$scope.back_status=true;
+
 				$scope.titulo = cancha;
 				var canchas=[];
 				for(var i in response.data){
@@ -55,6 +59,12 @@ iCancha.controller("canchasCtrl", function ($location,$http,$scope,$window,$rout
 					}
 				}
 				$scope.canchas = canchas;
+			}
+
+
+			$scope.back=function(){
+				$scope.mostrar=false;
+				$scope.back_status=false;
 			}
 
 			/******** MOSTRAR HORARIO DE ESA CANCHA *********/

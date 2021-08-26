@@ -21,7 +21,7 @@
 			"BARRIO"=>$unaCancha->getBarrio(),
 			"DIRECCION"=>$unaCancha->getDireccion(),
 			"BORRADO"=>$unaCancha->getBorrado(),
-			"TARJETA"=>$unaCancha->getTarjeta(),
+			//"TARJETA"=>$unaCancha->getTarjeta(),
 			"PUNTAJE"=>$unaCancha->getPuntaje(),
 			"PRECIO"=>$unaCancha->getPrecio()
 		];

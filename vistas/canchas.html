@@ -1,12 +1,15 @@
 <!-- BUSCAR POR TIPO DE CANCHA -->
 		<style> 
 			@import "css/sin-mapa.css";
+			@import "css/estilos_final.css";
+
 		</style>
-		
-		<section id="list-topics" class="list-topics">
+		<button ng-click="back();" ng-show="back_status" class="back-button">Back</button>
+
+		<section id="list-topics" class="list-topics" ng-show="!back_status">
 			<div class="container">
 				<div class="list-topics-content">
-					<ul>
+					<ul >
 						<li>
 							<div class="single-list-topics-content" ng-click="listar_canchas('Futbol');">
 								<div class="single-list-topics-icon">

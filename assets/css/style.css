@@ -439,10 +439,10 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
         7. Explore
 --------------------------------------*/
 .explore{
-    padding:117px 0 95px;
+    /*padding:117px 0 95px;*/
     background: #f8fafb;
 }
-.explore-content{margin-top: 78px;}
+.explore-content{/*margin-top: 78px;*/}
 
 .single-explore-item {
     background: #fff;
@@ -949,4 +949,22 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     0%   {bottom:0px;}
     100%  {bottom:7px;}
 }
+
+
+.back-button{
+    width: 90vw;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 16px;
+    margin: 1em;
+    position: absolute;
+    float: right;
+    z-index: 4;
+}
+
+
 /*========================Thank you=================
+
+

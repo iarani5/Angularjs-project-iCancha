@@ -1,0 +1,252 @@
+
+/* M E N U */
+.top-area{
+    position:absolute;
+}
+
+.menu-expanded {
+	background: #212529;
+	max-width: 0px;
+	opacity: 0;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.4s ease 0s;
+	overflow: hidden;
+  }
+  
+  .menu-expanded ul {
+	margin: 0;
+	list-style: none;
+	font-size: 32px;
+	text-align: left;
+	line-height: 2em;
+  }
+  
+  a {
+	text-decoration: none;
+	/*color: #fff;*/
+  }
+  
+  .hamburguer-menu {
+	width: 50px;
+	height: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 16px;
+    margin: 1em;
+	position: absolute;
+  }
+  
+  .line {
+	display: block;
+	width: 30px;
+	background: #000;
+	height: 2px;
+	margin: 5px 5px;
+	transition: all 0.4s ease;
+	z-index: 1;
+  }
+  
+  input {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	/*position: absolute;
+	opacity: 0;*/
+	z-index: 2;
+  }
+  
+  .change .first-line {
+	transform: rotate(45deg) translate(0px, 0px);
+  }
+
+  .change .line{
+    background: #fff;
+  }
+  
+  .change .second-line {
+	transform: rotate(-45deg) translate(8px, -8px);
+  }
+  
+  .change ~ .menu-expanded {
+	max-width: 400px;
+	opacity: 1;
+  }
+
+  .container_menu{
+      padding:0;
+      margin:0;
+  }
+  
+  @media (max-width: 400px) {
+	.menu-expanded {
+        width: 75vw;
+        height: 100vh;
+	}
+  }
+  
+  /*********************************/
+  
+  .single-welcome-hero-form{
+    align-items: unset;
+    padding: 0;
+    width: auto!important;
+    margin: 1.5em 1em!important;
+  }
+
+  .single-welcome-hero-form select {
+    border-bottom: solid 1px #b8b8b8;
+  }
+
+  h3{
+    text-align: left;
+    padding-bottom: .6em;
+  }
+
+  .welcome-hero-form{
+      height:auto;
+  }
+
+  .welcome-hero-btn{
+      margin:0;
+      margin-top:3em;
+  }
+
+  .welcome-hero-btn:hover{
+      background:#298445;
+  }
+
+  .active{
+      color:#298445;
+  }
+
+  #works{
+      margin-top:0;
+  }
+
+  .section-header{
+    padding-top: 7em!important;
+  }
+
+  .single-how-works{
+      box-shadow: none!important;
+      height:auto!important;
+
+  }
+
+ .single-how-works h2{
+    color:black;
+    padding:1.5em;
+ }
+ .works-content{
+     margin-top:auto!important;
+ }
+ #works .container .section-header p{
+    padding: 0 2em;
+ }
+
+ .single-how-works h2 span{
+    padding-right: .2em;
+    font-weight: bold;
+    color: #298445;
+    vertical-align: top;
+ }
+ .single-how-works:hover{
+     background-color: white!important;
+ }
+
+ .single-how-works:hover .single-how-works-icon [class^="fa-"]:before, .single-how-works:hover .single-how-works-icon [class*=" fa-"]:before, .single-how-works:hover .single-how-works-icon [class^="fa-"]:after, .single-how-works:hover .single-how-works-icon [class*=" fa-"]:after{
+    color: #298445;
+ }
+
+ .single-how-works p{
+     margin-bottom:0;
+ }
+
+ .single-list-topics-content:hover{
+     background:#298445;
+ }
+
+ nav.navbar.bootsnav ul.nav > li > a:hover, nav.navbar.bootsnav ul.nav > li > a:focus{
+    color: #298445;
+ }
+
+ .single-list-topics-content{
+    width: 105px;
+    height: 150px;
+ }
+
+
+ /***** forms ****/
+
+ .wrap-login100{
+     background:none!important;
+     border:none!important;
+     box-shadow:none!important;
+ }
+
+ #login>div{
+     background:#fff!important;
+ }
+
+ .symbol-input100{
+    border-radius: 0!important;
+    border-bottom: 1px solid;
+ }
+ .focus-input100{
+    color: transparent!important;
+ }
+
+ input:-internal-autofill-selected {
+    color:grey!important;
+ }
+
+ .input100, #registro>div{
+     background: white!important;
+ }
+
+ .btn-danger, .selectionator .search .overlay, .selectionator .search{
+    background-color: #298445;
+    border-color: #298445;
+ }
+
+ .selectionator ul.optgroup li input[type="checkbox"]:checked ~ label {
+    background-color: #298445;
+ }
+
+ #ventana_modal .modal-body p{
+    font-size: 24px;
+    line-height: 1.7;
+    color: #666666;
+    margin: 0px;
+    padding: 3em;
+    text-align: center;
+ }
+
+ #nombre{
+    color: #298445;
+    font-size: .6em;
+    font-weight: bold;
+    padding-bottom: 2em;
+ }
+
+ .wrap-login100 {
+    width: auto!important;
+ }
+
+.back-button{
+  float: left;
+    width: 90vw;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 16px;
+    margin: 1em;
+    position: absolute;
+    float: right;
+}

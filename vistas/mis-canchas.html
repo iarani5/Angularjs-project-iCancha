@@ -13,12 +13,7 @@
 					<span class="login100-form-title p-b-55">
 						{{ titulo_formulario }}
 					</span>
-					<span class="login100-form-title p-b-55">
-						HORARIOS
-					</span>
-				<div class="container_horarios" id="horarios_de_cancha" style="margin-bottom: 15em;">
-					<div id="select" ng-model="cancha_editar.HORARIOS" ></div>
-				</div>
+				
 		<form ng-show="titulo_formulario==='Crear cancha'" id="crear" ng-submit="crear_cancha(cancha)" class="login100-form validate-form" class="md-form" id="crear_cancha">
 
 					
@@ -61,6 +56,13 @@
 						</span>
 					</div>
 
+						<span>
+						HORARIOS
+					</span>
+				<div class="container_horarios" id="horarios_de_cancha" style="margin-bottom: 15em;">
+					<div id="select" ng-model="cancha_editar.HORARIOS" ></div>
+				</div>
+				
 					<!-- FOTO -->
 					 <div class="wrap-input100 validate-input m-b-16" ng-show="titulo_formulario!='Editar cancha'">
 						<input type="file" class='upload-file cancha-file ' ngf-select ng-model="cancha.FOTO" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-pattern="'image/*'" ngf-accept="'.jpg,.jpeg,.png'" id="foto">

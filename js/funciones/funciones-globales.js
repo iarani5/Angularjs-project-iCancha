@@ -45,7 +45,13 @@ function sacar_botones(estado){
 	}
 }
 
+////////// MENU 
 
+function toggle(element) {
+	element.classList.toggle("change");
+  }
+
+  
 ////////// MODAL MENSAJE
 function modal_msj(mensaje,boton1){
 	var div=document.createElement("div");

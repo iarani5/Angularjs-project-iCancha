@@ -8,12 +8,13 @@ iCancha.controller("indexCtrl", function ($location,$http,$scope,$window,$routeP
 
 	});
 
-	$http({
+	/*$http({
 		method: 'POST',
 		url:"php/abm/logueado.php",
 		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 	})
 	.then(function (response){
+
 		if(response.data!==""&&localStorage.getItem("dts_user")!==undefined&&localStorage.getItem("dts_user")!==null){
 			var usuario=angular.fromJson(localStorage.getItem("dts_user"));
 			$scope.nombre_usuario=usuario.NOMBRE;
@@ -22,7 +23,7 @@ iCancha.controller("indexCtrl", function ($location,$http,$scope,$window,$routeP
 
 	},function (error){
 
-	});
+	});*/
 
 //************************************* LOGOUT
 	$scope.logout=function(){
